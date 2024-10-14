@@ -1,0 +1,177 @@
+/* estiloBase.css */
+
+
+body {
+    background-color: rgb(14, 7, 80); /* Cambia el color de fondo para comprobar */
+}
+
+nav {
+    padding: 0; /* Elimina padding de la barra lateral */
+    margin: 0; /* Elimina margen */
+    background-color: whitesmoke; /* Color de fondo de la barra lateral */
+    width: 250px; /* Ancho fijo de la barra lateral */
+}
+
+
+
+/* Cambia el color de fondo de la barra lateral */
+nav.p-3 {
+    background-color: #fffffff7; 
+    padding: 0;
+    margin: 0;
+    width: 250px; /* Ancho fijo */
+    
+}
+
+
+
+.nav{
+    overflow:visible;
+}
+
+.nav-link {
+    color: rgb(132, 132, 132);  /* Color de letra blanco */
+    width: 100%; /* Ocupa el 100% del ancho del contenedor */
+    font-size: 1.5rem; /* Tamaño de letra más grande */
+    margin-right: 10px; /* Espacio entre el icono y el texto */
+    text-align: left;
+    padding: 1.5rem; /* Aumentar el espaciado alrededor de cada opción */
+
+    display: flex;
+    align-items: center;
+}
+
+.nav-link i {
+    
+    margin-right: 15px; /* Espacio entre el icono y el texto */
+}
+
+
+.nav-link:hover {
+    background-color: #1f4c71; /* Color de fondo al pasar el mouse */
+    color: #8098d1;
+   
+}
+
+
+/* Estilo para "Menú" */
+nav h6 {
+    color: #6c757d; /* Color más claro (gris) para "Menú" */
+    margin: 0; /* Elimina el margen por defecto */
+    font-size: 20px; /* Tamaño de fuente más pequeño */
+   
+}
+
+/* Estilo para "Ciencias Top" */
+nav h5 {
+    font-weight: bold; /* Negrita */
+    color: #131415; /* Color más oscuro (casi negro) para "Ciencias Top" */
+    margin: 0; /* Elimina el margen por defecto */
+    font-size: 28px;
+    padding-bottom: 20px;
+}
+
+
+/* Estilo del header */
+.header {
+    background-color: #142d5ff7; /* Cambia el color de fondo del header */
+    padding: 18px; /* Espacio interno alrededor del contenido del header */
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.8); /* Sombra del encabezado */
+    transition: background-color 0.3s ease, box-shadow 0.3s ease; 
+    
+}
+
+
+.header-container {
+    display: flex; /* Usar flexbox para disposición flexible */
+    align-items: center; /* Centrar verticalmente los elementos en el contenedor */
+    justify-content: center; /* Espacio entre los elementos */
+    width: 100%; /* Asegurar que el contenedor ocupe todo el ancho del header */
+}
+
+
+.header-title {
+    margin: 0; /* Eliminar margen */
+    padding: 0;
+    color: #bfb43c; /* Cambia el color de letra del título */
+    font-family: 'Montserrat', sans-serif;
+    text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.3); /* Sombra del texto */
+    font-size: 42px; /* Tamaño de letra del título */
+    font-weight: bold;
+    text-align: center; /* Centrar el texto del título */
+    flex-grow: 1; /* Permitir que el título tome todo el espacio disponible */
+}
+
+/* Estilo para el botón de menú */
+.menu-toggle {
+    background: none; /* Sin fondo */
+    border: none; /* Sin borde */
+    cursor: pointer; /* Cambiar cursor al pasar sobre el botón */
+    
+    
+    margin-right: 20px; /* Espacio a la derecha del botón */
+    display: flex; /* Asegurarse de que el botón use flexbox */
+    flex-direction: column; /* Colocar las barras en columna */
+    align-items: center; /* Centrar las barras horizontalmente */
+}
+
+
+.iconoMenu {
+    color: #fcfcfce3; /* Cambia el color de las barras del menú */
+    font-weight: bold;
+    text-shadow: 1px 1px 0 currentColor, -1px -1px 0 currentColor, 
+                 1px -1px 0 currentColor, -1px 1px 0 currentColor;
+    font-size: 32px; /* Tamaño*/
+    transform: scale(1.4, 1); /* Escala de las barras */
+}
+
+.iconoMenu:hover {
+    color: #8098d1; /* Cambia el color*/
+}
+
+
+.search-container {
+    display: flex; /* Para colocar el input y el botón en la misma línea */
+    justify-content: center; /* Centrar el contenido */
+    margin-top: 30px; /* Espacio entre el header y la barra de búsqueda */
+    padding: 0 15px; /* Espacio interno en los lados */
+}
+
+
+.search-input {
+    width: 80%; /* Ajusta el ancho del campo de búsqueda */
+    padding: 12px; /* Espacio interno del campo */
+    border-radius: 7px 0 0 7px; /* Bordes redondeados en la izquierda */
+    border:none; /* Borde gris */
+    outline: none; /* Eliminar el borde azul al hacer clic */
+    font-size: 1.2rem; /* Tamaño de la letra */
+}   
+
+.search-button {
+    background-color: none; /* Color de fondo del botón */
+    border: none; /* Borde del botón */
+    border-radius: 0 7px 7px 0; /* Bordes redondeados en la derecha */
+    color: rgb(163, 163, 163); /* Color del icono */
+    padding: 12px; /* Espacio interno del botón */
+    cursor: pointer; /* Cambia el cursor al pasar sobre el botón */
+    font-size: 1.5rem; /* Tamaño del icono */
+}
+
+.search-button i {
+    font-size: 1.4rem; /* Ajustar el tamaño del ícono de la lupa */
+}
+
+.search-input:focus {
+    border-color: #1f4c71; /* Cambia el borde al hacer clic en el input */
+}
+.search-button:hover {
+    color: #1f4c71; /* Cambia el color del icono al pasar el mouse */
+}
+
+nav {
+    display: none; /* Ocultar por defecto */
+}
+
+nav.show {
+    display: block; /* Mostrar cuando se agrega la clase 'show' */
+}
