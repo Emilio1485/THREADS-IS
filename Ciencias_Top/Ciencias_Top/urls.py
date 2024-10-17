@@ -21,6 +21,6 @@ from usuarios.views import login
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('login/',login),
-    path('', include ('Productos.urls')),
+    #path('', include ('Productos.urls')),
     
 ]
