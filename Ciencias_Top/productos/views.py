@@ -4,6 +4,7 @@ from django.http import HttpResponse
 # Create your views here.
 
 def inicioAdmin(request):
-    return render(request, 'inicioV\inicioAdmin.html')
+    print("Llamando a inicioAdmin")
+    return render(request, 'inicioV\inicioAdmin.html',{'titulo':'Inicio Administrador'}) 
 
 

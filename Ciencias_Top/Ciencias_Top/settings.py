@@ -38,7 +38,8 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'usuarios',
-    'Productos',
+    'productos',
+    'rentas',
 ]
 
 MIDDLEWARE = [
@@ -56,7 +57,7 @@ ROOT_URLCONF = 'Ciencias_Top.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
+        'DIRS': [ BASE_DIR / 'templates' ], 
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -127,7 +128,8 @@ STATIC_URL = 'static/'
 
 # Default primary key field type
 STATICFILES_DIRS = [
-    BASE_DIR / 'static',  # Agrega esto si tienes archivos estáticos adicionales
+    BASE_DIR / 'static', 
+    
 ]
 
 # https://docs.djangoproject.com/en/5.1/ref/settings/#default-auto-field

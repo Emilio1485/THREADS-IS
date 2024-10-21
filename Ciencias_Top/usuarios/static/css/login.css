@@ -1,0 +1,73 @@
+/* Estilos generales */
+body {
+    min-height: 100vh;
+    background-color: #4B0082;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+/* Contenedor del formulario */
+.login-container {
+    background-color: #4B0082;
+    width: 100%;
+    max-width: 400px;
+    padding: 2rem;
+}
+
+/* Estilos del título */
+h1 {
+    color: white;
+    text-align: center;
+    margin-bottom: 2rem;
+}
+
+/* Estilos de los inputs */
+.form-control {
+    background-color: transparent;
+    border: none;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.5);
+    border-radius: 0;
+    color: white;
+    padding: 0.75rem 0;
+}
+
+.form-control:focus {
+    background-color: transparent;
+    border-color: white;
+    box-shadow: none;
+    color: white;
+}
+
+.form-control::placeholder {
+    color: rgba(255, 255, 255, 0.7);
+}
+
+/* Estilos del botón */
+.btn-login {
+    background-color: #DAA520;
+    border: none;
+    padding: 1rem;
+    width: 100%;
+}
+
+.btn-login:hover {
+    background-color: #B8860B;
+}
+
+/* Estilos del ícono de usuario */
+.user-icon {
+    width: 64px;
+    height: 64px;
+    background-color: rgba(255, 255, 255, 0.1);
+    border-radius: 50%;
+    margin: 0 auto 2rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.user-icon svg {
+    width: 32px;
+    height: 32px;
+}
