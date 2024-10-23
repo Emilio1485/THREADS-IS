@@ -48,10 +48,12 @@ class SuperUsuario(AbstractUser):
 
     # Atributos adicionales para el modelo de usuario
     numero_cuenta = models.CharField(max_length=12, unique=True, primary_key=True, verbose_name='Número de cuenta')
+    contrasenia_temp = models.CharField(max_length=128, blank=True, null=True)
     nombre = models.CharField(max_length=100, verbose_name='Nombre(s)')
     apellido_paterno = models.CharField(max_length=100, verbose_name='Apellido paterno')
     apellido_materno = models.CharField(max_length=100, blank=True, null=True, verbose_name='Apellido materno')
     celular = models.CharField(max_length=10, verbose_name='Número de celular')
+    correo = models.EmailField(unique=True, default='ejemplo@unam.mx') 
     carrera = models.CharField(max_length=100, choices=CARRERAS, verbose_name='Carrera')
     rol = models.CharField(max_length=20, choices=ROLES, verbose_name='Rol')
     

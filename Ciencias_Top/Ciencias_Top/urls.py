@@ -18,12 +18,16 @@ from django.contrib import admin
 from django.urls import path
 from django.urls import include
 from usuarios.views import login
+from django.contrib.auth import views as auth_views
 
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('login/',login),
-    path('inicioAdmin/', include('productos.urls')),
+    #path('login/',login),
+    #path('login/', auth_views.LoginView.as_view(), name='login'),  # Ruta para el inicio de sesión
+    path('', include('productos.urls')),
+    path('', include('usuarios.urls')),
+   
    
     
 ]
