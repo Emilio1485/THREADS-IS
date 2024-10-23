@@ -6,6 +6,10 @@
 
 {% block buscar %}Buscar un producto específico (nombre/código){% endblock %}
 
-{% block contenido_adicional %}
-    <p>Este es un texto adicional que se muestra en la sección de contenido adicional.</p>
+
+{% block lista_items %}
+
+ <!-- Aquí se muestra la lista de productos -->
+ {% include "producto/ver_productos.html" %}
 {% endblock %}
+

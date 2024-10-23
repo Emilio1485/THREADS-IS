@@ -19,6 +19,8 @@ from django.urls import path
 from django.urls import include
 from usuarios.views import login
 from django.contrib.auth import views as auth_views
+from django.conf import settings
+from django.contrib.staticfiles.urls import static
 
 
 urlpatterns = [
@@ -30,4 +32,4 @@ urlpatterns = [
    
    
     
-]
+] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT) # para que se muestren las imagenes en el admin

@@ -6,6 +6,9 @@ from django.contrib.auth import authenticate, login
 from django.contrib.auth import logout
 from django.shortcuts import render, redirect
 
+
+from productos.models import Producto  
+
 import logging
 
 logger = logging.getLogger(__name__)
@@ -35,8 +38,12 @@ def login_view(request):
 
 @login_required  # Esto requiere que el usuario esté autenticado para acceder a esta vista
 def inicio_view(request):
-    return render(request, 'inicioV/inicio.html', {'titulo': 'Inicio', 'user': request.user})
-
+    productos = Producto.objects.all()
+    return render(request, 'inicioV/inicio.html', {
+    'titulo': 'Inicio',
+    'user': request.user,
+    'productos': productos
+})
 
 
 
