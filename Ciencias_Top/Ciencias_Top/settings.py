@@ -89,7 +89,7 @@ DATABASES = {
         'NAME': 'cienciastop',
         'USER': 'admin',
         'PASSWORD': 'admin1234',
-        'HOST': 'localhost',
+        'HOST': 'db',
         'PORT': '5432',
     }
 
