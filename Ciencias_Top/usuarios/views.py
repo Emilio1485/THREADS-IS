@@ -11,25 +11,20 @@ from productos.models import Producto
 
 import logging
 
-logger = logging.getLogger(__name__)
+
 
 def login_view(request):
     if request.method == 'POST':
         numero_cuenta = request.POST.get('numero_cuenta')
         password = request.POST.get('password')
 
-        logger.debug(f'Intentando autenticar: {numero_cuenta}')  # Añade esto para depuración
-
         user = authenticate(request, username=numero_cuenta, password=password)
 
         if user is not None:
-            logger.debug(f'Usuario autenticado: {user}')  # Usuario autenticado
             login(request, user)
-            logger.debug('Redirigiendo a la página de inicio')  # Mensaje de depuración de redirección
             return redirect('inicio')  # Redirigir a la página de inicio
         else:
             error_message = "Número de cuenta o contraseña incorrectos."
-            logger.debug('Autenticación fallida')  # Mensaje en caso de fallo
             return render(request, 'login.html', {'error_message': error_message})
 
     return render(request, 'login.html')
