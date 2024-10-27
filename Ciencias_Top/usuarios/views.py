@@ -1,15 +1,15 @@
-from pyexpat.errors import messages
+
 from django.shortcuts import render
 from django.contrib.auth.decorators import login_required
 
 from django.contrib.auth import authenticate, login
 from django.contrib.auth import logout
 from django.shortcuts import render, redirect
+from django.contrib import messages
 
 
 from productos.models import Producto  
 
-import logging
 
 
 
@@ -34,16 +34,15 @@ def login_view(request):
 @login_required  # Esto requiere que el usuario esté autenticado para acceder a esta vista
 def inicio_view(request):
     productos = Producto.objects.all()
+    # Obtener permisos de todos los grupos a los que pertenece el usuario
     return render(request, 'inicioV/inicio.html', {
     'titulo': 'Inicio',
     'user': request.user,
-    'productos': productos
+    'productos': productos,
 })
 
 
-
 def logout_view(request):
-    logout(request)
-    return redirect('login')  # Redirigir a la página de inicio de sesión
-
-
+    logout(request)  # Cerrar sesión del usuario
+    messages.success(request, "Has cerrado sesión correctamente.")  # Mensaje de confirmación
+    return redirect('login')  # Redirigir a la página de inicio de sesión 

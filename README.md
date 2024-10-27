@@ -48,7 +48,7 @@ Para trabajar se necesitan 2 consolas: en una estará corriendo Docker y en la o
 - docker-compose exec web python manage.py loaddata data.json
 - docker-compose exec web python manage.py tu_comando_personalizado
 - docker-compose exec web python manage.py runserver 0.0.0.0:8000
-- si no jala el de arriba usar un puerto diferente  docker-compose exec web python manage.py runserver 0.0.0.0:8001
+
 
 **Detener y eliminar los contenedores actuales:**
 
