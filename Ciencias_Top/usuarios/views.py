@@ -8,6 +8,8 @@ from django.shortcuts import render, redirect
 
 
 from productos.models import Producto  
+from .models import SuperUsuario 
+from .forms import UsuarioForm 
 
 import logging
 
@@ -47,6 +49,38 @@ def logout_view(request):
     return redirect('login')  # Redirigir a la página de inicio de sesión
 
 def agregarUsuarioView(request):
-    return render(request, 'inicioV/AnadirUsuario.html',{'titulo':'Agregar Producto'})
+
+    if request.method == 'POST':
+        form = UsuarioForm(request.POST)
+        if form.is_valid():
+            # Crear una instancia del modelo SuperUsuario
+            superusuario = SuperUsuario(
+                numero_cuenta=form.cleaned_data['numero_cuenta'],
+                nombre=form.cleaned_data['nombre'],
+                apellido_paterno=form.cleaned_data['apellido_paterno'],
+                apellido_materno=form.cleaned_data['apellido_materno'],
+                celular=form.cleaned_data['celular'],
+                correo=form.cleaned_data['correo'],
+                carrera=form.cleaned_data['carrera'],
+                rol=form.cleaned_data['rol'],
+                tipo_usuario=form.cleaned_data['tipo_usuario'],
+            )
+
+            # Generar y establecer una contraseña segura
+            contrasena = superusuario.generar_contraseña()
+            superusuario.set_password(contrasena)  # Almacenar la contraseña de forma segura
+
+            # Guardar el superusuario en la base de datos
+            superusuario.save()
+
+            messages.success(request, f"Usuario registrado exitosamente. La contraseña generada es: {contrasena}")
+            return redirect('inicio')  # Redirigir a la página de inicio o a donde desees
+        else:
+            messages.error(request, "Error en el registro. Por favor, revisa los datos.")
+    else:
+        form = UsuarioForm()
+    return render(request, 'inicioV/AnadirUsuario.html',{
+        'titulo':'Agregar Producto'
+})
 
 

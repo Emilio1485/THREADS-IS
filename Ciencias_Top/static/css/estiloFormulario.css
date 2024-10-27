@@ -1,91 +1,109 @@
 .form-container {
     max-width: 850px;
-    margin: 0 auto;
-    background-color: white;
     margin: 40px auto;
+    background-color: white;
     padding: 20px;
     border-radius: 8px;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
 
 .form-group {
-    margin-bottom: 15px;
+    margin-bottom: 20px; /* Margen inferior para espacio entre campos */
 }
 
 label {
     display: block;
-    color: #666;
-    margin-bottom: 5px;
-    font-size: 14px;
+    color: #333; /* Color de texto */
+    margin-bottom: 5px; /* Margen inferior para separación */
+    font-size: 15px; /* Tamaño de fuente */
 }
 
 input, 
-textarea {
+select,
+textarea { /* Estilo para inputs y selects */
     width: 100%;
-    padding: 8px;
+    padding: 10px; /* Padding para mayor comodidad */
     border: 1px solid #ddd;
     border-radius: 4px;
-    box-sizing: border-box;
-    font-size: 14px;
+    box-sizing: border-box; /* Asegura que el padding no afecte el ancho total */
+    font-size: 14px; /* Tamaño de fuente */
 }
 
 input:focus,
-textarea:focus {
-    outline: none;
-    border-color: #673ab7;
-    box-shadow: 0 0 3px rgba(103, 58, 183, 0.3);
+select:focus { /* Estilos al enfocar inputs y selects */
+    outline: none; /* Sin contorno por defecto */
+    border-color: #673ab7; /* Color del borde al enfocar */
+    box-shadow: 0 0 3px rgba(103, 58, 183, 0.3); /* Sombra al enfocar */
 }
 
 input:disabled {
-    background-color: #f5f5f5;
-    cursor: not-allowed;
+    background-color: #f5f5f5; /* Color de fondo para inputs deshabilitados */
+    cursor: not-allowed; /* Cursor de no permitido */
 }
 
 .button-group {
     display: flex;
-    gap: 10px;
-    margin-top: 20px;
+    gap: 10px; /* Espacio entre botones */
+    margin-top: 20px; /* Margen superior para separación */
 }
 
 .btn {
-    padding: 10px 20px;
+    padding: 10px 20px; /* Padding para botones */
     border: none;
-    border-radius: 4px;
-    color: white;
-    cursor: pointer;
-    font-weight: bold;
-    transition: background-color 0.2s ease;
+    border-radius: 4px; /* Bordes redondeados */
+    color: white; /* Color de texto */
+    cursor: pointer; /* Cursor de puntero */
+    font-weight: bold; /* Negrita */
+    transition: background-color 0.2s ease; /* Transición suave para cambios de color */
 }
 
 .btn:hover {
-    opacity: 0.9;
-}
-
-.btn-upload {
-    background-color: #4a148c;
-    width: auto;
+    opacity: 0.9; /* Opacidad al pasar el mouse */
 }
 
 .btn-cancel {
-    background-color: #8b1f1f;
+    background-color: #8b1f1f; /* Color de fondo para cancelar */
 }
 
 .btn-add {
-    background-color: #673ab7;
+    background-color: #673ab7; /* Color de fondo para agregar */
+}
+
+/* Estilos para mensajes de error y éxito */
+.messages {
+    margin-top: 20px; /* Margen superior para separación */
+    padding: 10px; /* Padding para mensajes */
+    border-radius: 4px; /* Bordes redondeados */
+}
+
+.alert {
+    padding: 10px; /* Padding para alertas */
+    border-radius: 4px; /* Bordes redondeados */
+    margin-bottom: 10px; /* Margen inferior para separación */
+}
+
+.alert.success {
+    background-color: #d4edda; /* Color de fondo verde claro para éxito */
+    color: #155724; /* Texto verde oscuro */
+}
+
+.alert.error {
+    background-color: #f8d7da; /* Color de fondo rojo claro para error */
+    color: #721c24; /* Texto rojo oscuro */
 }
 
 /* Responsive adjustments */
 @media (max-width: 600px) {
     .form-container {
-        margin: 10px;
-        padding: 15px;
+        margin: 10px; /* Margen para dispositivos pequeños */
+        padding: 15px; /* Padding para dispositivos pequeños */
     }
     
     .button-group {
-        flex-direction: column;
+        flex-direction: column; /* Botones en columna para dispositivos pequeños */
     }
     
     .btn {
-        width: 100%;
+        width: 100%; /* Botones ocupan el ancho completo en dispositivos pequeños */
     }
 }
