@@ -18,12 +18,18 @@ from django.contrib import admin
 from django.urls import path
 from django.urls import include
 from usuarios.views import login
+from django.contrib.auth import views as auth_views
+from django.conf import settings
+from django.contrib.staticfiles.urls import static
 
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('login/',login, name='login'),
-    path('inicioAdmin/', include('productos.urls')),
+    #path('login/',login),
+    #path('login/', auth_views.LoginView.as_view(), name='login'),  # Ruta para el inicio de sesión
+    path('', include('productos.urls')),
+    path('', include('usuarios.urls')),
+   
    
     
-]
+] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT) # para que se muestren las imagenes en el admin

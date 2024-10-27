@@ -1,0 +1,91 @@
+.form-container {
+    max-width: 850px;
+    margin: 0 auto;
+    background-color: white;
+    margin: 40px auto;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.form-group {
+    margin-bottom: 15px;
+}
+
+label {
+    display: block;
+    color: #666;
+    margin-bottom: 5px;
+    font-size: 14px;
+}
+
+input, 
+textarea {
+    width: 100%;
+    padding: 8px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    box-sizing: border-box;
+    font-size: 14px;
+}
+
+input:focus,
+textarea:focus {
+    outline: none;
+    border-color: #673ab7;
+    box-shadow: 0 0 3px rgba(103, 58, 183, 0.3);
+}
+
+input:disabled {
+    background-color: #f5f5f5;
+    cursor: not-allowed;
+}
+
+.button-group {
+    display: flex;
+    gap: 10px;
+    margin-top: 20px;
+}
+
+.btn {
+    padding: 10px 20px;
+    border: none;
+    border-radius: 4px;
+    color: white;
+    cursor: pointer;
+    font-weight: bold;
+    transition: background-color 0.2s ease;
+}
+
+.btn:hover {
+    opacity: 0.9;
+}
+
+.btn-upload {
+    background-color: #4a148c;
+    width: auto;
+}
+
+.btn-cancel {
+    background-color: #8b1f1f;
+}
+
+.btn-add {
+    background-color: #673ab7;
+}
+
+/* Responsive adjustments */
+@media (max-width: 600px) {
+    .form-container {
+        margin: 10px;
+        padding: 15px;
+    }
+    
+    .button-group {
+        flex-direction: column;
+    }
+    
+    .btn {
+        width: 100%;
+    }
+}
