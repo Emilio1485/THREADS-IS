@@ -33,7 +33,7 @@ def crear_grupos_y_permisos():
 
     # Crear el grupo de Usuarios
     usuario_group, _ = Group.objects.get_or_create(name='Usuarios')
-    permisos_usuario = ['ver_productos', 'sumar_pumapuntos', 'rentar_producto']
+    permisos_usuario = ['ver_productos', 'rentar_producto']
     for perm in permisos_usuario:
         permission = Permission.objects.get(codename=perm)
         usuario_group.permissions.add(permission)

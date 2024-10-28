@@ -1,0 +1,201 @@
+{% load static %}
+
+<div class="productos-lista">
+    <!-- Bloque para mostrar mensajes de éxito o error -->
+    {% if messages %}
+        <div class="messages">
+            {% for message in messages %}
+                <div class="alert {{ message.tags }}">{{ message }}</div>
+            {% endfor %}
+        </div>
+    {% endif %}
+
+    {% for producto in productos %}
+    <div class="card">
+        <div class="card-header">
+            <div class="icono-item">
+                <span class="material-icons">shopping_bag</span>
+            </div>
+            <div class="info-header">
+                <h4>{{ producto.nombre }}</h4>
+                <p>Código: {{ producto.codigo }}</p>
+            </div>
+            <div class="menu-dots">
+                <i class="bi bi-three-dots-vertical"></i>
+            </div>
+        </div>
+        
+        <div class="card-image">
+            {% if producto.imagen %}
+                <img src="{{ producto.imagen.url }}" alt="{{ producto.nombre }}">
+            {% else %}
+                <img src="{% static 'images/placeholder.png' %}" alt="Imagen no disponible">
+            {% endif %}
+        </div>
+        
+        <div class="card-content">
+            <p><strong>{{ producto.pumapuntos }} PUMA PUNTOS</strong></p>
+            <p>{{ producto.existencia }} Disponibles</p>
+            <p>{{ producto.dias_renta }} días de renta</p>
+            <p>{{ producto.descripcion }}</p>
+        </div>
+        
+        <div class="card-actions">
+            {% if perms.usuarios.eliminar_producto %}
+                <button class="btn btn-danger">Eliminar</button>
+                <button class="btn btn-primary">Editar</button>
+            {% elif perms.usuarios.rentar_producto %}
+                <!-- Botón de renta con modal -->
+                <button class="btn btn-success" onclick="abrirModal('{{ producto.id }}', '{{ producto.nombre }}', '{{ producto.codigo }}', {{ producto.pumapuntos }}, '{{ producto.descripcion }}', '{{ producto.dias_renta }}', '{{ producto.existencia }}', '{% if producto.imagen %}{{ producto.imagen.url }}{% else %}{% static 'images/placeholder.png' %}{% endif %}')">Rentar</button>
+            {% endif %}
+        </div>
+    </div>
+    {% endfor %}
+</div>
+
+<!-- Ventana Modal -->
+<div id="modalRenta" class="modal">
+    <div class="modal-content">
+        <div class="modal-header">
+            <h3 id="modalTitulo">CONFIRMAR RENTA</h3>
+            <span class="close" onclick="cerrarModal()">&times;</span>
+        </div>
+        <div class="modal-body" style="text-align: center;">
+            <img id="modalImagen" src="" alt="Imagen del producto" style="width: 200px; height: auto; margin-bottom: 10px;">
+            <p id="modalCodigo"></p>
+            <p id="modalMensaje"></p>
+            <p id="modalDetalles"></p>
+        </div>
+        <div class="modal-footer">
+            <button id="btnConfirmar" class="btn btn-primary">Confirmar</button>
+        </div>
+    </div>
+</div>
+
+<!-- Script para manejar la confirmación de renta -->
+<script>
+    function abrirModal(id, nombre, codigo, pumapuntos, descripcion, diasRenta, existencia, imagen) {
+        const userPumaPuntos = {{ user.pumapuntos|default:0 }};
+        if (userPumaPuntos >= pumapuntos) {
+            document.getElementById('modalRenta').style.display = "block";
+            document.getElementById('modalTitulo').innerText = nombre.toUpperCase();
+            document.getElementById('modalCodigo').innerText = `Código: ${codigo}`;
+            document.getElementById('modalMensaje').innerText = `¿Deseas rentar este producto por ${pumapuntos} Puma Puntos?`;
+            document.getElementById('modalDetalles').innerHTML = `
+                <strong>Descripción:</strong> ${descripcion}<br>
+                <strong>Días de renta:</strong> ${diasRenta}<br>
+                <strong>Disponibles:</strong> ${existencia}<br>
+            `;
+            document.getElementById('modalImagen').src = imagen;
+
+            document.getElementById('btnConfirmar').onclick = function() {
+                fetch(`/rentas/rentar/${id}/`, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'X-CSRFToken': '{{ csrf_token }}'
+                    }
+                })
+                .then(response => {
+                    if (response.ok) {
+                        alert("Producto rentado exitosamente.");
+                        location.reload(); // Recarga la página para actualizar la lista
+                    } else {
+                        alert("Error al rentar el producto.");
+                    }
+                })
+                .catch(error => console.error('Error:', error));
+            };
+        } else {
+            alert("No tienes suficientes Puma Puntos para rentar este producto.");
+        }
+    }
+
+    function cerrarModal() {
+        document.getElementById('modalRenta').style.display = "none";
+    }
+
+    window.onclick = function(event) {
+        const modal = document.getElementById('modalRenta');
+        if (event.target == modal) {
+            cerrarModal();
+        }
+    }
+</script>
+
+<!-- CSS para la ventana modal aquí -->
+<style>
+    /* Estilos para la ventana modal */
+    .modal {
+        display: none; 
+        position: fixed; 
+        z-index: 1; 
+        left: 0;
+        top: 0;
+        width: 100%; 
+        height: 100%; 
+        overflow: auto; 
+        background-color: rgb(0,0,0); 
+        background-color: rgba(0,0,0,0.4); 
+        padding-top: 60px; 
+    }
+
+    .modal-content {
+        background-color: #fff;
+        margin: auto; 
+        padding: 20px;
+        border: 1px solid #888;
+        width: 80%; /* Ventana más pequeña */
+        max-width: 500px; /* Tamaño máximo reducido */
+        border-radius: 10px; 
+        box-shadow: 0 0 10px rgba(0,0,0,0.2); 
+    }
+
+    .modal-header {
+        margin-bottom: 15px;
+        border-bottom: 2px solid #0a0a4df7; /* Marco inferior */
+        padding-bottom: 10px; /* Espacio inferior del marco */
+        display: flex; /* Usar flexbox */
+        justify-content: space-between; /* Espacio entre el título y el botón de cerrar */
+        align-items: center; /* Alinear verticalmente */
+    }
+
+    .modal-header h3 {
+        margin: 0; /* Quitar margen del título */
+        font-size: 1em; /* Tamaño del título ajustado */
+        text-transform: uppercase; /* Título en mayúsculas */
+    }
+
+    .close {
+        color: #aaa;
+        font-size: 24px; /* Tamaño del ícono de cierre */
+        font-weight: bold;
+        cursor: pointer; /* Cambiar el cursor al pasar sobre el botón */
+    }
+
+    .close:hover,
+    .close:focus {
+        color: black;
+        text-decoration: none;
+    }
+
+    .modal-body {
+        text-align: center;
+    }
+
+    .modal-footer {
+        display: flex;
+        justify-content: center;
+        margin-top: 20px;
+    }
+
+    #btnConfirmar {
+        background-color: #0a0a4df7; /* Color azul */
+        color: white; /* Texto blanco */
+        width: 100%; /* Botón ocupa todo el ancho */
+    }
+
+    #btnConfirmar:hover {
+        background-color: #0056b3; /* Color azul más oscuro al pasar el mouse */
+    }
+</style>
