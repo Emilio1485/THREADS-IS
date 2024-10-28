@@ -6,3 +6,5 @@ urlpatterns = [
     #path('', views.inicioAdmin, name = 'inicioAdmin'),
     path('agregarProducto/', agregarProductoView, name='agregarProducto'),
 ]
+
+

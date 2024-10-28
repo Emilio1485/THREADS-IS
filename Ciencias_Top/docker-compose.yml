@@ -1,6 +1,6 @@
 services:
   db:
-    image: postgres:17  # Usar la versión más reciente de PostgreSQL
+    image: postgres:latest  # Usar la versión más reciente de PostgreSQL
     environment:
       POSTGRES_DB: cienciastop
       POSTGRES_USER: admin

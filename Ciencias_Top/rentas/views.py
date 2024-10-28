@@ -1,9 +1,10 @@
+
 from django.shortcuts import get_object_or_404, redirect
 from django.contrib import messages
 from productos.models import Producto
 from .models import Renta
 from django.utils import timezone
-
+from django.shortcuts import render
 
 def rentar_producto(request, producto_id):
     if request.method == "POST":

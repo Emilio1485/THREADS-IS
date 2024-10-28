@@ -1,3 +1,4 @@
+
 from datetime import datetime, timedelta
 from django.db import models
 from django.conf import settings
@@ -12,7 +13,6 @@ class Renta(models.Model):
     fecha_devolucion = models.DateTimeField(blank=True, null=True, verbose_name='Fecha de devolución', editable=False) # este atributo registra cuando el usuario deolvio el producto (retardo)
     estado = models.CharField(max_length=20, choices=[('R', 'Rentado'), ('D', 'Devuelto'), ('T', 'Devuelto tarde'), ('P', 'Sin devolve aun')], default='R', verbose_name='Estado de la renta', editable=False)
     pumapuntos_obtenidos = models.PositiveIntegerField(default=0, verbose_name='PumaPuntos obtenidos de esta renta', editable=False)
-    
     
     def puede_rentar(self):
         """Verifica si el usuario cumple con los requisitos para rentar."""
@@ -42,7 +42,6 @@ class Renta(models.Model):
             return True, "Renta completada con éxito."
         else:
             return False, mensaje
-    
     
     def save(self, *args, **kwargs):
         if not self.id_renta:

@@ -31,7 +31,6 @@ urlpatterns = [
     path('', include('productos.urls')),
     path('', include('usuarios.urls')),
     path('', include('rentas.urls')),
-   
-   
+      
     
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT) # para que se muestren las imagenes en el admin
