@@ -3,7 +3,6 @@
 
 body {
     
-
     background-color: rgb(14, 7, 80); /* Cambia el color de fondo para comprobar */
      
  }
@@ -52,144 +51,7 @@ body {
  .nav{
     
      overflow:visible; 
-   background-color: rgb(14, 7, 80); /* Cambia el color de fondo para comprobar */
     
-}
-
-
-nav {
-    display: flex;
-    flex-direction: column;
-   
-    padding: 0;
-    margin: 0;
-    background-color: whitesmoke; /* Color de fondo de la barra lateral */
-    width: 250px; /* Ancho fijo de la barra lateral */
-    position: fixed;
-    top: 90px;
-    left: 0;
-    height: calc(100vh - 90px);
-    z-index: 999;
-   
-}
-
-ul.nav{
-    list-style-type: none;
-    flex-grow: 1;
-    margin: 0 ;
-    padding: 0;
-    overflow-y: auto;
-}
-
-
-.container-fluid{
-    width: calc(100%-250px);
-}
-/* Cambia el color de fondo de la barra lateral */
-nav.p-3 {
-    background-color: #fffffff7; 
-    padding: 0;
-    margin: 0;
-    width: 250px; /* Ancho fijo */
-    height: 100vh;
-    overflow: auto;
-}
-
-
-
-.nav{
-   
-    overflow:visible; 
-   
-}
-
-.nav-link {
-    color: rgb(132, 132, 132);  /* Color de letra blanco */
-    width: 100%; /* Ocupa el 100% del ancho del contenedor */
-    font-size: 1.5rem; /* Tamaño de letra más grande */
-    margin-right: 10px; /* Espacio entre el icono y el texto */
-    text-align: left;
-    padding: 1.5rem; /* Aumentar el espaciado alrededor de cada opción */
-
-    display: flex;
-    align-items: center;
-}
-
-.nav-link i {
-    
-    margin-right: 15px; /* Espacio entre el icono y el texto */
-}
-
-
-.nav-link:hover {
-    background-color: #1f4c71; /* Color de fondo al pasar el mouse */
-    color: #a1b3dd;
-   
-}
-
-
-/* Estilo para "Menú" */
-nav h6 {
-    color: #6c757d; /* Color más claro (gris) para "Menú" */
-    margin: 0; /* Elimina el margen por defecto */
-    font-size: 20px; /* Tamaño de fuente más pequeño */
-   
-}
-
-/* Estilo para "Ciencias Top" */
-nav h5 {
-    font-weight: bold; /* Negrita */
-    color: #131415; /* Color más oscuro (casi negro) para "Ciencias Top" */
-    margin: 0; /* Elimina el margen por defecto */
-    font-size: 28px;
-    padding-bottom: 20px;
-}
-
-
-/* Estilo del header */
-.header {
-    background-color: rgb(8, 4, 46); /* Cambia el color de fondo del header */
-    padding: 18px; /* Espacio interno alrededor del contenido del header */
-    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1); /* Sombra del encabezado */
-    transition: background-color 0.3s ease, box-shadow 0.3s ease; 
-    position: fixed;
-    width: 100%;
-    top:0;
-    z-index: 1000;
-    
-}
-
-
-.header-container {
-    display: flex; /* Usar flexbox para disposición flexible */
-    align-items: center; /* Centrar verticalmente los elementos en el contenedor */
-    justify-content: center; /* Espacio entre los elementos */
-    width: 100%; /* Asegurar que el contenedor ocupe todo el ancho del header */
-}
-
-.container-fluid{
-    margin-top: 80px;
-    padding-top: 140px; /* Compensar altura del header + barra de búsqueda */
-
-}
-
-.header-title {
-    margin: 0; /* Eliminar margen */
-    padding: 0;
-    color: #dea813; /* Cambia el color de letra del título */
-    font-family: 'Montserrat', sans-serif;
-    text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.3); /* Sombra del texto */
-    font-size: 42px; /* Tamaño de letra del título */
-    font-weight: bold;
-    text-align: center; /* Centrar el texto del título */
-    flex-grow: 1; /* Permitir que el título tome todo el espacio disponible */
-}
-
-/* Estilo para el botón de menú */
-.menu-toggle {
-    background: none; /* Sin fondo */
-    border: none; /* Sin borde */
-    cursor: pointer; /* Cambiar cursor al pasar sobre el botón */
  }
  
  .nav-link {
@@ -213,7 +75,7 @@ nav h5 {
  .nav-link:hover {
      background-color: #1f4c71; /* Color de fondo al pasar el mouse */
      color: #a1b3dd;
-   
+    
  }
  
  
@@ -279,6 +141,8 @@ nav h5 {
      background: none; /* Sin fondo */
      border: none; /* Sin borde */
      cursor: pointer; /* Cambiar cursor al pasar sobre el botón */
+     
+     
      margin-right: 20px; /* Espacio a la derecha del botón */
      display: flex; /* Asegurarse de que el botón use flexbox */
      flex-direction: column; /* Colocar las barras en columna */
@@ -444,170 +308,4 @@ nav h5 {
  
  #logout-footer button:hover {
      background-color: #07093d; /* Cambia el color de fondo al pasar el cursor */
-    margin-right: 20px; /* Espacio a la derecha del botón */
-    display: flex; /* Asegurarse de que el botón use flexbox */
-    flex-direction: column; /* Colocar las barras en columna */
-    align-items: center; /* Centrar las barras horizontalmente */
-}
-
-
-.iconoMenu {
-    color: #fcfcfce3; /* Cambia el color de las barras del menú */
-    font-weight: bold;
-    text-shadow: 1px 1px 0 currentColor, -1px -1px 0 currentColor, 
-                 1px -1px 0 currentColor, -1px 1px 0 currentColor;
-    font-size: 32px; /* Tamaño*/
-    transform: scale(1.4, 1); /* Escala de las barras */
-}
-
-.iconoMenu:hover {
-    color: #8098d1; /* Cambia el color*/
-}
-.container-fluid{
-    margin-left: 250px;
-    padding: 20px;
-}
-
-.search-container {
-    display: flex; /* Para colocar el input y el botón en la misma línea */
-    justify-content: center; /* Centrar el contenido */
-    margin-top: 30px; /* Espacio entre el header y la barra de búsqueda */
-    padding: 0 15px; /* Espacio interno en los lados */
-    
-    top:70px;
-    
-}
-
-
-.search-input {
-    width: 80%; /* Ajusta el ancho del campo de búsqueda */
-    padding: 12px; /* Espacio interno del campo */
-    border-radius: 7px 0 0 7px; /* Bordes redondeados en la izquierda */
-    border:none; /* Borde gris */
-    outline: none; /* Eliminar el borde azul al hacer clic */
-    font-size: 1.2rem; /* Tamaño de la letra */
-}   
-
-.search-button {
-    background-color: none; /* Color de fondo del botón */
-    border: none; /* Borde del botón */
-    border-radius: 0 7px 7px 0; /* Bordes redondeados en la derecha */
-    color: rgb(163, 163, 163); /* Color del icono */
-    padding: 12px; /* Espacio interno del botón */
-    cursor: pointer; /* Cambia el cursor al pasar sobre el botón */
-    font-size: 1.5rem; /* Tamaño del icono */
-}
-
-.search-button i {
-    font-size: 1.4rem; /* Ajustar el tamaño del ícono de la lupa */
-}
-
-.search-input:focus {
-    border-color: #1f4c71; /* Cambia el borde al hacer clic en el input */
-}
-.search-button:hover {
-    color: #1f4c71; /* Cambia el color del icono al pasar el mouse */
-}
-
-nav {
-    display: none; /* Ocultar por defecto */
-}
-
-nav.show {
-    display: block; /* Mostrar cuando se agrega la clase 'show' */
-}
-
-
-/* Establece un ancho personalizado para la ventana del modal */
-.custom-modal-size {
-    max-width: 400px; /* Ajusta el valor para el tamaño deseado */
-}
-
-#logoutModal .modal-header {
-    padding: 0.5rem 1rem;
-    height: 40px; 
-    border-bottom: none; /* Quitar el borde inferior si no lo deseas */
-    background-color: rgb(255, 255, 255) ; /* Cambia el color de fondo del encabezado */
-}
-
-#logoutModal .modal-body {
-    background-color: white;
-    margin: 0;
-    padding-top: 0;  /* Ajuste del espaciado superior */
-    padding-bottom: 10px;
-    text-align: center;
-}
-
-#logoutModal .modal-footer {
-    border-top: none; /* Quitar el borde superior si no lo deseas */
-    border-top: none;    
-    background-color: rgb(255, 255, 255); /* Cambia el color de fondo del pie de página */
-}
-
-#logoutModal .modal-footer button {
-    /*background-color: #142d5ff7; /* Cambia el color de fondo del botón */
-    color: white; /* Cambia el color del texto del botón */
-    border-radius: 15px; /* Añade bordes redondeados al botón */
-    padding: 10px 20px; /* Ajusta el espaciado interno del botón */
-    border: none; /* Elimina el borde del botón */
-    margin: 0 10px; /* Añade margen horizontal entre los botones */
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Sombra del botón */
-    transition: box-shadow 0.3s ease; /* Efecto de transición para la sombra */
-    
-}
-
-
-.custom-modal-size {
-    max-width: 400px; /* Puedes cambiar el ancho del modal si lo necesitas */
-}
-
-.btn-secondary {
-    background-color: #8e8e8e; /* Color de fondo */
-    margin: 0;
-    color: white; /* Color del texto */
-}
-
-.btn-secondary:hover {
-    background-color: #6d6b6b; /* Color de fondo al pasar el cursor */
-}
-.modal-footer .btn-danger{
-    background-color:  #142d5ff7; /* Color de fondo */
-    margin: 0;
-    color: white; /* Color del texto */
-}
-.modal-footer .btn-danger:hover {
-    background-color: #000000; /* Color de fondo al pasar el cursor */
-}
-
-
-#logout-footer {
-    position: absolute;
-    bottom:100px;
-    left: 0;
-    right: 0;
-    padding: 10px; /* Añadir espacio alrededor del botón si es necesario */
-    width: 100%;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    background-color:whitesmoke;
-    
-} 
-#logout-footer button {
-    background-color:  #20315e; /* Cambia el color de fondo del botón */ 
-    color: white;  
-    font-size: 1.25rem; /* Aumentar el tamaño de la fuente del botón */
-    padding: 10px 10px; /* Aumentar el padding del botón para hacerlo más grande */
-    max-width: 90%; /* Hacer que el botón ocupe el ancho completo del contenedor */
-    border-radius: 10px;
-    margin: 0 auto;
-    display: block;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Sombra del botón */
-    transition: box-shadow 0.3s ease;
-
-}
-
-#logout-footer button:hover {
-    background-color: #07093d; /* Cambia el color de fondo al pasar el cursor */
-}
-
+ }
