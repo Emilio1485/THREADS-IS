@@ -97,6 +97,39 @@ input:disabled {
     color: #721c24; /* Texto rojo oscuro */
 }
 
+.file-input-container {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+/* Oculta completamente el input original */
+.hidden-input {
+    display: none !important;
+}
+
+/* Estilo para el botón personalizado (ahora es un label) */
+.btn-upload {
+    background-color: #673ab7;
+    color: white;
+    padding: 10px 20px;
+    border-radius: 4px;
+    cursor: pointer;
+    font-weight: bold;
+    border: none;
+    transition: background-color 0.2s ease;
+    display: inline-block;
+}
+
+.btn-upload:hover {
+    background-color: #563098;
+}
+
+#file-chosen {
+    color: #666;
+    font-size: 14px;
+}
+
 /* Responsive adjustments */
 @media (max-width: 600px) {
     .form-container {
