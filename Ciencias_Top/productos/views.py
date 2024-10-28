@@ -24,10 +24,10 @@ def agregarProductoView(request):
             'existencia': request.POST.get('existencia'),
             'pumapuntos': request.POST.get('pumapuntos'),
             'dias_renta': request.POST.get('dias_renta'),
-            'imagen': request.POST.get('imagen'),
+            'imagen': request.FILES.get('imagen'),
         }
 
-        form = ProductoForm(form_data)
+        form = ProductoForm(form_data, request.FILES)
 
         if form.is_valid():
             try:
