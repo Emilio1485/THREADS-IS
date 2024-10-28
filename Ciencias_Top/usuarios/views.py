@@ -45,8 +45,10 @@ def inicio_view(request):
 
 
 def logout_view(request):
-    logout(request)
-    return redirect('login')  # Redirigir a la página de inicio de sesión
+    logout(request)  # Cerrar sesión del usuario
+    messages.success(request, "Has cerrado sesión correctamente.")  # Mensaje de confirmación
+    return redirect('login')  # Redirigir a la página de inicio de sesión 
+
 
 def agregarUsuarioView(request):
     if request.method == 'POST':
@@ -93,7 +95,4 @@ def agregarUsuarioView(request):
     return render(request, 'inicioV/AnadirUsuario.html', {
         'titulo': 'Agregar Usuario'
     })
-
-
-
 

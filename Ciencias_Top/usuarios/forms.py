@@ -84,4 +84,4 @@ class UsuarioForm(forms.ModelForm):
             usuario.save()
 
         return usuario
-    
+
