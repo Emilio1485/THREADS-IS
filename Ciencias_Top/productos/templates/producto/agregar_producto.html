@@ -2,7 +2,8 @@
 
 
     <div class="form-container">
-        <form>
+        <form method="POST" enctype="multipart/form-data">
+            {% csrf_token %}
             <div class="form-group">
                 <label>Código:</label>
                 <input type="text" name="codigo" disabled>

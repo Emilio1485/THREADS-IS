@@ -32,7 +32,7 @@ def agregarProductoView(request):
         if form.is_valid():
             try:
                 producto = form.save(commit=False)
-                
+                producto.propietario = request.user
                 producto.save()
                 
                 messages.success(

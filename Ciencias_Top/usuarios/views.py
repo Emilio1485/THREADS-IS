@@ -67,12 +67,10 @@ def agregarUsuarioView(request):
         if form.is_valid():
             try:
                 usuario = form.save(commit=False)
-                # Usar la contraseña generada si se proporcionó
-                contraseña = request.POST.get('contraseña')
-                if contraseña:
-                    usuario.set_password(contraseña)
-                    usuario.contrasenia_temp = contraseña
-                
+                # Generar contraseña automáticamente
+                contraseña = usuario.generar_contraseña()
+                usuario.set_password(contraseña)
+                usuario.contrasenia_temp = contraseña
                 usuario.save()
                 
                 messages.success(
