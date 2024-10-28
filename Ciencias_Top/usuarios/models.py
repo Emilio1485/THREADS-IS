@@ -141,4 +141,6 @@ class Usuario(models.Model):
     pumapuntos = models.IntegerField(default=0)
 
     def __str__(self):
+
         return f'Perfil de {self.user.username} - Puma Puntos: {self.pumapuntos}'
+

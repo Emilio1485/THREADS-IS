@@ -1,5 +1,6 @@
 {% load static %}
 <!DOCTYPE html>
+
 <html>
     <head>
         <meta charset="utf-8"/>
@@ -55,3 +56,53 @@
         </section>
     </body>
 </html>
+
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ciencias Top</title>
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.2/css/bootstrap.min.css">
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="{% static 'css/login.css' %} ">
+</head>
+<body>
+    <div class="login-container">
+        <h1 class="fw-bold">Ciencias Top</h1>
+        <div class="user-icon">
+            <svg viewBox="0 0 24 24">
+                <path fill="white" d="M12 4a4 4 0 014 4 4 4 0 01-4 4 4 4 0 01-4-4 4 4 0 014-4m0 10c4.42 0 8 1.79 8 4v2H4v-2c0-2.21 3.58-4 8-4z"/>
+            </svg>
+        </div>
+
+        {% if messages %}
+        <div class="messages">
+            {% for message in messages %}
+            <div class="alert alert-{{ message.tags }}">
+                {{ message }}
+            </div>
+            {% endfor %}
+        </div>
+        {% endif %}
+
+
+        <form method="POST" action="{% url 'login' %}">
+            {% csrf_token %}
+            <div class="mb-4">
+                <input type="text" name="numero_cuenta" id="typeEmailX" class="form-control" placeholder="Ingrese su Número de cuenta / trabajador" required>
+            </div>
+            <div class="mb-4">
+                <input type="password" name="password" id="typePasswordX" class="form-control"  placeholder="Ingrese su contraseña" required>
+            </div>
+            <button type="submit" class="btn btn-login text-white">Login</button>
+        </form>
+    </div>
+
+    <!-- Bootstrap Bundle with Popper -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.2/js/bootstrap.bundle.min.js"></script>
+</body>
+
+</html>
+
+

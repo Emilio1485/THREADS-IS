@@ -50,6 +50,7 @@ Para trabajar se necesitan 2 consolas: en una estará corriendo Docker y en la o
 - docker-compose exec web python manage.py runserver 0.0.0.0:8000
 
 
+
 **Detener y eliminar los contenedores actuales:**
 
    

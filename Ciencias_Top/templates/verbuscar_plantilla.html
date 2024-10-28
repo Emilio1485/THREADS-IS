@@ -10,10 +10,12 @@
     <!-- Campo de búsqueda -->
     <input type="text" class="search-input" placeholder="{% block buscar %}{% endblock %}">
     <button class="search-button"><i class="bi bi-search"></i></button>
-    
+
 </div>
 
 <!-- Aquí se puede agregar más contenido específico de la vista -->
 {% block lista_items %}{% endblock %}
+
+{% block agregarProducto %}{% endblock %}
 
 {% endblock %}

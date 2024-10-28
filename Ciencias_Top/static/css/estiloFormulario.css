@@ -1,0 +1,147 @@
+.form-container {
+    max-width: 850px;
+    margin: 40px auto;
+    background-color: white;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.form-group {
+    margin-bottom: 20px; /* Margen inferior para espacio entre campos */
+}
+
+label {
+    display: block;
+    color: #333; /* Color de texto */
+    margin-bottom: 5px; /* Margen inferior para separación */
+    font-size: 15px; /* Tamaño de fuente */
+}
+
+input, 
+select,
+textarea { /* Estilo para inputs y selects */
+    width: 100%;
+    padding: 10px; /* Padding para mayor comodidad */
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    box-sizing: border-box; /* Asegura que el padding no afecte el ancho total */
+    font-size: 14px; /* Tamaño de fuente */
+}
+
+input:focus,
+select:focus { /* Estilos al enfocar inputs y selects */
+    outline: none; /* Sin contorno por defecto */
+    border-color: #673ab7; /* Color del borde al enfocar */
+    box-shadow: 0 0 3px rgba(103, 58, 183, 0.3); /* Sombra al enfocar */
+}
+
+input:disabled {
+    background-color: #f5f5f5; /* Color de fondo para inputs deshabilitados */
+    cursor: not-allowed; /* Cursor de no permitido */
+}
+
+.button-group {
+    display: flex;
+    gap: 10px; /* Espacio entre botones */
+    margin-top: 20px; /* Margen superior para separación */
+}
+
+.btn {
+    padding: 10px 20px; /* Padding para botones */
+    border: none;
+    border-radius: 4px; /* Bordes redondeados */
+    color: white; /* Color de texto */
+    cursor: pointer; /* Cursor de puntero */
+    font-weight: bold; /* Negrita */
+    transition: background-color 0.2s ease; /* Transición suave para cambios de color */
+}
+
+.btn:hover {
+    opacity: 0.9; /* Opacidad al pasar el mouse */
+}
+
+.btn-cancel {
+    background-color: #8b1f1f; /* Color de fondo para cancelar */
+}
+
+.btn-upload {
+    background-color: #330e3e;
+    width:auto;
+}
+
+.btn-add {
+    background-color: #673ab7; /* Color de fondo para agregar */
+}
+
+/* Estilos para mensajes de error y éxito */
+.messages {
+    margin-top: 20px; /* Margen superior para separación */
+    padding: 10px; /* Padding para mensajes */
+    border-radius: 4px; /* Bordes redondeados */
+}
+
+.alert {
+    padding: 10px; /* Padding para alertas */
+    border-radius: 4px; /* Bordes redondeados */
+    margin-bottom: 10px; /* Margen inferior para separación */
+}
+
+.alert.success {
+    background-color: #d4edda; /* Color de fondo verde claro para éxito */
+    color: #155724; /* Texto verde oscuro */
+}
+
+.alert.error {
+    background-color: #f8d7da; /* Color de fondo rojo claro para error */
+    color: #721c24; /* Texto rojo oscuro */
+}
+
+.file-input-container {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+/* Oculta completamente el input original */
+.hidden-input {
+    display: none !important;
+}
+
+/* Estilo para el botón personalizado (ahora es un label) */
+.btn-upload {
+    background-color: #673ab7;
+    color: white;
+    padding: 10px 20px;
+    border-radius: 4px;
+    cursor: pointer;
+    font-weight: bold;
+    border: none;
+    transition: background-color 0.2s ease;
+    display: inline-block;
+}
+
+.btn-upload:hover {
+    background-color: #563098;
+}
+
+#file-chosen {
+    color: #666;
+    font-size: 14px;
+}
+
+/* Responsive adjustments */
+@media (max-width: 600px) {
+    .form-container {
+        margin: 10px; /* Margen para dispositivos pequeños */
+        padding: 15px; /* Padding para dispositivos pequeños */
+    }
+    
+    .button-group {
+        flex-direction: column; /* Botones en columna para dispositivos pequeños */
+    }
+    
+    .btn {
+        width: 100%; /* Botones ocupan el ancho completo en dispositivos pequeños */
+    }
+}
