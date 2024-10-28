@@ -9,11 +9,12 @@ from django.contrib import messages
 
 
 from productos.models import Producto  
+from usuarios.models import SuperUsuario
 
 
 
 
-def login_view(request):
+def iniciar_sesion_vista(request):
     if request.method == 'POST':
         numero_cuenta = request.POST.get('numero_cuenta')
         password = request.POST.get('password')
@@ -31,18 +32,15 @@ def login_view(request):
 
 
 
-@login_required  # Esto requiere que el usuario esté autenticado para acceder a esta vista
-def inicio_view(request):
-    productos = Producto.objects.all()
-    # Obtener permisos de todos los grupos a los que pertenece el usuario
-    return render(request, 'inicioV/inicio.html', {
-    'titulo': 'Inicio',
-    'user': request.user,
-    'productos': productos,
-})
 
 
-def logout_view(request):
+@login_required
+def usuarios_vista(request):
+    usuarios = SuperUsuario.objects.all()
+    return render(request, 'usuarios/ver_usuarios.html', {'usuarios': usuarios})
+
+@login_required
+def cerrar_sesion_vista(request):
     logout(request)  # Cerrar sesión del usuario
     messages.success(request, "Has cerrado sesión correctamente.")  # Mensaje de confirmación
-    return redirect('login')  # Redirigir a la página de inicio de sesión 
+    return redirect('iniciar_sesion')  # Redirigir a la página de inicio de sesión 

@@ -21,7 +21,7 @@
                                     <p class="text-white-50 mb-5">Por favor ingresa usuario y contraseña</p>
                                     
                                     <!-- Formulario de Login -->
-                                    <form method="POST" action="{% url 'login' %}">
+                                    <form method="POST" action="{% url 'iniciar_sesion' %}">
                                       {% csrf_token %}
                                       <div class="form-outline form-white mb-4">
                                           <input type="text" name="numero_cuenta" id="typeEmailX" class="form-control form-control-lg" required />

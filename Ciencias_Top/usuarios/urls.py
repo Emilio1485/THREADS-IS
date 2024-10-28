@@ -1,8 +1,8 @@
 from django.urls import path
-from .views import inicio_view, login_view, logout_view
+from . import views  # Import the views module
 
 urlpatterns = [
-    path('', login_view, name='login'),
-    path('logout/', logout_view, name='logout'),
-    path('inicio/', inicio_view, name='inicio'),  # Esta es la vista que quieres mostrar después de iniciar sesión
+    path('', views.iniciar_sesion_vista, name='iniciar_sesion'),
+    path('salir/', views.cerrar_sesion_vista, name='cerrar_sesion'),
+    path('usuarios/', views.usuarios_vista, name='ver_usuarios'),
     ]
