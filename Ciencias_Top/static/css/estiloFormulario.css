@@ -65,6 +65,11 @@ input:disabled {
     background-color: #8b1f1f; /* Color de fondo para cancelar */
 }
 
+.btn-upload {
+    background-color: #330e3e;
+    width:auto;
+}
+
 .btn-add {
     background-color: #673ab7; /* Color de fondo para agregar */
 }
