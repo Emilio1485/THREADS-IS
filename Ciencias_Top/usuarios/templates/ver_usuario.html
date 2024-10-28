@@ -1,0 +1,31 @@
+{% load static %}
+<div class="card usuario-card">
+    <div class="card-header">
+        <div class="icono-item">
+            <span class="material-icons">person</span>
+        </div>
+        <div class="info-header">
+            <h4> {{ usuario.apellido_paterno }} {{ usuario.apellido_materno }} {{ usuario.nombre }}</h4>
+            <p>Número de cuenta: {{ usuario.numero_cuenta }}</p>
+        </div>
+        
+    </div>
+    <div class="card-content">
+        {% if perms.usuarios.rentar_producto %}
+            <p><strong>{{ usuario.pumapuntos }} PUMA PUNTOS</strong></p>
+        {% endif %}
+        <p>Correo: {{ usuario.correo }}</p>
+        <p>Celular: {{ usuario.celular }}</p>
+        <p>Carrera: {{ usuario.get_carrera_display }}</p>
+        <p>Rol: {{ usuario.get_rol_display }}</p>
+        <p>Tipo de usuario: {{ usuario.get_tipo_usuario_display }}</p>
+    </div>
+    <div class="card-actions">
+        {% if perms.usuarios.editar_usuario %}
+            <button class="btn btn-primary">Editar</button>
+        {% endif %}
+        {% if perms.usuarios.eliminar_usuario %}
+            <button class="btn btn-danger">Eliminar</button>
+        {% endif %}
+    </div>
+</div>
