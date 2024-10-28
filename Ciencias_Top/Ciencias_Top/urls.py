@@ -21,6 +21,7 @@ from usuarios.views import login
 from django.contrib.auth import views as auth_views
 from django.conf import settings
 from django.contrib.staticfiles.urls import static
+from rentas import views
 
 
 urlpatterns = [
@@ -29,7 +30,7 @@ urlpatterns = [
     #path('login/', auth_views.LoginView.as_view(), name='login'),  # Ruta para el inicio de sesión
     path('', include('productos.urls')),
     path('', include('usuarios.urls')),
-   
-   
+    path('', include('rentas.urls')),
+      
     
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT) # para que se muestren las imagenes en el admin

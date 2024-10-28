@@ -14,6 +14,7 @@
     <link rel="stylesheet" href="{% static 'css/estiloMenu.css' %}" />
     <link rel="stylesheet" href="{% static 'css/estiloLista.css' %}" />
     <link rel="stylesheet" href="{% static 'css/estiloFormulario.css' %}" />
+  
 </head>
 <body>
     <header class="header">
@@ -53,6 +54,7 @@
                 {% if perms.usuarios.agregar_usuario %}
                     <li class="nav-item">
                         <a class="nav-link active" href="/agregarUsuario/"><i class="bi bi-chevron-right"></i> Agregar Usuario</a>
+
                     </li>
                 {% endif %}
             
@@ -65,8 +67,8 @@
                         <a class="nav-link active" href="#"><i class="bi bi-chevron-right"></i> Ver Historial</a>
                     </li>
                 {% endif %}
+               
             </ul>
-            
             <div id="logout-footer" class="mt-3" style="display: none;">
                 <button class="btn btn-danger" 
                  onclick="event.preventDefault(); confirmLogout();">
@@ -83,7 +85,6 @@
             
         </div>
     </div>
-
 
     <!-- Modal de Confirmación -->
     <!-- Modal de Confirmación con Botón de Cierre -->

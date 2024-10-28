@@ -54,3 +54,4 @@ def agregarProductoView(request):
     return render(request, 'inicioV/AnadirProducto.html',{
         'titulo':'Agregar Producto'
     })
+

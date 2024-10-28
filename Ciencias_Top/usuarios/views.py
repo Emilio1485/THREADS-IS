@@ -49,6 +49,7 @@ def logout_view(request):
     messages.success(request, "Has cerrado sesión correctamente.")  # Mensaje de confirmación
     return redirect('login')  # Redirigir a la página de inicio de sesión 
 
+
 def agregarUsuarioView(request):
     if request.method == 'POST':
         # Crear un diccionario con los datos del formulario
@@ -94,7 +95,4 @@ def agregarUsuarioView(request):
     return render(request, 'inicioV/AnadirUsuario.html', {
         'titulo': 'Agregar Usuario'
     })
-
-
-
 
