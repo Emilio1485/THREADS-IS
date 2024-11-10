@@ -12,9 +12,10 @@
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     <link rel="stylesheet" href="{% static 'css/estiloMenu.css' %}" />
-    <link rel="stylesheet" href="{% static 'css/estiloLista.css' %}" />
+    <link rel="stylesheet" href="{% static 'css/estiloListaTarjeta.css' %}" />
     <link rel="stylesheet" href="{% static 'css/estiloFormulario.css' %}" />
   
+
 </head>
 <body>
     <header class="header">
@@ -32,14 +33,15 @@
                 <!-- Todos los roles pueden ver productos -->
                 {% if perms.usuarios.ver_productos %}
                     <li class="nav-item">
-                        <a class="nav-link active" href="/inicio/"><i class="bi bi-chevron-right"></i> Inicio</a>
+                        <a class="nav-link active" href="{% url 'inicio'%}"><i class="bi bi-chevron-right"></i> Inicio</a>
+
                     </li>
                 {% endif %}
             
                 <!-- Opciones para el usuario con permiso de ver usuarios -->
                 {% if perms.usuarios.ver_usuarios %}
                     <li class="nav-item">
-                        <a class="nav-link active" href="#"><i class="bi bi-chevron-right"></i> Ver Usuarios</a>
+                        <a class="nav-link active" href="{% url 'vistaUsuarios' %}"><i class="bi bi-chevron-right"></i> Ver Usuarios</a>
                     </li>
                 {% endif %}
             
@@ -54,7 +56,6 @@
                 {% if perms.usuarios.agregar_usuario %}
                     <li class="nav-item">
                         <a class="nav-link active" href="/agregarUsuario/"><i class="bi bi-chevron-right"></i> Agregar Usuario</a>
-
                     </li>
                 {% endif %}
             
@@ -75,6 +76,7 @@
                     Cerrar Sesión
                 </button>
             </div>
+
         </nav>
 
         <!-- Contenido principal -->
@@ -109,9 +111,11 @@
 </div>
     </div>
     <!-- Formulario oculto de cierre de sesión -->
+
     <form id="logout-form" action="{% url 'logout' %}" method="POST" style="display: none;">
         {% csrf_token %}
     </form>
+    
 
     <!-- JavaScript de Bootstrap -->
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js" integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQ+zqX6gSbd85u4mG4QzX+" crossorigin="anonymous"></script>

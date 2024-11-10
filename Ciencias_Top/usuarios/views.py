@@ -42,7 +42,10 @@ def inicio_view(request):
     'productos': productos
 })
 
-
+@login_required
+def usuarios_vista(request):
+    usuarios = SuperUsuario.objects.all()
+    return render(request, 'usuarios/verUsuarios.html', {'usuarios': usuarios})
 
 def logout_view(request):
     logout(request)  # Cerrar sesión del usuario
