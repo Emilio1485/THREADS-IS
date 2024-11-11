@@ -12,8 +12,10 @@ class UsuarioForm(forms.ModelForm):
 
     def clean_correo(self):
         correo = self.cleaned_data.get('correo')
-        if not correo.endswith('@unam.mx'):
-            raise forms.ValidationError('El correo debe terminar en @unam.mx')
+        dominio = '@unam.mx'
+        dominio_1 = '@ciencias.unam.mx'
+        if not (correo.endswith(dominio) or correo.endswith(dominio_1)):
+            raise forms.ValidationError('El correo debe terminar en ' + dominio + ' o ' + dominio_1)
         return correo
     
     def clean_celular(self):
@@ -21,6 +23,15 @@ class UsuarioForm(forms.ModelForm):
         if len(celular) != 10 or not celular.isdigit():
             raise forms.ValidationError('El número de celular debe tener exactamente 10 dígitos numéricos.')
         return celular
+    
+    def clean_numero_cuenta(self):
+        numero_cuenta = self.cleaned_data.get('numero_cuenta')
+        if not numero_cuenta.isdigit():
+            raise forms.ValidationError('No se permite caracteres.')
+        if len(numero_cuenta)  != 9:
+            raise forms.ValidationError(('El número de cuenta debe tener  exactamente 9 dígitos numéricos.'))
+        
+        return numero_cuenta
 
     def save(self, commit=True):
         usuario = super().save(commit=False)
@@ -84,4 +95,6 @@ class UsuarioForm(forms.ModelForm):
             usuario.save()
 
         return usuario
+    
+
 

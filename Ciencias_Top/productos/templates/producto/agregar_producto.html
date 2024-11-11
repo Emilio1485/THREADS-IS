@@ -1,47 +1,93 @@
 {% load static %}
 
-
     <div class="form-container">
         <form method="POST" enctype="multipart/form-data">
             {% csrf_token %}
-            <div class="form-group">
-                <label>Código:</label>
-                <input type="text" name="codigo" disabled>
-            </div>
-            
+
             <div class="form-group">
                 <label>Nombre:</label>
-                <input type="text" name="nombre" required>
+                <input type="text" name="nombre" value="{{ form.nombre.value|default_if_none:'' }}" required>
+                {% if form.nombre.errors %}
+                    {% for error in form.nombre.errors %}
+                        <p class="error-message">{{ error }}</p>
+                    {% endfor %}
+                {% endif %}
             </div>
+            
             
             <div class="form-group">
                 <label>Descripción:</label>
-                <textarea rows="3" name="descripcion" required></textarea>
+                <textarea rows="3" name="descripcion" required> {{ form.descripcion.value|default_if_none:'' }}</textarea>
+                {% if form.descripcion.errors %}
+                {% for error in form.descripcion.errors %}
+                    <p class="error-message">{{ error }}</p>
+                {% endfor %}
+            {% endif %}
             </div>
             
             <div class="form-group">
                 <label>Cantidad de productos:</label>
-                <input type="number" name="existencia" required>
+                <input type="number" name="existencia"  value="{{ form.existencia.value|default_if_none:'' }}" required>
+                {% if form.existencia.errors %}
+                {% for error in form.existencia.errors %}
+                    <p class="error-message">{{ error }}</p>
+                {% endfor %}
+            {% endif %}
             </div>
             
             <div class="form-group">
                 <label>Número de puntos:</label>
-                <input type="number" name="pumapuntos" required>
+                <input type="number" name="pumapuntos" value="{{ form.pumapuntos.value|default_if_none:'' }}" required>
+                {% if form.pumapuntos.errors %}
+                {% for error in form.pumapuntos.errors %}
+                    <p class="error-message">{{ error }}</p>
+                {% endfor %}
+            {% endif %}
             </div>
             
             <div class="form-group">
                 <label>Días de uso:</label>
-                <input type="number" name="dias_renta" required>
+                <input type="number" name="dias_renta" value="{{ form.dias_renta.value|default_if_none:'' }}" required>
+                {% if form.dias_renta.errors %}
+                {% for error in form.dias_renta.errors %}
+                    <p class="error-message">{{ error }}</p>
+                {% endfor %}
+            {% endif %}
             </div>
             
             <div class="form-group">
                 <label>Imagen del producto:</label>
                 <div class="file-input-container">
-                    <input type="file" name="imagen" accept="image/*" id="actual-input" class="hidden-input" style="display: none;" required>
-                    <button type="button" class="btn btn-upload" id="custom-button">Examinar archivos</button>
+                    <input type="file" 
+                           name="imagen" 
+                           accept="image/*" 
+                           id="actual-input" 
+                           class="hidden-input" 
+                           style="display: none;"
+                           required>
+                    
+                    <button type="button" class="btn btn-upload" id="custom-button">
+                        Examinar archivos
+                    </button>
+                    
+                    <!-- Agregamos el contenedor para la vista previa y el botón de eliminar -->
+                    <div id="image-preview-container" style="display:none; margin-top: 10px;">
+                        <img id="image-preview" src="" alt="Vista previa" 
+                             style="max-width: 200px; max-height: 200px; margin: 10px 0; border: 1px solid #ddd; border-radius: 4px; padding: 5px;">
+                        <br>
+                        <button type="button" class="btn btn-danger" id="delete-image">Eliminar imagen</button>
+                    </div>
+                    
                     <span id="file-chosen">No se ha seleccionado ningún archivo</span>
                 </div>
+                {% if form.imagen.errors %}
+                    {% for error in form.imagen.errors %}
+                        <p class="error-message">{{ error }}</p>
+                    {% endfor %}
+                {% endif %}
             </div>
+            
+ 
             
             <div class="button-group">
                 <button type="submit" class="btn btn-cancel" onclick="window.location.href='{% url 'inicio' %}'">Cancelar</button>
@@ -49,20 +95,48 @@
             </div>
 
             <script>
+                // Función para limpiar la selección de imagen
+                function clearImageSelection() {
+                    document.getElementById('actual-input').value = '';
+                    document.getElementById('file-chosen').textContent = 'No se ha seleccionado ningún archivo';
+                    document.getElementById('image-preview-container').style.display = 'none';
+                    document.getElementById('image-preview').src = '';
+                }
+            
+                // Limpiar el input de archivo al cargar la página
+                window.onload = clearImageSelection;
+            
                 const actualInput = document.getElementById('actual-input');
                 const customButton = document.getElementById('custom-button');
                 const fileChosen = document.getElementById('file-chosen');
+                const imagePreviewContainer = document.getElementById('image-preview-container');
+                const imagePreview = document.getElementById('image-preview');
+                const deleteButton = document.getElementById('delete-image');
             
                 customButton.addEventListener('click', function() {
                     actualInput.click();
                 });
             
                 actualInput.addEventListener('change', function() {
-                    if (actualInput.value) {
-                        fileChosen.textContent = actualInput.value.split('\\').pop();
+                    if (this.files && this.files[0]) {
+                        const file = this.files[0];
+                        fileChosen.textContent = 'Archivo seleccionado: ' + file.name;
+                        
+                        // Crear vista previa de la imagen
+                        const reader = new FileReader();
+                        reader.onload = function(e) {
+                            imagePreview.src = e.target.result;
+                            imagePreviewContainer.style.display = 'block';
+                        };
+                        reader.readAsDataURL(file);
                     } else {
-                        fileChosen.textContent = 'No se ha seleccionado ningún archivo';
+                        clearImageSelection();
                     }
+                });
+            
+                // Manejar el clic en el botón de eliminar
+                deleteButton.addEventListener('click', function() {
+                    clearImageSelection();
                 });
             </script>
 

@@ -1,8 +1,10 @@
 from django.shortcuts import render,redirect
+from django.contrib.auth.decorators import login_required
 from django.http import HttpResponse
 from django.contrib import messages
 
-from .forms import ProductoForm 
+from .forms import ProductoForm
+from .models import Producto 
 
 #import productos
 
@@ -16,42 +18,48 @@ def inicio(request):
     print("Llamando a inicio")
     return render(request, 'inicioV\inicio.html',{'titulo':'Inicio'})
 
+def buscar_productos(request):
+    query = request.GET.get('query', '')
+    productos = Producto.objects.filter(nombre__icontains=query)  # Filtra por nombre del producto
+    return render(request, 'inicioV/inicio.html', {
+        'titulo': 'Resultados de la búsqueda',
+        'productos': productos,
+        'query': query
+    })
+
+@login_required
 def agregarProductoView(request):
     if request.method == 'POST':
-        form_data = {
-            'nombre': request.POST.get('nombre'),
-            'descripcion': request.POST.get('descripcion'),
-            'existencia': request.POST.get('existencia'),
-            'pumapuntos': request.POST.get('pumapuntos'),
-            'dias_renta': request.POST.get('dias_renta'),
-            'imagen': request.FILES.get('imagen'),
-        }
-
-        form = ProductoForm(form_data, request.FILES)
-
+        form = ProductoForm(request.POST, request.FILES)
         if form.is_valid():
             try:
                 producto = form.save(commit=False)
                 producto.propietario = request.user
+                
+                if 'imagen' in request.FILES:
+                    producto.imagen = request.FILES['imagen']
+                else:
+                    messages.error(request, 'Se requiere una imagen para el producto.')
+                    return render(request, 'inicioV/AnadirProducto.html', {
+                        'titulo': 'Agregar Producto',
+                        'form': ProductoForm()
+                    })
+                
                 producto.save()
-                
-                messages.success(
-                    request, 
-                    f'Producto agregdo exitosamente. Nombre: {producto.nombre}, '
-                    f'Puntos: {producto.pumapuntos}'
-                )
-                
+                messages.success(request, 'Producto agregado exitosamente.')
                 return redirect('inicio')
-                
             except Exception as e:
                 messages.error(request, f'Error al crear el producto: {str(e)}')
         else:
-            # Manejo correcto de errores del formulario
-            for field, error_list in form.errors.items():
-                for error in error_list:
+            for field, errors in form.errors.items():
+                for error in errors:
                     messages.error(request, f'Error en {field}: {error}')
+            
+            form = ProductoForm()
+    else:
+        form = ProductoForm()
 
-    return render(request, 'inicioV/AnadirProducto.html',{
-        'titulo':'Agregar Producto'
+    return render(request, 'inicioV/AnadirProducto.html', {
+        'titulo': 'Agregar Producto',
+        'form': form
     })
-

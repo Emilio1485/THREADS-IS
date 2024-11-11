@@ -33,6 +33,10 @@ class ProductoForm(forms.ModelForm):
             raise forms.ValidationError('Los PumaPuntos no pueden ser un número negativo.')
         return pumapuntos
     
-    
+    def clean_imagen(self):
+        imagen = self.cleaned_data.get('imagen')
+        if not imagen:
+            raise forms.ValidationError("Se requiere una imagen para el producto.")
+        return imagen
     
     
