@@ -28,7 +28,7 @@ def buscar_productos(request):
     })
 
 @login_required
-def agregarProductoView(request):
+def agregarProductoVista(request):
     if request.method == 'POST':
         form = ProductoForm(request.POST, request.FILES)
         if form.is_valid():
