@@ -45,7 +45,7 @@ def inicio_vista(request):
 @login_required
 def usuarios_vista(request):
     usuarios = SuperUsuario.objects.all()
-    return render(request, 'usuarios/verUsuarios.html', {'usuarios': usuarios})
+    return render(request, 'usuario/ver_usuarios.html', {'usuarios': usuarios})
 
 def cerrar_sesion_vista(request):
     logout(request)  # Cerrar sesión del usuario
@@ -54,7 +54,7 @@ def cerrar_sesion_vista(request):
 
 
 @login_required
-def agregarUsuarioVista(request):
+def agregar_usuario_vista(request):
     if request.method == 'POST':
         form = UsuarioForm(request.POST)
         if form.is_valid():

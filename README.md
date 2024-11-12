@@ -36,7 +36,7 @@ docker-compose exec web python manage.py createsuperuser
 
 ### Paso 5: Acceder a la aplicación
 Abrir el navegador web y acceder  a la aplicación en
-http://localhost:8000.
+http://localhost:8000 
 
 
 ### Ejecutar Comandos de Django

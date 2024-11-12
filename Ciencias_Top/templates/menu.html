@@ -25,35 +25,35 @@
     </header>
     <div class="d-flex" style="height: 100vh;">
         <!-- Sidebar -->
-        <nav class="p-3 vh-100">
+        <nav class="p-3 vh-100 ">
             <h6>Menú</h6>
             <h5>Ciencias Top</h5>
             <ul class="nav flex-column">
                 <!-- Todos los roles pueden ver productos -->
                 {% if perms.usuarios.ver_productos %}
                     <li class="nav-item">
-                        <a class="nav-link active" href="/inicio/"><i class="bi bi-chevron-right"></i> Inicio</a>
+                        <a class="nav-link active" href="{% url "inicio" %}"><i class="bi bi-chevron-right"></i> Inicio</a>
                     </li>
                 {% endif %}
             
                 <!-- Opciones para el usuario con permiso de ver usuarios -->
                 {% if perms.usuarios.ver_usuarios %}
                     <li class="nav-item">
-                        <a class="nav-link active" href="/vistaUsuarios/"><i class="bi bi-chevron-right"></i> Ver Usuarios</a>
+                        <a class="nav-link active" href="{% url 'usuarios' %}"><i class="bi bi-chevron-right"></i> Ver Usuarios</a>
                     </li>
                 {% endif %}
             
                 <!-- Opciones para el usuario con permiso de agregar productos -->
                 {% if perms.usuarios.agregar_producto %}
                     <li class="nav-item">
-                        <a class="nav-link active" href="/agregarProducto/"><i class="bi bi-chevron-right"></i> Agregar Producto</a>
+                        <a class="nav-link active" href="{% url 'agregar_producto'%}"><i class="bi bi-chevron-right"></i> Agregar Producto</a>
                     </li>
                 {% endif %}
             
                 <!-- Opciones para el usuario con permiso de agregar usuarios -->
                 {% if perms.usuarios.agregar_usuario %}
                     <li class="nav-item">
-                        <a class="nav-link active" href="/agregarUsuario/"><i class="bi bi-chevron-right"></i> Agregar Usuario</a>
+                        <a class="nav-link active" href="{% url 'agregar_usuario' %}"><i class="bi bi-chevron-right"></i> Agregar Usuario</a>
 
                     </li>
                 {% endif %}
@@ -109,7 +109,7 @@
 </div>
     </div>
     <!-- Formulario oculto de cierre de sesión -->
-    <form id="logout-form" action="{% url 'logout' %}" method="POST" style="display: none;">
+    <form id="logout-form" action="{% url 'cerrar_sesion' %}" method="POST" style="display: none;">
         {% csrf_token %}
     </form>
 

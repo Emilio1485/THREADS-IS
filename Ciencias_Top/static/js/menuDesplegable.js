@@ -6,6 +6,7 @@ const logoutFooter = document.getElementById('logout-footer'); // div del botón
 const confirmLogoutBtn = document.getElementById('confirmLogout'); // botón de confirmar cierre de sesión
 
 
+
 menuToggle.addEventListener('click', () => {
     sidebar.classList.toggle('show');
     // Mostrar u ocultar el botón de cerrar sesión

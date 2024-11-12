@@ -6,9 +6,10 @@
 
 {% block buscar %}Buscar un producto específico (nombre/código){% endblock %}
 
-
 {% block lista_items %}
-
- <!-- Aquí se muestra la lista de productos -->
- {% include "producto/ver_productos.html" %}
+<div class="productos-lista">
+    {% for producto in productos %}
+        {% include 'producto/ver_producto.html' %}
+    {% endfor %}
+</div>
 {% endblock %}
