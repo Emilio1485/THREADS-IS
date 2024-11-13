@@ -50,7 +50,7 @@ def usuarios_vista(request):
 def cerrar_sesion_vista(request):
     logout(request)  # Cerrar sesión del usuario
     messages.success(request, "Has cerrado sesión correctamente.")  # Mensaje de confirmación
-    return redirect('login')  # Redirigir a la página de inicio de sesión 
+    return redirect('iniciar_sesion')  # Redirigir a la página de inicio de sesión 
 
 
 @login_required
