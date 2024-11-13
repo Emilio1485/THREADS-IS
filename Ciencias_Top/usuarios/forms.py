@@ -1,6 +1,6 @@
 from django import forms
 from django.contrib.auth.models import Group, Permission
-from .models import SuperUsuario 
+from .models import SuperUsuario, Usuario 
 
 
 
@@ -89,8 +89,12 @@ class UsuarioForm(forms.ModelForm):
                     except Permission.DoesNotExist:
                         continue
                 
-                # Asignar puma puntos solo si es un usuario normal
-                usuario.pumapuntos = 100
+                # Crear perfil de usuario y se asignan 100 pumapuntos
+                usuario_perfil, created = Usuario.objects.get_or_create(user=usuario)
+                if created:
+                    usuario_perfil.pumapuntos = 100 # Asigna pumapuntos solo a los usuarios
+                    usuario_perfil.save()
+                
 
             usuario.save()
 
