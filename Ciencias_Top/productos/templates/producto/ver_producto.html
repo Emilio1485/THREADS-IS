@@ -32,7 +32,11 @@
     
     <div class="card-actions">
         {% if perms.usuarios.eliminar_producto %}
-            <button class="btn btn-danger">Eliminar</button>
+        <form action="{% url 'eliminar_producto' producto.codigo %}" method="post" style="display:inline;">
+            {% csrf_token %}
+            <button type="submit" class="btn btn-danger">Eliminar</button>
+        </form>
+
             <button class="btn btn-primary">Editar</button>
         {% elif perms.usuarios.rentar_producto %}
             <button class="btn btn-success" onclick="abrirModal('{{ producto.id }}', '{{ producto.nombre }}', '{{ producto.codigo }}', {{ producto.pumapuntos }}, '{{ producto.descripcion }}', '{{ producto.dias_renta }}', '{{ producto.existencia }}', '{% if producto.imagen %}{{ producto.imagen.url }}{% else %}{% static 'images/placeholder.png' %}{% endif %}')">

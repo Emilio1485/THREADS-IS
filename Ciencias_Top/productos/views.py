@@ -1,7 +1,8 @@
-from django.shortcuts import render,redirect
+from django.shortcuts import render,redirect,get_object_or_404
 from django.contrib.auth.decorators import login_required
 from django.http import HttpResponse
 from django.contrib import messages
+from django.db.models import Q
 
 from .forms import ProductoForm
 from .models import Producto 
@@ -20,7 +21,7 @@ def inicio(request):
 
 def buscar_productos(request):
     query = request.GET.get('query', '')
-    productos = Producto.objects.filter(nombre__icontains=query)  # Filtra por nombre del producto
+    productos = Producto.objects.filter(Q(nombre__icontains=query) | Q(codigo__icontains=query))  # Filtra por nombre del producto
     return render(request, 'inicioV/inicio.html', {
         'titulo': 'Resultados de la búsqueda',
         'productos': productos,
@@ -63,3 +64,16 @@ def agregarProductoVista(request):
         'titulo': 'Agregar Producto',
         'form': form
     })
+
+
+def eliminar_producto(request, codigo):
+    producto = get_object_or_404(Producto, codigo=codigo)
+    
+    if request.method == "POST":
+        if request.user.has_perm('usuarios.eliminar_producto'):
+            producto.delete()
+            messages.success(request, f'Producto "{producto.nombre}" eliminado con éxito.')
+        else:
+            messages.error(request, "No tienes permiso para eliminar este producto.")
+    
+    return redirect('inicio')  # Cambia esto al nombre de la vista que muestra la lista de productos
