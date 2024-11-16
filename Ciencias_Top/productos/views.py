@@ -27,6 +27,7 @@ def buscar_productos(request):
         'query': query
     })
 
+
 @login_required
 def agregarProductoVista(request):
     if request.method == 'POST':

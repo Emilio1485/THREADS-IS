@@ -44,8 +44,23 @@ def inicio_vista(request):
 
 @login_required
 def usuarios_vista(request):
-    usuarios = SuperUsuario.objects.all()
-    return render(request, 'usuario/ver_usuarios.html', {'usuarios': usuarios})
+    #  Obtener la consulta de búsqueda
+    query = request.GET.get('q', '') # Obtener el valor de la consulta de búsqueda
+    mensaje = None
+    
+    es_busqueda_usuario = request.GET.get('tipo', '') == 'usuario'
+    if es_busqueda_usuario:
+        if query and not query.isdigit():
+            mensaje = "El número de cuenta/trabajador sólo esta compuesto de números."
+            usuarios = SuperUsuario.objects.none()
+        else:
+            usuarios = SuperUsuario.objects.filter(numero_cuenta__contains=query)
+            if not usuarios:
+                mensaje = f"No se encontró usuario con el número de cuenta/trabajador '{query}'."
+    else:
+        usuarios = SuperUsuario.objects.all()
+    
+    return render(request, 'usuario/ver_usuarios.html', {'usuarios': usuarios, 'query': query, 'mensaje': mensaje, 'es_busqueda_usuario': es_busqueda_usuario})
 
 def cerrar_sesion_vista(request):
     logout(request)  # Cerrar sesión del usuario

@@ -11,8 +11,8 @@
         
     </div>
     <div class="card-content">
-        {% if perms.usuarios.rentar_producto %}
-            <p><strong>{{ usuario.pumapuntos }} PUMA PUNTOS</strong></p>
+        {% if usuario.get_rol_display == 'Usuario' %}
+            <p><strong>{{ usuario.usuario.pumapuntos }} PUMA PUNTOS</strong></p>
         {% endif %}
         <p>Correo: {{ usuario.correo }}</p>
         <p>Celular: {{ usuario.celular }}</p>
