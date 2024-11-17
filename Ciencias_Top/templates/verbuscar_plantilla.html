@@ -8,9 +8,9 @@
 <!-- Aquí agregas la barra de búsqueda -->
 <div class="search-container">
     <!-- Campo de búsqueda -->
-    <form method="GET" action="{% url 'buscar_productos' %}">
-    <input type="text" class="search-input" placeholder="{% block buscar %}{% endblock %}">
-    <button class="search-button"><i class="bi bi-search"></i></button>
+    <form method="GET" action="">
+    <input type="text" class="search-input" name = "q" placeholder="{% block buscar %}{% endblock %}">
+    <button type="submit" ><i class="bi bi-search"></i></button>
     </form>
 </div>
 

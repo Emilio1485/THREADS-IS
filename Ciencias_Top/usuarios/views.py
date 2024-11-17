@@ -5,7 +5,7 @@ from django.contrib.auth.decorators import login_required
 from django.contrib.auth import authenticate, login
 from django.contrib.auth import logout
 from django.shortcuts import render, redirect
-
+from django.db.models import Q
 
 from productos.models import Producto  
 from .models import SuperUsuario 
@@ -36,10 +36,17 @@ def inicar_sesion_vista(request):
 @login_required  # Esto requiere que el usuario esté autenticado para acceder a esta vista
 def inicio_vista(request):
     productos = Producto.objects.all()
-    return render(request, 'inicioV/inicio.html', {
-    'titulo': 'Inicio',
-    'user': request.user,
-    'productos': productos
+    query = request.GET.get('q', '')
+
+    if query:
+        productos = productos.filter(Q(nombre__icontains=query) | Q(codigo__icontains=query))
+    else:
+        productos = Producto.objects.all()
+
+    return render(request, 'inicioV/inicio.html',{
+        'titulo':'Inicio',
+        'user': request.user,
+        'productos': productos
 })
 
 @login_required

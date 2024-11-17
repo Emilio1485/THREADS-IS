@@ -1,12 +1,5 @@
 {% load static %}
 
-<div class="search-container">
-    <form method="GET" action="{% url 'buscar_productos' %}">
-        <input type="text" name="query" class="search-input" placeholder="Buscar un producto específico (nombre/código)" required>
-        <button type="submit" class="search-button"><i class="bi bi-search"></i></button>
-    </form>
-</div>
-
 <div class="productos-lista">
     {% for producto in productos %}
     <div class="card">
