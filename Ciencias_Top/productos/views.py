@@ -19,7 +19,10 @@ def inicioAdmin(request):
 
 def buscar_productos(request):
     query = request.GET.get('query', '')
-    productos = Producto.objects.filter(Q(nombre__icontains=query) | Q(codigo__icontains=query))  # Filtra por nombre del producto
+    productos = Producto.objects.filter(
+        Q(nombre__icontains=query) | 
+        Q(codigo__icontains=query)
+    ).order_by('nombre')  # Ordenar por nombre
     return render(request, 'inicioV/inicio.html', {
         'titulo': 'Resultados de la búsqueda',
         'productos': productos,
@@ -64,6 +67,44 @@ def agregarProductoVista(request):
     })
 
 
+@login_required
+def editar_producto(request, codigo):
+    print(f"Editando producto con código: {codigo}")
+    print("Método de solicitud:", request.method)
+    
+    producto = get_object_or_404(Producto, codigo=codigo)
+    
+    if request.method == "POST":
+        form = ProductoForm(request.POST, request.FILES, instance=producto)
+        
+        print("Datos del formulario:", request.POST)
+        print("Archivos:", request.FILES)
+        
+        if form.is_valid():
+            try:
+                producto = form.save(commit=False)
+                
+                # Manejar la imagen
+                if 'imagen' in request.FILES:
+                    producto.imagen = request.FILES['imagen']
+                
+                producto.save()
+                messages.success(request, f'Producto "{producto.nombre}" editado con éxito.')
+                print(f"Producto {producto.nombre} editado exitosamente")
+            except Exception as e:
+                print(f"Error al editar el producto: {str(e)}")
+                messages.error(request, f'Error al editar el producto: {str(e)}')
+        else:
+            print("Errores del formulario:", form.errors)
+            # Si el formulario no es válido, mostrar errores
+            for field, errors in form.errors.items():
+                for error in errors:
+                    messages.error(request, f'Error en {field}: {error}')
+    
+    return redirect('inicio')
+
+
+@login_required
 def eliminar_producto(request, codigo):
     producto = get_object_or_404(Producto, codigo=codigo)
     
@@ -73,5 +114,7 @@ def eliminar_producto(request, codigo):
             messages.success(request, f'Producto "{producto.nombre}" eliminado con éxito.')
         else:
             messages.error(request, "No tienes permiso para eliminar este producto.")
-    
-    return redirect('inicio')  # Cambia esto al nombre de la vista que muestra la lista de productos
+        return redirect('inicio')  # Redirigir a la vista de inicio después de eliminar
+
+    # Si no es un POST, redirigir a la vista de inicio
+    return redirect('inicio')

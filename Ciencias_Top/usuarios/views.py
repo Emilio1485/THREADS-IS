@@ -46,7 +46,8 @@ def inicio_vista(request):
     return render(request, 'inicioV/inicio.html',{
         'titulo':'Inicio',
         'user': request.user,
-        'productos': productos
+        'productos': productos,
+        'query': query
 })
 
 @login_required

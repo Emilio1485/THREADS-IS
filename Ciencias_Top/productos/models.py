@@ -1,4 +1,3 @@
-
 import unicodedata 
 
 from django.db import models
@@ -47,4 +46,7 @@ class Producto(models.Model):
     def __str__(self):
         return f'{self.codigo} -> {self.nombre}'
     
-    
+    class Meta:
+        ordering = ['nombre']
+        verbose_name = 'Producto'
+        verbose_name_plural = 'Productos'
