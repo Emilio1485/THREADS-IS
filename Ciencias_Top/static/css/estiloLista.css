@@ -216,3 +216,99 @@
 .usuario-card .card-actions button {
     margin-left: 30px;
 }
+
+/* Estilos para el botón de eliminar */
+
+
+/* Asegurar que el modal esté centrado */
+.modal-dialog.modal-dialog-centered {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+
+/* Ajustar el tamaño del modal */
+.custom-modal-size {
+    max-width: 400px; /* Ajusta el ancho según las necesidades */
+    width: 100%;
+}
+
+/* Estilo para el fondo del modal */
+.modal-content {
+    background-color:palevioletred; /* Color de fondo del modal */
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+
+/* Estilo para el encabezado del modal */
+
+.custom-modal-size {
+    max-width: 400px; /* Ajusta el valor para el tamaño deseado */
+}
+/* Estilo para el encabezado del modal */
+.modal-header {
+    padding: 0.5rem 1 rem;
+    height: 40px;
+    background-color:white; /* Color de fondo del encabezado del modal */
+    border-bottom:none
+}
+
+.modal-header .close {
+    /* Custom styles for the close button */
+    border: none;
+    background: none;
+    font-size: 1.5rem; /* Example font size */
+}
+
+
+
+.modal-body{
+    background-color: white;
+    margin: 0;
+    padding-top: 0;
+    padding-bottom: 10px;
+    text-align: center;
+}
+
+.modal-footer{
+    background-color:white;
+    border-top: none;
+    border-bottom: none;
+}
+.modal-footer button {
+    /*background-color: #142d5ff7; /* Cambia el color de fondo del botón */
+    color: white; /* Cambia el color del texto del botón */
+    border-radius: 15px; /* Añade bordes redondeados al botón */
+    padding: 10px 20px; /* Ajusta el espaciado interno del botón */
+    border: none; /* Elimina el borde del botón */
+    margin: 0 10px; /* Añade margen horizontal entre los botones */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Sombra del botón */
+    transition: box-shadow 0.3s ease; /* Efecto de transición para la sombra */
+    
+}
+
+
+.modal-footer .btn-secondary {
+    background-color: rgb(150, 0, 0); /* Color de fondo al pasar el cursor */
+}
+.modal-footer .btn-secondary:hover {
+    background-color: #650000; /* Color de fondo al pasar el cursor */
+}
+.modal-footer .btn-danger{
+    background-color:  #142d5ff7; /* Color de fondo */
+    margin: 0;
+    color: white; /* Color del texto */
+}
+.modal-footer .btn-danger:hover {
+    background-color: #000000; /* Color de fondo al pasar el cursor */
+}
+
+.modal-footer button{
+    background-color:#07093d ;
+}
+
+.modal-backdrop {
+    background-color:rgba(0, 0, 0, 0.2) !important; /* Ajusta la opacidad según sea necesario */
+}

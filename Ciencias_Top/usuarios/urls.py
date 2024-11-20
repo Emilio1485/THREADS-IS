@@ -7,5 +7,6 @@ urlpatterns = [
     path('inicio/', inicio_vista, name='inicio'),  # Esta es la vista que quieres mostrar después de iniciar sesión
     path('agregar_usuario/', agregar_usuario_vista, name='agregar_usuario'),
     path('usuarios/',usuarios_vista, name='usuarios'),
+     path('eliminar_usuario/<str:numero_cuenta>/', eliminar_usuario_vista, name='eliminar_usuario'),
     ]
 

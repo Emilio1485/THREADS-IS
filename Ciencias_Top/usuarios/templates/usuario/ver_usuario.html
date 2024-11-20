@@ -19,13 +19,104 @@
         <p>Carrera: {{ usuario.get_carrera_display }}</p>
         <p>Rol: {{ usuario.get_rol_display }}</p>
         <p>Tipo de usuario: {{ usuario.get_tipo_usuario_display }}</p>
+        <p>Estado: {{ usuario.is_active }}</p>
     </div>
     <div class="card-actions">
         {% if perms.usuarios.editar_usuario %}
             <button class="btn btn-primary">Editar</button>
         {% endif %}
         {% if perms.usuarios.eliminar_usuario %}
-            <button class="btn btn-danger">Eliminar</button>
+            <button type = "button"  class="btn btn-danger" 
+            data-toggle="modal" 
+            data-target="#modal-eliminar-usuario-{{ usuario.numero_cuenta }}" 
+            data-usuario-id="{{ usuario.numero_cuenta }}"
+            data-usuario-nombre="{{ usuario.nombre }} {{ usuario.apellido_paterno }} {{ usuario.apellido_materno }}"> Eliminar</button>
         {% endif %}
     </div>
 </div>
+
+<!-- Modal de confirmación para eliminar usuario dentro del bucle -->
+<div class="modal fade" id="modal-eliminar-usuario-{{ usuario.numero_cuenta }}" tabindex="-1" role="dialog" aria-labelledby="modal-eliminar-usuario-{{ usuario.numero_cuenta }}" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered custom-modal-size" role="document">
+        <div class="modal-content">
+            <div class="modal-header justify-content-end">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <p>¿Estás seguro de que deseas eliminar a <span id="usuario-nombre-{{ usuario.numero_cuenta }}"></span>?</p>
+            </div>
+            <div class="modal-footer d-flex justify-content-center">
+                <form id="form-eliminar-usuario-{{ usuario.numero_cuenta }}" method="post">
+                    {% csrf_token %}
+                    <button type="submit" class="btn btn-danger">Eliminar</button>
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+<!-- Mostrar mensajes -->
+{% if messages %}
+    <div class="alert-container">
+        {% for message in messages %}
+            <div class="alert alert-{{ message.tags }}">
+                {{ message }}
+            </div>
+        {% endfor %}
+    </div>
+{% endif %}
+
+
+<!-- jQuery -->
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<!-- Bootstrap JS -->
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.bundle.min.js"></script>
+
+
+<script>
+    $(document).ready(function () {
+        // Al hacer clic en un botón de eliminar
+        $(document).on('click', '.btn-danger', function () {
+            var button = $(this); // El botón que activó el modal
+            var usuarioId = button.data('usuario-id'); // ID del usuario
+            var usuarioNombre = button.data('usuario-nombre'); // Nombre del usuario
+    
+            // Selecciona el modal correspondiente
+            var modal = $('#modal-eliminar-usuario-' + usuarioId);
+    
+            // Actualiza el contenido dinámico dentro del modal
+            modal.find('#usuario-nombre-' + usuarioId).text(usuarioNombre);
+    
+            // Configura la acción del formulario dinámicamente
+            var form = modal.find('#form-eliminar-usuario-' + usuarioId);
+            form.attr('action', '/eliminar_usuario/' + usuarioId + '/');
+    
+            // Muestra el modal
+            modal.modal('show');
+        });
+    
+        // Al cerrar cualquier modal
+        $(document).on('hidden.bs.modal', '.modal', function () {
+            var modal = $(this);
+    
+            // Limpia el contenido dinámico del modal
+            modal.find('form').trigger('reset'); // Limpia el formulario
+            modal.find('.modal-body span').text(''); // Limpia textos dinámicos
+    
+            // Elimina cualquier evento asociado al formulario
+            modal.find('form').off('submit');
+
+            $('.modal-backdrop').remove(); // Elimina cualquier fondo residual del modal
+            $('body').removeClass('modal-open'); // Elimina la clase modal-open
+        $('body').css('overflow', ''); // Restaura el scroll
+        });
+    });
+
+    
+    
+</script>
