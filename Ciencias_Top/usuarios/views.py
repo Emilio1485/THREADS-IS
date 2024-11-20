@@ -71,18 +71,22 @@ def agregar_usuario_vista(request):
                 
                 messages.success(
                     request, 
-                    f'Usuario creado exitosamente.\n Número de cuenta: {usuario.numero_cuenta}, '
+                    f'Usuario creado exitosamente.'
+                    f'\n Número de cuenta: {usuario.numero_cuenta}, '
                     f'Contraseña: {usuario.contrasenia_temp}'
                 )
                 
-                return redirect('inicio')
+                return render(request, 'inicioV/AnadirUsuario.html', {
+                    'titulo': 'Agregar Usuario',
+                    'form': form
+                })
                 
             except Exception as e:
                 messages.error(request, f'Error al crear el usuario: {str(e)}')
         else:
             for field, error_list in form.errors.items():
                 for error in error_list:
-                    messages.error(request, f'Error en {field}: {error}')
+                    messages.error(request, f'Error en {field}: {error} <br>')
     else:
         form = UsuarioForm()
     

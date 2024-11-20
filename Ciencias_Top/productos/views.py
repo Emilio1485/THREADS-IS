@@ -30,7 +30,7 @@ def buscar_productos(request):
     })
 
 @login_required
-def agregarProductoVista(request):
+def agregar_producto_vista(request):
     if request.method == 'POST':
         form = ProductoForm(request.POST, request.FILES)
         if form.is_valid():
@@ -49,13 +49,22 @@ def agregarProductoVista(request):
                 
                 producto.save()
                 messages.success(request, 'Producto agregado exitosamente.')
-                return redirect('inicio')
+                return redirect('agregar_producto')
             except Exception as e:
                 messages.error(request, f'Error al crear el producto: {str(e)}')
+                return render(request, 'inicioV/AnadirProducto.html', {
+                    'titulo': 'Agregar Producto',
+                    'form': form
+                })
+                
         else:
             for field, errors in form.errors.items():
                 for error in errors:
                     messages.error(request, f'Error en {field}: {error}')
+                    return render(request, 'inicioV/AnadirProducto.html', {
+        '               titulo': 'Agregar Producto',
+                        'form': form
+                    })
             
             form = ProductoForm()
     else:
@@ -111,7 +120,7 @@ def eliminar_producto(request, codigo):
     if request.method == "POST":
         if request.user.has_perm('usuarios.eliminar_producto'):
             producto.delete()
-            messages.success(request, f'Producto "{producto.nombre}" eliminado con éxito.')
+            #messages.success(request, f'Producto "{producto.nombre}" eliminado con éxito.')
         else:
             messages.error(request, "No tienes permiso para eliminar este producto.")
         return redirect('inicio')  # Redirigir a la vista de inicio después de eliminar
