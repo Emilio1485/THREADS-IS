@@ -17,20 +17,26 @@ def inicioAdmin(request):
 
 @login_required  # Esto requiere que el usuario esté autenticado para acceder a esta vista
 def inicio_vista(request):
-    productos = Producto.objects.all()
     query = request.GET.get('q', '')
-
+    
     if query:
-        productos = productos.filter(Q(nombre__icontains=query) | Q(codigo__icontains=query))
+        productos = Producto.objects.filter(
+            Q(nombre__icontains=query) | Q(codigo__icontains=query)
+        )
+        
+        if not productos.exists():
+            # Si no hay resultados, agrega un mensaje que se mostrará en un modal
+            messages.warning(request, f'No se encontraron productos con el nombre o código "{query}".')
+            #messages.warning(request, f'Lo sentimos hubo un error')
     else:
         productos = Producto.objects.all()
 
-    return render(request, 'inicioV/inicio.html',{
-        'titulo':'Inicio',
+    return render(request, 'inicioV/inicio.html', {
+        'titulo': 'Inicio',
         'user': request.user,
         'productos': productos,
         'query': query
-})
+    })
 
 
 def buscar_productos(request):
@@ -114,10 +120,10 @@ def editar_producto(request, codigo):
                     producto.imagen = request.FILES['imagen']
                 
                 producto.save()
-                #messages.success(request, f'Producto "{producto.nombre}" editado con éxito.')
-                #print(f"Producto {producto.nombre} editado exitosamente")
+                messages.success(request, f'Producto "{producto.nombre}" editado con éxito.')
+                print(f"Producto {producto.nombre} editado exitosamente")
             except Exception as e:
-                #print(f"Error al editar el producto: {str(e)}")
+                print(f"Error al editar el producto: {str(e)}")
                 messages.error(request, f'Error al editar el producto: {str(e)}')
         else:
             print("Errores del formulario:", form.errors)

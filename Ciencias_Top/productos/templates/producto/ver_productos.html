@@ -129,5 +129,38 @@
     </div>
 </div>
 
+{% if messages %}
+<!-- Modal de Mensajes -->
+<div class="modal fade" id="mensajeModal" tabindex="-1" aria-labelledby="mensajeModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="mensajeModalLabel">
+                    {% for message in messages %}
+                        {% if message.tags == 'success' %}Éxito{% else %}Error{% endif %}
+                    {% endfor %}
+                </h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                {% for message in messages %}
+                    {{ message }}
+                {% endfor %}
+            </div>
+
+        </div>
+    </div>
+</div>
+{% endif %}
+
 <script src="{% static 'js/funciones_productos.js' %}"></script>
+<script>
+    // Script para mostrar el modal automáticamente cuando hay mensajes
+    document.addEventListener('DOMContentLoaded', function() {
+        {% if messages %}
+            var mensajeModal = new bootstrap.Modal(document.getElementById('mensajeModal'));
+            mensajeModal.show();
+        {% endif %}
+    });
+</script>
 
