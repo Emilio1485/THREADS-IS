@@ -176,18 +176,17 @@ body {
  
  .search-container form {
     display: flex; /* Asegura que el input y el botón estén en línea */
-    align-items: strech; /* Centra verticalmente los elementos */
+    align-items: stretch ; /* Centra verticalmente los elementos */
     justify-content: center; /* Centra horizontalmente el formulario */
     width: 100%; /* El formulario ocupa todo el ancho disponible */
     margin: 0 auto; /* Elimina márgenes predeterminados */
     padding: 0; /* Elimina relleno predeterminado */
-    
     margin-top: 30px; /* Ajusta la posición del formulario */
 }
 
  
 .search-container input {
-    width: 75%; /* Ajusta el ancho del campo de búsqueda */
+    width: 70%; /* Ajusta el ancho del campo de búsqueda */
     padding: 12px; /* Espacio interno */
     border: none; /* Borde gris claro */
     border-radius: 7px 0 0 7px; /* Bordes redondeados a la izquierda */
@@ -197,29 +196,56 @@ body {
 }
 
 
-.search-container button {
-    background-color: none ; /* Color de fondo del botón */
+.clear-button {
+    background-color: white;
+    border: none; /* Sin borde */
+    padding: 10px; /* Espaciado interno */
+    font-size: 0.5rem; /* Tamaño del texto */
+    cursor: pointer; /* Cambia el cursor al pasar sobre el botón */
+    margin: 0; /* Sin margen */
+    outline: none; /* Elimina bordes al hacer clic */
+    display: flex;
+    align-items: center; /* Asegura el centrado vertical */
+    justify-content: center; /* Centra el contenido */
+}
+
+.clear-button i {
+    font-size: 1.4rem; /* Tamaño del ícono */
+    color: rgb(192, 192, 192);
+}
+
+.clear-button i:hover {
+    color: #9b9b9b; /* Cambia el color*/
+}
+.search-container .clear-button:hover {
+    background-color: white; /* Cambia el color de fondo al pasar el mouse */
+}
+
+.search-container .clear-button{
+    border-radius: 0;
+}
+.search-container .search-button {
+    background-color: #eaedfd ; /* Color de fondo del botón */
     border: none; /* Sin borde */
     border-radius: 0 7px 7px 0; /* Bordes redondeados a la derecha */
-    color: white; /* Color del ícono */
+  
     padding: 12px 18px; /* Espaciado interno */
     cursor: pointer; /* Cambia el cursor al pasar sobre el botón */
     font-size: 1.5rem; /* Tamaño del ícono */
     display: flex; /* Centra el ícono */
-    color: rgb(163, 163, 163); /* Color del icono */
+    color:rgb(8, 4, 46); /* Color del icono */
     align-items: center; /* Asegura el centrado vertical del ícono */
 }
 
-.search-container button i {
-    font-size: 1.4rem; /* Ajusta el tamaño del ícono de la lupa */
+.search-container .search-button i {
+    font-size: 1.5rem; /* Ajusta el tamaño del ícono de la lupa */
 }
 
-.search-container input:focus {
-    border-color: pink; /* Cambia el borde al hacer clic */
-}
 
-.search-container button:hover {
+
+.search-container .search-button:hover {
     background-color:  black; /* Cambia el color de fondo al pasar el mouse */
+    color: white; /* Cambia el color del texto al pasar el mouse */
 }
 
 
@@ -331,9 +357,9 @@ body {
 
 /* Estilo general para el mensaje */
 .custom-message {
-    background-color: #ffcdcd; /* Fondo amarillo claro */
-    color: #85040a; /* Color de texto marrón oscuro */
-    border: 1px solid #ffbaba; /* Borde amarillo claro */
+    background-color: #cdceff; /* Fondo amarillo claro */
+    color: #080f3f; /* Color de texto marrón oscuro */
+    border: none;
     padding: 15px;
     border-radius: 5px; /* Bordes redondeados */
     display: flex;

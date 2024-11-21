@@ -6,10 +6,10 @@ from django.contrib.auth import authenticate, login
 from django.contrib.auth import logout
 from django.shortcuts import render, redirect, get_object_or_404
 
-from django.http import JsonResponse
 from productos.models import Producto  
 from .models import SuperUsuario 
 from .forms import UsuarioForm 
+from django.db.models import Q
 
 #import logging
 
@@ -53,23 +53,27 @@ def cerrar_sesion_vista(request):
 @login_required
 @permission_required('usuarios.ver_usuarios', raise_exception=True)
 def usuarios_vista(request):
+    
     #  Obtener la consulta de búsqueda
     query = request.GET.get('q', '') # Obtener el valor de la consulta de búsqueda
     mensaje = None
-    
-    es_busqueda_usuario = request.GET.get('tipo', '') == 'usuario'
-    if es_busqueda_usuario:
-        if query and not query.isdigit():
-            mensaje = "El número de cuenta/trabajador sólo esta compuesto de números."
-            usuarios = SuperUsuario.objects.none()
-        else:
-            usuarios = SuperUsuario.objects.filter(numero_cuenta__contains=query, is_active = True)
-            if not usuarios:
-                mensaje = f"No se encontró usuario con el número de cuenta/trabajador '{query}'."
+    if query:
+        usuarios = SuperUsuario.objects.filter(
+                Q(numero_cuenta__icontains=query) |
+                Q(nombre__icontains=query) |
+                Q(apellido_paterno__icontains=query) |
+                Q(apellido_materno__icontains=query) |
+                Q(tipo_usuario__icontains=query) |
+                Q(rol__icontains=query) |
+                Q(carrera__icontains=query)
+            )
+        if not usuarios:
+            mensaje = 'No se encontraron usuarios con los criterios de búsqueda proporcionados.'
     else:
-        usuarios = SuperUsuario.objects.filter(is_active = True)
-    
-    return render(request, 'usuario/ver_usuarios.html', {'usuarios': usuarios, 'query': query, 'mensaje': mensaje, 'es_busqueda_usuario': es_busqueda_usuario})
+        usuarios = SuperUsuario.objects.all()
+        
+        
+    return render(request, 'usuario/ver_usuarios.html', {'usuarios': usuarios, 'query': query, 'mensaje': mensaje})
 
 
 
