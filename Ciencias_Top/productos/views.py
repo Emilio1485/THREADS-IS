@@ -114,7 +114,7 @@ def editar_producto(request, codigo):
                     producto.imagen = request.FILES['imagen']
                 
                 producto.save()
-                messages.success(request, f'Producto "{producto.nombre}" editado con éxito.')
+                #messages.success(request, f'Producto "{producto.nombre}" editado con éxito.')
                 #print(f"Producto {producto.nombre} editado exitosamente")
             except Exception as e:
                 #print(f"Error al editar el producto: {str(e)}")
