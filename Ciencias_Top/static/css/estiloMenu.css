@@ -174,47 +174,55 @@ body {
      padding: 20px;
  }
  
- .search-container {
-     display: flex; /* Para colocar el input y el botón en la misma línea */
-     justify-content: center; /* Centrar el contenido */
-     margin-top: 30px; /* Espacio entre el header y la barra de búsqueda */
-     padding: 0 15px; /* Espacio interno en los lados */
-     
-     top:70px;
-     
- }
+ .search-container form {
+    display: flex; /* Asegura que el input y el botón estén en línea */
+    align-items: strech; /* Centra verticalmente los elementos */
+    justify-content: center; /* Centra horizontalmente el formulario */
+    width: 100%; /* El formulario ocupa todo el ancho disponible */
+    margin: 0 auto; /* Elimina márgenes predeterminados */
+    padding: 0; /* Elimina relleno predeterminado */
+    
+    margin-top: 30px; /* Ajusta la posición del formulario */
+}
+
  
- 
- .search-input {
-     width: 80%; /* Ajusta el ancho del campo de búsqueda */
-     padding: 12px; /* Espacio interno del campo */
-     border-radius: 7px 0 0 7px; /* Bordes redondeados en la izquierda */
-     border:none; /* Borde gris */
-     outline: none; /* Eliminar el borde azul al hacer clic */
-     font-size: 1.2rem; /* Tamaño de la letra */
- }   
- 
- .search-button {
-     background-color: none; /* Color de fondo del botón */
-     border: none; /* Borde del botón */
-     border-radius: 0 7px 7px 0; /* Bordes redondeados en la derecha */
-     color: rgb(163, 163, 163); /* Color del icono */
-     padding: 12px; /* Espacio interno del botón */
-     cursor: pointer; /* Cambia el cursor al pasar sobre el botón */
-     font-size: 1.5rem; /* Tamaño del icono */
- }
- 
- .search-button i {
-     font-size: 1.4rem; /* Ajustar el tamaño del ícono de la lupa */
- }
- 
- .search-input:focus {
-     border-color: #1f4c71; /* Cambia el borde al hacer clic en el input */
- }
- .search-button:hover {
-     color: #1f4c71; /* Cambia el color del icono al pasar el mouse */
- }
- 
+.search-container input {
+    width: 75%; /* Ajusta el ancho del campo de búsqueda */
+    padding: 12px; /* Espacio interno */
+    border: none; /* Borde gris claro */
+    border-radius: 7px 0 0 7px; /* Bordes redondeados a la izquierda */
+    font-size: 1.2rem; /* Tamaño del texto */
+    outline: none; /* Elimina el borde azul al hacer clic */
+    box-sizing: border-box; /* Asegura que el padding esté incluido en el ancho */
+}
+
+
+.search-container button {
+    background-color: none ; /* Color de fondo del botón */
+    border: none; /* Sin borde */
+    border-radius: 0 7px 7px 0; /* Bordes redondeados a la derecha */
+    color: white; /* Color del ícono */
+    padding: 12px 18px; /* Espaciado interno */
+    cursor: pointer; /* Cambia el cursor al pasar sobre el botón */
+    font-size: 1.5rem; /* Tamaño del ícono */
+    display: flex; /* Centra el ícono */
+    color: rgb(163, 163, 163); /* Color del icono */
+    align-items: center; /* Asegura el centrado vertical del ícono */
+}
+
+.search-container button i {
+    font-size: 1.4rem; /* Ajusta el tamaño del ícono de la lupa */
+}
+
+.search-container input:focus {
+    border-color: pink; /* Cambia el borde al hacer clic */
+}
+
+.search-container button:hover {
+    background-color:  black; /* Cambia el color de fondo al pasar el mouse */
+}
+
+
  nav {
      display: none; /* Ocultar por defecto */
  }
@@ -317,3 +325,27 @@ body {
  #logout-footer button:hover {
      background-color: #07093d; /* Cambia el color de fondo al pasar el cursor */
  }
+
+
+
+
+/* Estilo general para el mensaje */
+.custom-message {
+    background-color: #ffcdcd; /* Fondo amarillo claro */
+    color: #85040a; /* Color de texto marrón oscuro */
+    border: 1px solid #ffbaba; /* Borde amarillo claro */
+    padding: 15px;
+    border-radius: 5px; /* Bordes redondeados */
+    display: flex;
+    align-items: center;
+    max-width: 600px; /* Establece un ancho máximo para el mensaje */
+    margin: 20px auto; /* Centra el mensaje en la pantalla */
+    font-size: 16px; /* Ajusta el tamaño de la fuente */
+    width: 90%; /* Ocupa el 90% del ancho disponible, ajustable */
+}
+
+/* Estilo para el icono */
+.custom-message i {
+    margin-right: 10px; /* Espacio entre el icono y el texto */
+    font-size: 20px; /* Tamaño del icono */
+}

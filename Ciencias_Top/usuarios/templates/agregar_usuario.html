@@ -82,11 +82,20 @@
                 <!-- Agrega más opciones según sea necesario -->
             </select>
         </div>
+
+        <div class="form-group">
+            <label>Tipo de usuario:</label>
+            <select name="tipo_usuario" required>
+                <option value="">Seleccione un tipo de usuario</option>
+                <option value="estudiante" {% if form.tipo_usuario.value == 'estudiante' %}selected{% endif %}>Estudiante</option>
+                <option value="trabajador" {% if form.tipo_usuario.value == 'trabajador' %}selected{% endif %}>Trabajador</option>
+            </select>
+        </div>
         
         <div class="form-group">
             <label>Rol:</label>
             <select name="rol" required>
-                <option value="">Seleccione un tipo de usuario</option>
+                <option value="">Seleccione el rol</option>
                 <option value="admin" {% if form.rol.value == 'admin' %}selected{% endif %}>Administrador</option>
                 <option value="usuario" {% if form.rol.value == 'usuario' %}selected{% endif %}>Usuario</option>
                 <option value="proveedor" {% if form.rol.value == 'proveedor' %}selected{% endif %}>Proveedor</option>

@@ -8,7 +8,7 @@ class UsuarioForm(forms.ModelForm):
     class Meta:
         model = SuperUsuario
         fields = ['numero_cuenta', 'nombre', 'apellido_paterno', 'apellido_materno', 
-                 'celular', 'correo', 'carrera', 'rol']
+                 'celular', 'correo', 'carrera', 'rol', 'tipo_usuario']
 
     def clean_correo(self):
         correo = self.cleaned_data.get('correo')

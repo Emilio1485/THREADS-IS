@@ -9,8 +9,10 @@
 <div class="search-container">
     <!-- Campo de búsqueda -->
     <form method="GET" action="">
-    <input type="text" class="search-input" name = "q" placeholder="{% block buscar %}{% endblock %}">
-    <button type="submit" ><i class="bi bi-search"></i></button>
+        <input type="text" class ="search-input" name = "q" placeholder="{% block buscar %}{% endblock %}" value = "{{query}}"
+        {% if es_busqueda_usuario %} pattern="\d*" title="Solo se permiten números" {% endif %} />
+        <input type="hidden" name="tipo" value="usuario" />
+        <button type="submit"><i class="fa fa-search"></i></button>
     </form>
 </div>
 
