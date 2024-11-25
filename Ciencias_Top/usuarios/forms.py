@@ -7,8 +7,8 @@ from .models import SuperUsuario, Usuario
 class UsuarioForm(forms.ModelForm):
     class Meta:
         model = SuperUsuario
-        fields = ['numero_cuenta', 'nombre', 'apellido_paterno', 'apellido_materno', 
-                 'celular', 'correo', 'carrera', 'rol', 'tipo_usuario']
+        fields = ['tipo_usuario', 'numero_cuenta', 'nombre', 'apellido_paterno', 'apellido_materno', 
+                 'celular', 'correo', 'carrera', 'rol']
 
     def clean_correo(self):
         correo = self.cleaned_data.get('correo')
@@ -26,11 +26,21 @@ class UsuarioForm(forms.ModelForm):
     
     def clean_numero_cuenta(self):
         numero_cuenta = self.cleaned_data.get('numero_cuenta')
-        if not numero_cuenta.isdigit():
-            raise forms.ValidationError('No se permite caracteres.')
-        if len(numero_cuenta)  != 9:
-            raise forms.ValidationError(('El número de cuenta debe tener  exactamente 9 dígitos numéricos.'))
+        tipo_usuario = self.cleaned_data.get('tipo_usuario')
+
+        # Validar si se seleccionó un tipo de usuario
+        if not tipo_usuario:
+            raise forms.ValidationError('Debes seleccionar un tipo de usuario.')
+
+        # Validaciones basadas en el tipo de usuario
+        if tipo_usuario == 'estudiante':
+            if len(numero_cuenta) != 9 or not numero_cuenta.isdigit():
+                raise forms.ValidationError('El número de cuenta debe tener exactamente 9 dígitos numéricos para estudiantes.')
         
+        elif tipo_usuario == 'trabajador':
+            if len(numero_cuenta) != 6 or not numero_cuenta.isdigit():
+                raise forms.ValidationError('El número de cuenta debe tener exactamente 6 dígitos numéricos para trabajadores.')
+
         return numero_cuenta
 
     def save(self, commit=True):
