@@ -61,10 +61,9 @@
 <div class="modal fade" id="confirmDeleteModal" tabindex="-1" aria-labelledby="confirmDeleteModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered custom-modal-size">
         <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title" id="confirmDeleteModalLabel">Confirmar Eliminación</h5>
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-            </div>
+      
+            <button type="button" class="btn-close ms-auto" data-bs-dismiss="modal" aria-label="Close"></button>
+
             <div class="modal-body">
                 ¿Estás seguro de que deseas eliminar este producto?
             </div>
@@ -82,10 +81,9 @@
 <div class="modal fade" id="editarProductoModal" tabindex="-1" aria-labelledby="editarProductoModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered custom-modal-size">
         <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title" id="editarProductoModalLabel">Editar Producto</h5>
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-            </div>
+
+            <button type="button" class="btn-close ms-auto" data-bs-dismiss="modal" aria-label="Close"></button>
+
             <form method="POST" enctype="multipart/form-data" id="editarProductoForm">
                 {% csrf_token %}
                 <div class="modal-body">
@@ -134,14 +132,9 @@
 <div class="modal fade" id="mensajeModal" tabindex="-1" aria-labelledby="mensajeModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered">
         <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title" id="mensajeModalLabel">
-                    {% for message in messages %}
-                        {% if message.tags == 'success' %}Éxito{% else %}Error{% endif %}
-                    {% endfor %}
-                </h5>
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-            </div>
+            
+            <button type="button" class="btn-close ms-auto" data-bs-dismiss="modal" aria-label="Close"></button>
+            
             <div class="modal-body">
                 {% for message in messages %}
                     {{ message }}
@@ -154,13 +147,13 @@
 {% endif %}
 
 <script src="{% static 'js/funciones_productos.js' %}"></script>
+
 <script>
-    // Script para mostrar el modal automáticamente cuando hay mensajes
-    document.addEventListener('DOMContentLoaded', function() {
+        // Script para mostrar el modal automáticamente cuando hay mensajes
+        document.addEventListener('DOMContentLoaded', function() {
         {% if messages %}
             var mensajeModal = new bootstrap.Modal(document.getElementById('mensajeModal'));
             mensajeModal.show();
         {% endif %}
     });
 </script>
-

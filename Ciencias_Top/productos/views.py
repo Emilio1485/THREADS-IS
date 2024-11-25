@@ -1,13 +1,24 @@
 from django.shortcuts import render,redirect,get_object_or_404
-from django.contrib.auth.decorators import login_required
+from django.contrib.auth.decorators import login_required, user_passes_test
 from django.http import HttpResponse
 from django.contrib import messages
 from django.db.models import Q
 
+
 from .forms import ProductoForm
 from .models import Producto 
 
-#import productos
+#Permisos
+
+def is_admin(user):
+    return user.groups.filter(name='Administradores').exists()
+
+def is_prov(user):
+    return user.groups.filter(name='Proveedores').exists()
+
+def is_admin_or_prov(user):
+    return is_admin(user) or is_prov(user)
+
 
 # Create your views here.
 
@@ -15,43 +26,52 @@ def inicioAdmin(request):
     print("Llamando a inicioAdmin")
     return render(request, 'inicioV\inicioAdmin.html',{'titulo':'Inicio Administrador'}) 
 
-@login_required  # Esto requiere que el usuario esté autenticado para acceder a esta vista
+@login_required
 def inicio_vista(request):
     query = request.GET.get('q', '')
-    
-    if query:
-        productos = Producto.objects.filter(
-            Q(nombre__icontains=query) | Q(codigo__icontains=query)
-        )
-        
-        if not productos.exists():
-            # Si no hay resultados, agrega un mensaje que se mostrará en un modal
-            messages.warning(request, f'No se encontraron productos con el nombre o código "{query}".')
-            #messages.warning(request, f'Lo sentimos hubo un error')
+    user = request.user
+
+    # Inicializar productos como un queryset vacío
+    productos = Producto.objects.none()
+
+    if user.groups.filter(name='Administradores').exists():
+        # Si es administrador, mostrar todos los productos
+        if query:
+            productos = Producto.objects.filter(
+                Q(nombre__icontains=query) | Q(codigo__icontains=query)
+            )
+        else:
+            productos = Producto.objects.all()
+    elif user.groups.filter(name='Proveedores').exists():
+        # Si es proveedor, mostrar solo sus productos
+        if query:
+            productos = Producto.objects.filter(
+                Q(propietario=user) & (Q(nombre__icontains=query) | Q(codigo__icontains=query))
+            )
+        else:
+            productos = Producto.objects.filter(propietario=user)
     else:
-        productos = Producto.objects.all()
+        # Para otros tipos de usuarios, mostrar todos los productos
+        if query:
+            productos = Producto.objects.filter(
+                Q(nombre__icontains=query) | Q(codigo__icontains=query)
+            )
+        else:
+            productos = Producto.objects.all()
+
+    # Manejar el caso en que no hay productos
+    if not productos.exists():
+        messages.warning(request, 'No se encontraron productos que coincidan con tu búsqueda.')
 
     return render(request, 'inicioV/inicio.html', {
         'titulo': 'Inicio',
-        'user': request.user,
-        'productos': productos,
-        'query': query
-    })
-
-
-def buscar_productos(request):
-    query = request.GET.get('query', '')
-    productos = Producto.objects.filter(
-        Q(nombre__icontains=query) | 
-        Q(codigo__icontains=query)
-    ).order_by('nombre')  # Ordenar por nombre
-    return render(request, 'inicioV/inicio.html', {
-        'titulo': 'Resultados de la búsqueda',
+        'user': user,
         'productos': productos,
         'query': query
     })
 
 @login_required
+@user_passes_test(is_admin_or_prov,login_url='iniciar_sesion')
 def agregar_producto_vista(request):
     if request.method == 'POST':
         form = ProductoForm(request.POST, request.FILES)

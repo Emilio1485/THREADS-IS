@@ -1,11 +1,12 @@
 from django.contrib import messages
 from django.shortcuts import render
-from django.contrib.auth.decorators import login_required
+from django.contrib.auth.decorators import login_required, user_passes_test
 
 from django.contrib.auth import authenticate, login
 from django.contrib.auth import logout
 from django.shortcuts import render, redirect
 from django.db.models import Q
+
 
 from productos.models import Producto  
 from .models import SuperUsuario 
@@ -13,6 +14,16 @@ from .forms import UsuarioForm
 
 #import logging
 
+#Permisos
+
+def is_admin(user):
+    return user.groups.filter(name='Administradores').exists()
+
+def is_prov(user):
+    return user.groups.filter(name='Proveedores').exists()
+
+def is_admin_or_prov(user):
+    return is_admin(user) or is_prov(user)
 
 
 def inicar_sesion_vista(request):
@@ -29,6 +40,9 @@ def inicar_sesion_vista(request):
             error_message = "Número de cuenta o contraseña incorrectos."
             return render(request, 'login.html', {'error_message': error_message})
 
+    if request.user.is_authenticated:
+        return redirect('inicio')
+    
     return render(request, 'login.html')
 
 
@@ -36,17 +50,19 @@ def inicar_sesion_vista(request):
 
 
 @login_required
+@user_passes_test(is_admin,login_url='iniciar_sesion')
 def usuarios_vista(request):
     usuarios = SuperUsuario.objects.all()
     return render(request, 'usuario/ver_usuarios.html', {'usuarios': usuarios})
 
 def cerrar_sesion_vista(request):
     logout(request)  # Cerrar sesión del usuario
-    messages.success(request, "Has cerrado sesión correctamente.")  # Mensaje de confirmación
+    #messages.success(request, "Has cerrado sesión correctamente.")  # Mensaje de confirmación
     return redirect('iniciar_sesion')  # Redirigir a la página de inicio de sesión 
 
 
 @login_required
+@user_passes_test(is_admin,login_url='iniciar_sesion')
 def agregar_usuario_vista(request):
     if request.method == 'POST':
         form = UsuarioForm(request.POST)

@@ -292,6 +292,10 @@ body {
  .modal-footer .btn-danger:hover {
      background-color: #000000; /* Color de fondo al pasar el cursor */
  }
+
+ .modal-content {
+    border: none; /* Elimina el borde */
+}
  
  
  #logout-footer {

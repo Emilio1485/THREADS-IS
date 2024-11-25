@@ -54,4 +54,5 @@ document.getElementById('actual-input').addEventListener('change', function() {
         fileChosen.textContent = 'No se ha seleccionado ningún archivo';
         imagePreviewContainer.style.display = 'none';
     }
-});  
+}); 
+

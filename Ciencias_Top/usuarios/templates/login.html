@@ -55,3 +55,11 @@
         </section>
     </body>
 </html>
+
+<script>
+    // Evitar que el usuario regrese a la página anterior
+    window.history.pushState(null, '', window.location.href);
+    window.onpopstate = function() {
+        window.history.pushState(null, '', window.location.href);
+    };
+</script>
