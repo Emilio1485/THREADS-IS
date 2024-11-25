@@ -22,6 +22,8 @@ class SuperUsuarioManager(BaseUserManager):
         superuser.is_superuser = True
         superuser.save(using=self._db)
         return superuser
+    
+    
 class SuperUsuario(AbstractUser):
     """
     Modelo de usuario personalizado extendiendo el usuario estándar de Django.

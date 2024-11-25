@@ -10,6 +10,7 @@ from productos.models import Producto
 from .models import SuperUsuario 
 from .forms import UsuarioForm 
 from django.db.models import Q
+from django.http import JsonResponse
 
 #import logging
 
@@ -45,7 +46,7 @@ def inicio_vista(request):
 @login_required    
 def cerrar_sesion_vista(request):
     logout(request)  # Cerrar sesión del usuario
-    messages.success(request, "Has cerrado sesión correctamente.")  # Mensaje de confirmación
+    print("Sesión cerrada con éxito")
     return redirect('iniciar_sesion')  # Redirigir a la página de inicio de sesión 
 
 
@@ -59,14 +60,15 @@ def usuarios_vista(request):
     mensaje = None
     if query:
         usuarios = SuperUsuario.objects.filter(
-                Q(numero_cuenta__icontains=query) |
-                Q(nombre__icontains=query) |
-                Q(apellido_paterno__icontains=query) |
-                Q(apellido_materno__icontains=query) |
-                Q(tipo_usuario__icontains=query) |
-                Q(rol__icontains=query) |
-                Q(carrera__icontains=query)
-            )
+            Q(numero_cuenta__icontains=query) |
+            Q(nombre__icontains=query) |
+            Q(apellido_paterno__icontains=query) |
+            Q(apellido_materno__icontains=query) |
+            Q(tipo_usuario__icontains=query) |
+            Q(rol__icontains=query) |
+            Q(carrera__icontains=query) |
+            Q(correo__icontains=query)
+    )
         if not usuarios:
             mensaje = 'No se encontraron usuarios con los criterios de búsqueda proporcionados.'
     else:
@@ -79,18 +81,32 @@ def usuarios_vista(request):
 
 @login_required
 @permission_required('usuarios.eliminar_usuario', raise_exception=True)
-def eliminar_usuario_vista(request, numero_cuenta): # inhabilitar usuario
-    usuario =  get_object_or_404(SuperUsuario, numero_cuenta=numero_cuenta)
-    if usuario == request.user:
-        messages.error(request, "No puedes eliminar tu propia cuenta.")
-        return redirect('usuarios')
-    if usuario.is_active:
-        usuario.is_active = False
-        usuario.save()
-        messages.success(request, f'Usuario {numero_cuenta} ha sido inhabilitado.')
-    else:
-        messages.warning(request, f'Usuario {numero_cuenta} ya está inhabilitado.')
-    return redirect('usuarios')
+def eliminar_usuario_vista(request, numero_cuenta):
+    if request.method == 'POST':
+        usuario = get_object_or_404(SuperUsuario, numero_cuenta=numero_cuenta)
+        
+        # No permitir deshabilitar tu propia cuenta
+        if usuario == request.user:
+            messages.error(request, "No puedes inhabilitar tu propia cuenta.")
+            return redirect('vista_detallada_usuario', numero_cuenta=numero_cuenta)
+
+        # Deshabilitar usuario si está activo
+        if usuario.is_active:
+            usuario.is_active = False
+            usuario.save()
+            messages.success(request, f'Usuario {numero_cuenta} inhabilitado exitosamente.')
+            return redirect('vista_detallada_usuario', numero_cuenta=numero_cuenta)
+    
+        # Ya está deshabilitado
+        messages.error(request, "Este usuario ya está inhabilitado.")
+        return redirect('vista_detallada_usuario', numero_cuenta=numero_cuenta)
+    # Si no es POST
+    return JsonResponse({'success': False, 'message': 'Método no permitido.'}, status=405)
+
+
+def vista_detallada_usuario(request, numero_cuenta):
+    usuario = get_object_or_404(SuperUsuario, numero_cuenta=numero_cuenta)
+    return render(request, 'usuario/vista_detallada_usuario.html', {'usuario': usuario})
 
 @login_required
 @permission_required('usuarios.agregar_usuario', raise_exception=True)

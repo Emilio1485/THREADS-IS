@@ -1,0 +1,283 @@
+/* Estilos para las tarjetas de usuario */
+.usuario-card, .usuario-detalles {
+    background-color: whitesmoke;
+    border: 0;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    width: 99%; /* Tarjeta más ancha */
+    display: flex;
+    flex-direction: row; /* Información en una sola línea */
+    align-items: stretch;
+    padding: 10px;
+    color: black;
+    margin: 20px auto;
+    
+}
+
+
+
+.usuario-detalles .card-header {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 200px;
+    height: 100%;
+    padding: 16px;
+    background-color: #c9ccde;
+    color: #000000;
+}
+
+.usuario-detalles .card-header .icono-item{
+    margin-bottom: 10px;
+    color: rgb(8, 4,46);
+}
+
+.usuario-detalles .card-header .info-header{
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
+    padding: 10px;
+    height: 100%;
+}
+.usuario-detalles .card-content {
+    display: flex;
+    flex: 1;
+    padding: 16px;
+    margin-bottom: none;
+    flex-direction: column;
+    justify-content: center;
+   
+    
+    color: #000000;
+}
+
+
+
+.usuario-detalles .card-content p {
+    display: flex;
+    align-items: center;
+    flex: 1 1 auto; /* Ajustar el ancho de los elementos */
+    white-space: nowrap; /* Evitar que el texto se divida en varias líneas */
+    margin: 5px 0; /* Espaciado entre los párrafos */
+}
+
+
+/* Estilos para el número de cuenta */
+.numero-cuenta-label {
+    font-size: 14px; /* Tamaño de letra para la etiqueta */
+    color : #454545;
+    margin: 0; /* Elimina el margen */
+    line-height: 1.2; /* Altura de línea */
+}
+
+.numero-cuenta {
+    font-size: 18px; /* Tamaño de letra para el número de cuenta */
+    font-weight: bold;
+    margin: 0; /* Elimina el margen */
+    line-height: 1.2; /* Altura de línea */
+    color: #454545;
+}
+
+
+/* Estilos para el botón de eliminar */
+.usuario-detalles .estado-icon {
+    display: inline-block;
+    width: 20px;
+    height: 20px;
+    background-color: palevioletred;
+    border-radius: 50%; /* Hace que el borde sea redondeado */
+    margin-left: 10px;
+    vertical-align: middle;
+    box-shadow: 0 0 3px rgba(0, 0, 0, 0.5); /* Añade una sombra */
+}
+
+.estado-icon.activo {
+    background-color: green; /* Color del icono cuando está activo */
+}
+
+.estado-icon.inactivo {
+    background-color: red; /* Color del icono cuando está inactivo */
+}
+
+
+
+.usuario-detalles .material-icons {
+    font-size: 228px; /* Solo afecta los íconos dentro de .usuario-card */
+}
+
+.puntos {
+   
+   
+    width: 18%; /* Ancho de los puntos */
+    font-size: 18px; /* Tamaño de letra para los puntos */
+    font-weight: bold; /* Negrita para los puntos */
+    color: rgb(8, 4,46);; /* Color de los puntos */
+    background-color: #edeadf; /* Fondo de los puntos */
+    padding: 10px; /* Espaciado interno */
+    border-radius: 5px; /* Bordes redondeados */
+  
+    margin-top: auto; /* Espacio superior */
+    
+   
+}
+
+
+#icono-email, #icono-phone {
+    font-size: 24px; /* Tamaño específico para los iconos de email y phone */
+    margin-right: 8px;
+    color: rgb(8, 4,46);
+}
+
+
+.switch {
+    position: relative;
+    display: inline-block;
+    width: 60px;
+    height: 34px;
+    margin-left: 10px;
+    vertical-align: middle;
+}
+
+
+
+.switch input {
+    opacity: 0;
+    width: 0;
+    height: 0;
+}
+
+.slider {
+    position: absolute;
+    cursor: pointer;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: #cb2c2c;
+    transition: .4s;
+    border-radius: 34px;
+}
+
+
+.slider:before {
+    position: absolute;
+    content: "";
+    height: 26px;
+    width: 26px;
+    left: 4px;
+    bottom: 4px;
+    background-color: rgb(255, 255, 255);
+    transition: .4s;
+    border-radius: 50%;
+}
+
+
+input:checked + .slider {
+    background-color: #51c279;
+}
+
+input:checked + .slider:before {
+    transform: translateX(26px);
+}
+input:not(:checked) + .slider {
+    background-color: rgb(190, 49, 49);
+    
+    
+}
+
+input:checked + .slider:before {
+    transform: translateX(26px);
+
+}
+
+.custom-modal-size{
+    max-width: 400px;
+    width: 100%;
+
+}
+
+.modal-header {
+    padding: 0.5rem 1rem;
+    height: 40px;
+    border-bottom: none;
+    justify-content: end;
+    background-color: whitesmoke;
+}
+
+.modal-header .close { 
+    border: none;
+    background-color: none;
+    font-size: 1.7rem;
+    color: rgb(8, 4,46);
+}
+
+.modal-header .btn-close:hover {
+    color: #000;
+    text-decoration: none;
+    opacity: 0.75;
+    border: none;
+}
+
+.btn-close:focus {
+    outline: none; /* Elimina el borde de enfoque */
+    box-shadow: none; /* Elimina la sombra de enfoque */
+}
+
+.modal-content {
+    border: 8px;
+    background-color: whitesmoke;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+.modal-body {
+    padding: 1rem;
+    background-color: whitesmoke;
+    margin: 0;
+    padding-top: 0;
+    padding-bottom: 10px;
+    text-align: center;
+}
+
+#modalConfirmacion .modal-footer {
+    border-top: none;
+    background-color: whitesmoke;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+}
+.modal-footer .btn {
+    margin: 0 5px; /* Añade margen horizontal entre los botones */
+}
+.modal-footer .btn-danger {
+    background-color: rgb(150, 0, 0); /* Color de fondo al pasar el cursor */
+}
+.modal-footer .btn-danger:hover {
+    background-color: #650000; /* Color de fondo al pasar el cursor */
+}
+
+
+.modal-footer .btn-secondary {
+    background-color:  #0a0a4df7; /* Color de fondo */
+    margin: 0;
+    color: white; /* Color del texto */
+}
+.modal-footer .btn-secondary:hover {
+    background-color: #000000; /* Color de fondo al pasar el cursor */
+}
+
+
+.modal-footer button {
+    /*background-color: #142d5ff7; /* Cambia el color de fondo del botón */
+    color: white; /* Cambia el color del texto del botón */
+    border-radius: 15px; /* Añade bordes redondeados al botón */
+    padding: 10px 20px; /* Ajusta el espaciado interno del botón */
+    border: none; /* Elimina el borde del botón */
+    margin: 0 10px; /* Añade margen horizontal entre los botones */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Sombra del botón */
+    transition: box-shadow 0.3s ease; /* Efecto de transición para la sombra */
+    
+}

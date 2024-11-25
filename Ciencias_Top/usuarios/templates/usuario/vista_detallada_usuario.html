@@ -1,0 +1,177 @@
+{% extends "ver_sin_buscar_plantilla.html" %}
+{% load static %}
+{% block titulo %}  Usuario {{usuario.numero_cuenta}} {% endblock %}
+{% block nombre %}  {{usuario.numero_cuenta}} {% endblock %}
+
+{% block contenido %} 
+
+
+
+<div class="detalle-usuario">
+    <div class=" card usuario-detalles">
+        <div class="card-header">
+            <div class="icono-item">
+                <span class="material-icons">person</span>
+            </div>
+            <div class="info-header">
+                <p class="numero-cuenta-label">Número de cuenta:</p>
+                <p class="numero-cuenta">{{ usuario.numero_cuenta }}</p>
+               
+            </div>
+            
+        </div>
+        <div class="card-content">
+    
+            <h4> {{ usuario.apellido_paterno }} {{ usuario.apellido_materno }} {{ usuario.nombre }}</h4>
+            <p><span id="icono-email" class="material-icons">email</span> Correo: {{ usuario.correo }}</p>
+            <p><span id="icono-phone" class="material-icons">phone</span> Celular: {{ usuario.celular }}</p>
+            <p>Carrera: {{ usuario.get_carrera_display }}</p>
+            <p>Rol: {{ usuario.get_rol_display }}</p>
+            <p>Tipo de usuario: {{ usuario.get_tipo_usuario_display }}</p>
+            <!-- Switch -->
+            <p >Estado:
+                <label class="switch">
+                    <input 
+                    type="checkbox" 
+                    id="estado-switch" 
+                    data-numero-cuenta="{{ usuario.numero_cuenta }}"
+                    {% if usuario.is_active %} checked {% endif %}>
+                    <span class="slider"></span>
+                </label>
+            </p>
+                
+            
+
+            {% if perms.usuarios.sumar_puntos and usuario.get_rol_display == 'Usuario' %}
+            <p class = "puntos">PUMA PUNTOS: {{ usuario.usuario.pumapuntos }} </p>
+            {% endif %}
+
+           
+        </div>
+        
+    </div>
+    
+    
+</div>
+
+
+
+<!-- Modal de confirmación -->
+<div class="modal fade" id="modalConfirmacion" tabindex="-1" aria-labelledby="modalConfirmacionLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Cerrar"></button>
+            </div>
+            <div class="modal-body">
+                ¿Estás seguro de que deseas deshabilitar a {{usuario.numero_cuenta}}?
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+                <button type="button" class="btn btn-danger" id="confirmarDeshabilitar">Deshabilitar</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Formulario oculto para deshabilitar al usuario -->
+<form id="deshabilitar-form" action="{% url 'eliminar_usuario' usuario.numero_cuenta %}" method="POST" style="display: none;">
+    {% csrf_token %}
+</form>
+
+
+<!-- Modal de Mensajes -->
+<div id="messageModal" class="modal" tabindex="-1" role="dialog" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <p id="messageContent"></p>
+            </div>
+            
+        </div>
+    </div>
+</div>
+
+  
+  
+
+{% endblock %}
+
+
+
+
+
+{% block scripts %}
+
+<script>
+    
+
+// Estado inicial del switch al cargar la página
+let estadoInicial = document.getElementById('estado-switch').checked;
+    // Mostrar modal de confirmación al cambiar el estado del switch
+    document.getElementById('estado-switch').addEventListener('change', function() {
+        const numeroCuenta = this.getAttribute('data-numero-cuenta');
+        const isActive = this.checked;
+
+        console.log('Estado del switch para el usuario', numeroCuenta, ':', isActive ? 'Activado' : 'Desactivado');
+
+        // Si el estado del switch cambia a "Desactivado", mostramos el modal
+        if (!isActive) {
+            // Mostrar el modal de confirmación
+            var mensajeModal = new bootstrap.Modal(document.getElementById('modalConfirmacion'));
+            mensajeModal.show();
+
+            const modaleElement = document.getElementById('modalConfirmacion');
+            modaleElement.addEventListener('hidden.bs.modal', function() {
+                // Si el modal se cierra sin confirmar, regresamos el switch a su estado original
+                document.getElementById('estado-switch').checked = estadoInicial;
+            });
+        }else{
+            
+            var mensajeModal =  new bootstrap.Modal(document.getElementById('messageModal'), {
+                keyboard: false
+            });
+            var messageContent = document.getElementById('messageContent');
+            messageContent.innerText = "Habilitar un usuario aun no esta permitido en el sistema";  // El contenido del mensaje
+            mensajeModal.show();
+            mensajeModal._element.addEventListener('hidden.bs.modal', function() {
+                // Si el modal se cierra sin confirmar, regresamos el switch a su estado original
+                document.getElementById('estado-switch').checked = estadoInicial;
+            });
+
+        }
+    });
+
+    // Al confirmar deshabilitar, se envía el formulario
+    document.getElementById('confirmarDeshabilitar').addEventListener('click', function() {
+        const form = document.getElementById('deshabilitar-form');
+        const modal = bootstrap.Modal.getInstance(document.getElementById('modalConfirmacion'));
+        modal.hide(); // Ocultar el modal
+        form.submit(); // Enviar el formulario para deshabilitar al usuario
+    });
+    
+</script>
+
+{% if messages %}
+    <script>
+        // Esperar a que la página cargue
+        document.addEventListener('DOMContentLoaded', function() {
+            {% for message in messages %}
+                var modal = new bootstrap.Modal(document.getElementById('messageModal'), {
+                    keyboard: false
+                });
+                var messageContent = document.getElementById('messageContent');
+                messageContent.innerText = "{{ message }}";  // El contenido del mensaje
+                modal.show();
+            {% endfor %}
+        });
+    </script>
+{% endif %}
+
+
+{% endblock %}

@@ -260,7 +260,8 @@ body {
  
  /* Establece un ancho personalizado para la ventana del modal */
  .custom-modal-size {
-     max-width: 400px; /* Ajusta el valor para el tamaño deseado */
+    max-width: 400px; /* Ajusta el valor para el tamaño deseado */
+    width: 100%; /* Asegura que el modal ocupe todo el ancho disponible */
  }
  
  #logoutModal .modal-header {
@@ -269,6 +270,7 @@ body {
      border-bottom: none; /* Quitar el borde inferior si no lo deseas */
      background-color: rgb(255, 255, 255) ; /* Cambia el color de fondo del encabezado */
  }
+ 
  
  #logoutModal .modal-body {
      background-color: white;
@@ -279,8 +281,7 @@ body {
  }
  
  #logoutModal .modal-footer {
-     border-top: none; /* Quitar el borde superior si no lo deseas */
-     border-top: none;    
+     border-top: none; /* Quitar el borde superior si no lo deseas */ 
      background-color: rgb(255, 255, 255); /* Cambia el color de fondo del pie de página */
  }
  
@@ -330,7 +331,7 @@ body {
      width: 100%;
      display: flex;
      justify-content: center;
-     align-items: center;
+     align-items: space-between;
      background-color:whitesmoke;
      
  } 
@@ -375,4 +376,3 @@ body {
     margin-right: 10px; /* Espacio entre el icono y el texto */
     font-size: 20px; /* Tamaño del icono */
 }
-
