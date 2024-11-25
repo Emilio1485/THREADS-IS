@@ -155,6 +155,10 @@ body {
      flex-direction: column; /* Colocar las barras en columna */
      align-items: center; /* Centrar las barras horizontalmente */
  }
+
+ .menu-toggle:focus {
+     outline: none; /* Eliminar el contorno al hacer clic */
+ }
  
  
  .iconoMenu {
@@ -270,7 +274,7 @@ body {
      border-bottom: none; /* Quitar el borde inferior si no lo deseas */
      background-color: rgb(255, 255, 255) ; /* Cambia el color de fondo del encabezado */
  }
- 
+
  
  #logoutModal .modal-body {
      background-color: white;
