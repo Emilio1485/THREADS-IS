@@ -1,0 +1,20 @@
+{% extends "verbuscar_plantilla.html" %}
+{% load static %}
+{% block titulo %} Usuarios {% endblock %}
+{% block nombre %} Usuarios {% endblock %}
+
+
+{% block buscar %}Buscar un usuario (numero de cuenta){% endblock %}
+
+{% block lista_items%}
+
+<div class="usuarios-lista">
+
+    {% for usuario in usuarios %}
+
+        {% include 'usuario/ver_usuario.html' %}
+
+    {% endfor %}
+</div>
+
+{% endblock%}

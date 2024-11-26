@@ -1,1 +1,13 @@
-.venv
+# Ignorar entorno virtual de Python
+venv/
+
+
+# Ignorar archivos de configuración del entorno
+.idea/
+.vscode/
+__pycache__/
+*.pyc
+
+
+# Ignorar archivos de logs
+*.log

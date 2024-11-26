@@ -1,0 +1,13 @@
+{% extends "verbuscar_plantilla.html" %}
+{% load static %}
+{% block titulo %} Inicio {% endblock %}
+{% block nombre %} Productos {% endblock %}
+
+
+{% block buscar %}Buscar un producto específico (nombre/código){% endblock %}
+
+{% block lista_items %}
+
+{% include 'producto/ver_productos.html' %}
+
+{% endblock %}

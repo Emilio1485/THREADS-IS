@@ -1,0 +1,141 @@
+{% load static %}
+
+<div class="productos-lista">
+    {% for producto in productos %}
+    <div class="card">
+        <div class="card-header">
+            <div class="icono-item">
+                <span class="material-icons">shopping_bag</span>
+            </div>
+            <div class="info-header">
+                <h4>{{ producto.nombre }}</h4>
+                <p>Código: {{ producto.codigo }}</p>
+            </div>
+            <div class="menu-dots">
+                <i class="bi bi-three-dots-vertical"></i>
+            </div>
+        </div>
+        <div class="card-image">
+            {% if producto.imagen %}
+                <img src="{{ producto.imagen.url }}" alt="{{ producto.nombre }}">
+            {% else %}
+                <img src="{% static 'images/placeholder.png' %}" alt="Imagen no disponible">
+            {% endif %}
+        </div>
+        <div class="card-content">
+            <p><strong>{{ producto.pumapuntos }} PUMA PUNTOS</strong></p>
+            <p>{{ producto.existencia }} Disponibles</p>
+            <p>{{ producto.dias_renta }} días de renta</p>
+            <p>{{ producto.descripcion }}</p>
+        </div>
+        <div class="card-actions">
+            {% if perms.usuarios.eliminar_producto or perms.usuarios.editar_producto %}
+                {% if perms.usuarios.eliminar_producto %}
+                    <button class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#confirmDeleteModal" 
+                    onclick="setDeleteUrl('{% url 'eliminar_producto' producto.codigo %}')">Eliminar</button>
+                {% endif %}
+                
+                {% if perms.usuarios.editar_producto %}
+                    <button class="btn btn-danger" 
+                    data-bs-toggle="modal" 
+                    data-bs-target="#editarProductoModal" 
+                    onclick="setEditProductData(
+                        '{{ producto.codigo }}', 
+                        '{{ producto.nombre|escapejs }}', 
+                        '{{ producto.descripcion|escapejs }}', 
+                        {{ producto.existencia }}, 
+                        {{ producto.pumapuntos }}, 
+                        {{ producto.dias_renta }}, 
+                        '{% if producto.imagen %}{{ producto.imagen.url }}{% endif %}'
+                    )">Editar</button>
+                {% endif %}
+            {% else %}
+                {% if producto.existencia > 0 %}
+                    <a href="{% url 'rentas:renta_producto' producto.codigo %}" class="btn btn-success">Rentar</a>
+                {% else %}
+                    <button class="btn btn-secondary" disabled>No disponible</button>
+                {% endif %}
+            {% endif %}
+        </div>
+    </div>
+    {% endfor %}
+</div>
+
+<!-- Modal para liberar una ventana de confirmación -->
+<div class="modal fade" id="confirmDeleteModal" tabindex="-1" aria-labelledby="confirmDeleteModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered custom-modal-size">
+        <div class="modal-content">
+            <button type="button" class="btn-close ms-auto" data-bs-dismiss="modal" aria-label="Close"></button>
+            <div class="modal-body">
+                ¿Estás seguro de que deseas eliminar este producto?
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+                <button type="button" class="btn btn-danger" id="confirmDeleteButton">Eliminar</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Modal para editar un producto -->
+<div class="modal fade" id="editarProductoModal" tabindex="-1" aria-labelledby="editarProductoModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered custom-modal-size">
+        <div class="modal-content">
+            <button type="button" class="btn-close ms-auto" data-bs-dismiss="modal" aria-label="Close"></button>
+            <div class="modal-body">
+                <form id="editarProductoForm" method="post" enctype="multipart/form-data">
+                    {% csrf_token %}
+                    <div class="form-group">
+                        <label for="codigo">Código:</label>
+                        <input type="text" class="form-control" id="codigo" name="codigo" readonly>
+                    </div>
+                    <div class="form-group">
+                        <label for="nombre">Nombre:</label>
+                        <input type="text" class="form-control" id="nombre" name="nombre">
+                    </div>
+                    <div class="form-group">
+                        <label for="descripcion">Descripción:</label>
+                        <textarea class="form-control" id="descripcion" name="descripcion"></textarea>
+                    </div>
+                    <div class="form-group">
+                        <label for="existencia">Existencia:</label>
+                        <input type="number" class="form-control" id="existencia" name="existencia">
+                    </div>
+                    <div class="form-group">
+                        <label for="pumapuntos">Puma Puntos:</label>
+                        <input type="number" class="form-control" id="pumapuntos" name="pumapuntos">
+                    </div>
+                    <div class="form-group">
+                        <label for="dias_renta">Días de Renta:</label>
+                        <input type="number" class="form-control" id="dias_renta" name="dias_renta">
+                    </div>
+                    <div class="form-group">
+                        <label for="imagen">Imagen:</label>
+                        <input type="file" class="form-control" id="imagen" name="imagen">
+                    </div>
+                    <button type="submit" class="btn btn-primary">Guardar cambios</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    function setDeleteUrl(url) {
+        document.getElementById('confirmDeleteButton').onclick = function() {
+            window.location.href = url;
+        };
+    }
+
+    function setEditProductData(codigo, nombre, descripcion, existencia, pumapuntos, dias_renta, imagen_url) {
+        document.getElementById('codigo').value = codigo;
+        document.getElementById('nombre').value = nombre;
+        document.getElementById('descripcion').value = descripcion;
+        document.getElementById('existencia').value = existencia;
+        document.getElementById('pumapuntos').value = pumapuntos;
+        document.getElementById('dias_renta').value = dias_renta;
+        if (imagen_url) {
+            document.getElementById('imagen').src = imagen_url;
+        }
+    }
+</script>

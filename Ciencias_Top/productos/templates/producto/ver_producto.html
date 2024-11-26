@@ -1,0 +1,49 @@
+<!-- Template para mostrar un producto en la vista de productos -->
+ {% load static %}
+<div class="card">
+    <div class="card-header">
+        <div class="icono-item">
+            <span class="material-icons">shopping_bag</span>
+        </div>
+        <div class="info-header">
+            <h4>{{ producto.nombre }}</h4>
+            <p>Código: {{ producto.codigo }}</p>
+        </div>
+        <div class="menu-dots">
+            <i class="bi bi-three-dots-vertical"></i>
+        </div>
+    </div>
+
+    <div class="card-image">
+        {% if producto.imagen %}
+            <img src="{{ producto.imagen.url }}" alt="{{ producto.nombre }}">
+        {% else %}
+            <img src="{% static 'images/placeholder.png' %}" alt="Imagen no disponible">
+        {% endif %}
+    </div>
+
+    <div class="card-content">
+        <p><strong>{{ producto.pumapuntos }} PUMA PUNTOS</strong></p>
+        <p>{{ producto.existencia }} Disponibles</p>
+        <p>{{ producto.dias_renta }} días de renta</p>
+        <p>{{ producto.descripcion }}</p>
+    </div>
+
+    
+    <div class="card-actions">
+        {% if perms.usuarios.eliminar_producto %}
+        <form action="{% url 'eliminar_producto' producto.codigo %}" method="post" style="display:inline;">
+            {% csrf_token %}
+            <button type="submit" class="btn btn-danger">Eliminar</button>
+        </form>
+
+            <button class="btn btn-primary">Editar</button>
+        {% elif perms.usuarios.rentar_producto %}
+            <button class="btn btn-success" onclick="abrirModal('{{ producto.id }}', '{{ producto.nombre }}', '{{ producto.codigo }}', {{ producto.pumapuntos }}, '{{ producto.descripcion }}', '{{ producto.dias_renta }}', '{{ producto.existencia }}', '{% if producto.imagen %}{{ producto.imagen.url }}{% else %}{% static 'images/placeholder.png' %}{% endif %}')">
+                Rentar
+            </button>
+
+        {% endif %}
+    </div>
+</div>
+

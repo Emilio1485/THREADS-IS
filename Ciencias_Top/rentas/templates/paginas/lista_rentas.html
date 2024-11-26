@@ -1,0 +1,29 @@
+{% load static %}
+
+{% block content %}
+<div class="lista-rentas">
+    <h2>Mis Rentas</h2>
+    <table class="table">
+        <thead>
+            <tr>
+                <th>ID Renta</th>
+                <th>Producto</th>
+                <th>Fecha de Renta</th>
+                <th>Fecha de Devolución Estimada</th>
+                <th>Estado</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for renta in rentas %}
+            <tr>
+                <td>{{ renta.id_renta }}</td>
+                <td>{{ renta.producto.nombre }}</td>
+                <td>{{ renta.fecha_renta }}</td>
+                <td>{{ renta.fecha_devolucion_estimada }}</td>
+                <td>{{ renta.get_estado_display }}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+{% endblock %}

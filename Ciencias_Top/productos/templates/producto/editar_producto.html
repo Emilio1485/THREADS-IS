@@ -1,0 +1,53 @@
+{% extends "verbuscar_plantilla.html" %}
+{% load static %}
+{% block titulo %} Editar Producto {% endblock %}
+{% block nombre %} Editar Producto {% endblock %}
+
+{% block contenido %}
+<div class="modal fade show" id="editarProductoModal" tabindex="-1" aria-labelledby="editarProductoModalLabel" aria-hidden="true" style="display: block; background-color: rgba(0,0,0,0.5);">
+    <div class="modal-dialog modal-dialog-centered custom-modal-size">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="editarProductoModalLabel">Editar Producto</h5>
+                <a href="{% url 'inicio' %}" class="btn-close" aria-label="Close"></a>
+            </div>
+            <form method="POST" enctype="multipart/form-data">
+                {% csrf_token %}
+                <div class="modal-body">
+                    <div class="form-group">
+                        <label>Nombre:</label>
+                        <input type="text" name="nombre" value="{{ form.nombre.value|default:producto.nombre }}" required>
+                    </div>
+                    <div class="form-group">
+                        <label>Descripción:</label>
+                        <textarea name="descripcion" required>{{ form.descripcion.value|default:producto.descripcion }}</textarea>
+                    </div>
+                    <div class="form-group">
+                        <label>Cantidad de productos:</label>
+                        <input type="number" name="existencia" value="{{ form.existencia.value|default:producto.existencia }}" required>
+                    </div>
+                    <div class="form-group">
+                        <label>Número de puntos:</label>
+                        <input type="number" name="pumapuntos" value="{{ form.pumapuntos.value|default:producto.pumapuntos }}" required>
+                    </div>
+                    <div class="form-group">
+                        <label>Días de uso:</label>
+                        <input type="number" name="dias_renta" value="{{ form.dias_renta.value|default:producto.dias_renta }}" required>
+                    </div>
+                    <div class="form-group">
+                        <label>Imagen actual:</label>
+                        {% if producto.imagen %}
+                            <img src="{{ producto.imagen.url }}" alt="Imagen actual" style="max-width: 200px;">
+                        {% endif %}
+                        <input type="file" name="imagen" accept="image/*">
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <a href="{% url 'inicio' %}" class="btn btn-secondary">Cancelar</a>
+                    <button type="submit" class="btn btn-primary">Guardar Cambios</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+{% endblock %}
