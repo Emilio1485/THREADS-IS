@@ -1,17 +1,19 @@
 from django.contrib import messages
-from django.shortcuts import render
-from django.contrib.auth.decorators import login_required, user_passes_test
+from django.shortcuts import render, get_object_or_404
+from django.contrib.auth.decorators import login_required, user_passes_test , permission_required
 
 from django.contrib.auth import authenticate, login
 from django.contrib.auth import logout
 from django.shortcuts import render, redirect
 from django.db.models import Q
 
+from datetime import datetime
+from rentas.models import Renta
 
 from productos.models import Producto  
-from .models import SuperUsuario 
+from .models import SuperUsuario , Usuario
 from .forms import UsuarioForm 
-
+from django.db.models import Sum
 #import logging
 
 #Permisos
@@ -96,3 +98,33 @@ def agregar_usuario_vista(request):
         'form': form
     })
 
+@login_required
+def ver_perfil(request):
+    usuario = request.user
+    perfil, created = Usuario.objects.get_or_create(user=usuario)  # Obtener o crear el perfil del usuario
+
+    # Inicializar variables para el historial de rentas
+    rentas_rentadas = []
+    rentas_devueltas = []
+    puma_puntos_mes = 0
+    puma_puntos_totales = None
+    puede_rentar = usuario.has_perm('usuarios.rentar_producto')
+
+    # Solo obtener el historial de rentas y Puma Puntos para usuarios normales
+    if puede_rentar:
+        rentas_rentadas = Renta.objects.filter(usuario=usuario, estado='R').order_by('-fecha_renta')
+        rentas_devueltas = Renta.objects.filter(usuario=usuario, estado__in=['D', 'T']).order_by('-fecha_renta')
+        puma_puntos_mes = usuario.rentas.filter(fecha_renta__month=datetime.now().month).aggregate(Sum('pumapuntos_obtenidos'))['pumapuntos_obtenidos__sum'] or 0
+        puma_puntos_totales = perfil.pumapuntos  # Obtener los Puma Puntos totales del perfil del usuario
+
+    context = {
+        'usuario': usuario,
+        'perfil': perfil,
+        'rentas_rentadas': rentas_rentadas,
+        'rentas_devueltas': rentas_devueltas,
+        'puma_puntos_mes': puma_puntos_mes,
+        'puma_puntos_totales': puma_puntos_totales,  # Incluir los Puma Puntos totales en el contexto si aplica
+        'rol': usuario.get_rol_display(),  # Incluir el rol del usuario en el contexto
+        'puede_rentar': puede_rentar,  # Incluir si el usuario puede rentar productos
+    }
+    return render(request, 'usuario/ver_perfil.html', context)

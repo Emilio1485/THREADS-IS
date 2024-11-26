@@ -1,0 +1,108 @@
+{% extends 'ver_sin_buscar_plantilla.html' %}
+{% load static %}
+
+{% block titulo %}
+Perfil de {{ usuario.get_full_name }}
+{% endblock %}
+
+{% block nombre %}
+Perfil de {{ usuario.get_full_name }}
+{% endblock %}
+
+{% block contenido %}
+<div class="perfil-usuario" style="background-color: #f0f8ff; padding: 20px; border-radius: 10px; max-width: 800px; margin: auto;">
+    <!-- Foto de Perfil Genérica -->
+    <div style="text-align: center; margin-bottom: 20px;">
+        <div style="width: 150px; height: 150px; border-radius: 50%; background-color: #ccc; display: inline-block; position: relative;">
+            <span style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); font-size: 50px; color: #fff;">👤</span>
+        </div>
+    </div>
+
+    <!-- Nombre y Correo -->
+    <div style="text-align: center; margin-bottom: 20px;">
+        <h2 style="color: #003366;">{{ usuario.get_full_name }}</h2>
+        <p><strong>Correo electrónico:</strong> {{ usuario.correo }}</p>
+    </div>
+
+    <!-- Información Personal -->
+    <div class="info-personal" style="background-color: #e6f2ff; padding: 20px; border-radius: 10px; margin-bottom: 20px;">
+        <h3 style="color: #003366; text-align: center;">Información Personal</h3>
+        <ul style="list-style: none; padding: 0; text-align: center;">
+            <li><strong>Nombre:</strong> {{ usuario.nombre }}</li>
+            <li><strong>Apellidos:</strong> {{ usuario.apellido_paterno }} {{ usuario.apellido_materno }}</li>
+            <li><strong>Número de cuenta:</strong> {{ usuario.numero_cuenta }}</li>
+            <li><strong>Celular:</strong> {{ usuario.celular }}</li>
+            <li><strong>Carrera:</strong> {{ usuario.get_carrera_display }}</li>
+            <li><strong>Rol:</strong> {{ rol }}</li>
+            {% if puma_puntos_totales is not None %}
+                <li><strong>Puma Puntos totales:</strong> {{ puma_puntos_totales }}</li>
+                <li><strong>Puma Puntos acumulados este mes:</strong> {{ puma_puntos_mes }}</li>
+            {% endif %}
+        </ul>
+    </div>
+
+    <!-- Productos Rentados -->
+    {% if puede_rentar %}
+        <div class="productos-rentados" style="background-color: #e6f2ff; padding: 20px; border-radius: 10px; margin-bottom: 20px;">
+            <h3 style="color: #003366; text-align: center;">Productos Rentados y Pendientes de Devolución</h3>
+            {% if rentas_rentadas %}
+                <table class="table" style="background-color: #ffffff; border-radius: 10px; margin-bottom: 20px;">
+                    <thead>
+                        <tr style="background-color: #003366; color: white;">
+                            <th>ID Renta</th>
+                            <th>Producto</th>
+                            <th>Fecha de Renta</th>
+                            <th>Fecha de Devolución Estimada</th>
+                            <th>Estado</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for renta in rentas_rentadas %}
+                        <tr>
+                            <td>{{ renta.id_renta }}</td>
+                            <td>{{ renta.producto.nombre }}</td>
+                            <td>{{ renta.fecha_renta }}</td>
+                            <td>{{ renta.fecha_devolucion_estimada }}</td>
+                            <td>{{ renta.get_estado_display }}</td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            {% else %}
+                <p style="color: #003366; text-align: center;">No tienes productos rentados actualmente.</p>
+            {% endif %}
+        </div>
+
+        <!-- Productos Devueltos -->
+        <div class="productos-devueltos" style="background-color: #e6f2ff; padding: 20px; border-radius: 10px;">
+            <h3 style="color: #003366; text-align: center;">Productos Devueltos</h3>
+            {% if rentas_devueltas %}
+                <table class="table" style="background-color: #ffffff; border-radius: 10px;">
+                    <thead>
+                        <tr style="background-color: #003366; color: white;">
+                            <th>ID Renta</th>
+                            <th>Producto</th>
+                            <th>Fecha de Renta</th>
+                            <th>Fecha de Devolución</th>
+                            <th>Estado</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for renta in rentas_devueltas %}
+                        <tr>
+                            <td>{{ renta.id_renta }}</td>
+                            <td>{{ renta.producto.nombre }}</td>
+                            <td>{{ renta.fecha_renta }}</td>
+                            <td>{{ renta.fecha_devolucion }}</td>
+                            <td>{{ renta.get_estado_display }}</td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            {% else %}
+                <p style="color: #003366; text-align: center;">No has devuelto ningún producto.</p>
+            {% endif %}
+        </div>
+    {% endif %}
+</div>
+{% endblock %}
