@@ -7,6 +7,7 @@ from productos.models import Producto
 from .models import Renta
 from django.conf import settings
 from usuarios.models import SuperUsuario
+from django.contrib.auth.decorators import user_passes_test
 
 # Verificar permisos
 def is_admin(user):
@@ -53,12 +54,12 @@ def renta_producto(request, producto_codigo):
         rentas_hoy = Renta.objects.filter(usuario=user, fecha_renta__date=hoy).count()
         if rentas_hoy >= 3:
             messages.error(request, "Ya has rentado el máximo de productos permitido para hoy.")
-            return redirect('rentas:lista_rentas')
+            return redirect('inicio')
 
         # Verificar la disponibilidad del producto
         if producto.existencia <= 0:
             messages.error(request, "El producto no está disponible.")
-            return redirect('rentas:lista_rentas')
+            return redirect('inicio')
 
         renta = Renta(usuario=user, producto=producto)
         puede_rentar, mensaje = renta.puede_rentar()
@@ -81,7 +82,7 @@ def renta_producto(request, producto_codigo):
             user.usuario.save()
 
             messages.success(request, 'Producto rentado exitosamente.')
-            return redirect('rentas:lista_rentas')
+            return redirect('ver_perfil')
         else:
             messages.error(request, mensaje)
 
@@ -100,6 +101,7 @@ def lista_rentas(request):
     return render(request, 'paginas/lista_rentas.html', context)
 
 @login_required
+@user_passes_test(is_admin)
 def devolver_producto(request, renta_id):
     renta = get_object_or_404(Renta, id_renta=renta_id)
     user = request.user

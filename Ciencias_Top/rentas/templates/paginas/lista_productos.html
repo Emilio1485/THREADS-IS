@@ -1,0 +1,16 @@
+{% load static %}
+<div class="productos-lista">
+    {% for producto in productos %}
+    <div class="card mb-3">
+        <div class="card-header">
+            <h4>{{ producto.nombre }}</h4>
+        </div>
+        <div class="card-body">
+            <p>Código: {{ producto.codigo }}</p>
+            <p>Existencia: {{ producto.existencia }}</p>
+            <p>PUMA PUNTOS: {{ producto.pumapuntos }}</p>
+            <p>Días de renta: {{ producto.dias_renta }}</p>
+        </div>
+    </div>
+    {% endfor %}
+</div>
