@@ -452,7 +452,7 @@ input:checked + .slider:before {
 }
 
 .historial-rentas table {
-    background-color: pink;
+    background-color: whitesmoke;
     border-radius: 15px;
     width: 100%;
     margin-bottom: 20px;
@@ -476,7 +476,7 @@ input:checked + .slider:before {
 }
 
 .historial-rentas table tbody tr:nth-child(even) {
-    background-color: #f2f2f2;
+    background-color:rgb(225, 225, 255);
 }
 
 .historial-rentas p {
