@@ -262,11 +262,7 @@ body {
  }
  
  
- /* Establece un ancho personalizado para la ventana del modal */
- .custom-modal-size {
-    max-width: 400px; /* Ajusta el valor para el tamaño deseado */
-    width: 100%; /* Asegura que el modal ocupe todo el ancho disponible */
- }
+
  
  #logoutModal .modal-header {
      padding: 0.5rem 1rem;
@@ -304,6 +300,7 @@ body {
  
  .custom-modal-size {
      max-width: 400px; /* Puedes cambiar el ancho del modal si lo necesitas */
+     width: 100%; /* Asegura que el modal ocupe todo el ancho disponible */
  }
  
  .btn-secondary {
@@ -379,4 +376,75 @@ body {
 .custom-message i {
     margin-right: 10px; /* Espacio entre el icono y el texto */
     font-size: 20px; /* Tamaño del icono */
+}
+
+
+
+/* Estilo para el modal de mensajes */
+.custom-modal .modal-content {
+    border: none;
+    border-radius: 15px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.custom-modal .modal-body {
+    padding: 10px;
+    font-size: 16px;
+    color: #333;
+}
+
+/* Estilo para el modal de mensajes */
+.custom-modal .modal-content {
+    border: 8px;
+    border-radius: 15px;
+    background-color: whitesmoke;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.custom-modal .modal-body {
+    padding: 1rem;
+    font-size: 16px;
+    margin: 0;
+    color: #333;
+    padding-bottom: 10px;
+}
+
+/* Asegurarse de que las esquinas inferiores también se redondeen */
+.custom-modal .modal-footer {
+    border-top: none;
+    display: flex; /* Alinea los elementos en la misma línea */
+    border-radius: 0 0 15px 15px;
+}
+/* Asegurarse de que el botón de cerrar esté correctamente alineado */
+.custom-modal .btn-close {
+    margin: 10px;
+}
+
+
+
+/* Estilo para el modal de mensajes */
+#mensajeModal .modal-content {
+    border: none;
+    border-radius: 15px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    padding: 20px; /* Añadir padding al contenido del modal */
+    margin: 10px; /* Añadir margen alrededor del modal */
+}
+
+#mensajeModal .modal-body {
+    padding: 20px;
+    font-size: 16px;
+    color: #333;
+}
+
+#mensajeModal .modal-footer {
+    border-top: none;
+    border-radius: 0 0 15px 15px;
+    padding: 10px; /* Añadir padding al footer del modal */
+    display: flex; /* Alinea los elementos en la misma línea */
+    justify-content: flex-end; /* Alinea los elementos al final del footer */
+}
+
+#mensajeModal .btn-close {
+    margin: 8px;
 }

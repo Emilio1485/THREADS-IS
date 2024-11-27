@@ -30,9 +30,8 @@ class SuperUsuarioAdmin(admin.ModelAdmin):
 
 
 class UsuarioAdmin(admin.ModelAdmin):
-    list_display = ('user', 'pumapuntos')
+    list_display = ('user', 'pumapuntos', 'fecha_ultimo_reinicio')
     search_fields = ('user__numero_cuenta',)
-
 
 
 # Registrar los modelos en el admin

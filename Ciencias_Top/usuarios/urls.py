@@ -9,5 +9,7 @@ urlpatterns = [
     path('usuarios/',usuarios_vista, name='usuarios'),
     path('eliminar_usuario/<str:numero_cuenta>/', eliminar_usuario_vista, name='eliminar_usuario'),
     path('detalles_usuario/<str:numero_cuenta>/', vista_detallada_usuario, name='vista_detallada_usuario'),  
+    path('editar_usuario/<str:numero_cuenta>/', editar_usuario_vista, name='editar_usuario'),
+    path('generar_contrasena/<str:numero_cuenta>/', generar_contrasena_vista, name='generar_contrasena_vista'),
     ]
 

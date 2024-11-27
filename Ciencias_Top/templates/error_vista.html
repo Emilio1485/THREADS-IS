@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Error</title>
+    <link rel="stylesheet" href="{% static 'css/estiloError.css' %}">
+    
+</head>
+<body>
+    <div class="container">
+        <h1>Ocurrió un error</h1>
+        <p>{{ mensaje }}</p>
+        <a href="{% url 'inicio' %}" class="btn">Volver al inicio</a>
+    </div>
+</body>
+</html>

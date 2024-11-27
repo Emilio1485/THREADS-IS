@@ -1,5 +1,5 @@
 /* Estilos para las tarjetas de usuario */
-.usuario-card, .usuario-detalles {
+ .usuario-detalles {
     background-color: whitesmoke;
     border: 0;
     border-radius: 8px;
@@ -105,13 +105,13 @@
 
 
 .usuario-detalles .material-icons {
-    font-size: 228px; /* Solo afecta los íconos dentro de .usuario-card */
+    font-size: 238px; /* Solo afecta los íconos dentro de .usuario-card */
 }
 
 .puntos {
    
    
-    width: 18%; /* Ancho de los puntos */
+    width:200px; /* Ancho de los puntos */
     font-size: 18px; /* Tamaño de letra para los puntos */
     font-weight: bold; /* Negrita para los puntos */
     color: rgb(8, 4,46);; /* Color de los puntos */
@@ -229,6 +229,7 @@ input:checked + .slider:before {
 .modal-content {
     border: 8px;
     background-color: whitesmoke;
+    
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
 }
 
@@ -280,4 +281,152 @@ input:checked + .slider:before {
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Sombra del botón */
     transition: box-shadow 0.3s ease; /* Efecto de transición para la sombra */
     
+}
+
+.usuario-detalles .card-footer {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 16px;
+    background-color: whitesmoke;
+    
+}
+.edit-button {
+    margin-bottom: auto;
+    background-color:whitesmoke; /* Color de fondo */
+    color: rgb(83, 82, 99) ; /* Color de fondo */; /* Color del texto */
+    border: none; /* Sin borde */
+    padding: 10px 20px; /* Espaciado interno */
+    border-radius: 5px; /* Bordes redondeados */
+    font-size: 16px; /* Tamaño de fuente */
+    cursor: pointer; /* Cursor de mano */
+    transition: background-color 0.3s ease; /* Transición suave */
+}
+
+.edit-button:hover {
+    background-color: whitesmoke;
+    color:black; /* Color de fondo al pasar el cursor */
+    transform: scale(1.2); /* Efecto de escala al pasar el cursor */
+}
+
+
+.edit-button .material-icons {
+    font-size: 30px; /* Tamaño de fuente para el icono */
+    margin-right: none; /* Espacio entre el icono y el texto */
+    
+}
+
+
+/* Estilos para editar usuario */
+
+/* Estilo para los checkboxes del modal de edición de usuario */
+.modal-body .form-check {
+    margin-bottom: 10px;
+    display: flex;
+    align-items: center;
+}
+
+.modal-body .form-check-input {
+    margin-right: 10px;
+}
+
+.modal-body .form-check-label {
+    font-size: 14px;
+    color: #3c3c3c;
+    text-align: left;
+    flex : 1;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.modal-body .form-check-input:checked {
+    background-color: #081829;
+    border-color: #7ea2c8;
+}
+
+.modal-body .form-check-input:focus {
+    
+    box-shadow: 0 0 0 0.3rem rgba(0, 123, 255, 0.25);
+}
+/* Estilo hover para los checkboxes */
+.modal-body .form-check-input:hover {
+    background-color: #a7d2ff; /* Cambiar el color de fondo al pasar el ratón */
+    border-color: #bdd4ed; /* Cambiar el color del borde al pasar el ratón */
+}
+
+
+/* Estilo específico para el label "Sumar Pumapuntos" */
+.sumar-pumapuntos-label {
+    font-size: 18px;
+    font-weight: bold;
+    color: #007bff; /* Color azul */
+    margin-bottom: 15px;
+    text-align: left;
+    display: block;
+    text-transform: uppercase; /* Convertir el texto a mayúsculas */
+    letter-spacing: 1px; /* Espaciado entre letras */
+}
+
+
+/* Estilo para el contenedor de los checkboxes */
+.modal-body .container {
+    padding: 20px;
+    background-color:#c9ccde;
+    border-radius: 10px;
+    margin-bottom: 20px;
+    
+    
+}
+
+/* Estilo para el texto "Sumar Pumapuntos" */
+.modal-body .form-label {
+    font-size: 18px;
+    color: #1a1d20; /* Color azul */
+    margin-bottom: 15px;
+    text-align: left;
+    display: block;
+    letter-spacing: 1px; /* Espaciado entre letras */
+}
+
+
+
+#modalEditarUsuario .modal-footer {
+    border-top: none;
+    background-color: whitesmoke;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+}
+
+
+
+/* Estilo hover para los checkboxes */
+.modal-body .form-check-input:hover {
+    background-color: #c9e3ef; /* Cambiar el color de fondo al pasar el ratón */
+    border-color: #0056b3; /* Cambiar el color del borde al pasar el ratón */
+}
+
+
+/* Estilo para el botón de la contraseña */
+.modal-body .btn-outline-secondary {
+    background-color: #124780; /* Color de fondo */
+    color: #fff; /* Color del texto */
+    border-color: #007bff; /* Color del borde */
+    font-weight: bold; /* Negrita */
+    text-transform: uppercase; /* Convertir el texto a mayúsculas */
+    letter-spacing: 1px; /* Espaciado entre letras */
+    padding: 10px 20px; /* Padding */
+    border-radius: 8px; /* Bordes redondeados */
+    transition: background-color 0.3s, color 0.3s; /* Transición suave */
+}
+
+.modal-body .btn-outline-secondary:hover {
+    background-color: #0056b3; /* Color de fondo al pasar el ratón */
+    color: #fff; /* Color del texto al pasar el ratón */
+    border-color: #0056b3; /* Color del borde al pasar el ratón */
+}
+
+.modal-body .btn-outline-secondary:focus {
+    box-shadow: 0 0 0 0.2rem rgba(0, 123, 255, 0.25); /* Sombra al enfocar */
 }
