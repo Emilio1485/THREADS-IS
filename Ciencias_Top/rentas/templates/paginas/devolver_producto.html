@@ -1,18 +1,69 @@
-
+{% extends "ver_sin_buscar_plantilla.html" %}
 {% load static %}
 
-{% block content %}
-<div class="producto-detalle">
-    <h2>Devolver Producto</h2>
-    <p>Producto: {{ renta.producto.nombre }}</p>
-    <p>Usuario: {{ renta.usuario.numero_cuenta }}</p>
-    <p>Fecha de Renta: {{ renta.fecha_renta }}</p>
-    <p>Fecha de Devolución Estimada: {{ renta.fecha_devolucion_estimada }}</p>
-    <p>Estado: {{ renta.get_estado_display }}</p>
+{% block titulo %}Devolver Producto{% endblock %}
+{% block nombre %}Devolución de Producto{% endblock %}
 
-    <form method="post">
-        {% csrf_token %}
-        <button type="submit" class="btn btn-primary">Confirmar Devolución</button>
-    </form>
+{% block contenido %}
+<div class="container mt-5">
+    <div class="d-flex justify-content-center">
+        <div class="detalle-producto" style="max-width: 900px; border: 1px solid #ddd; border-radius: 8px; padding: 20px; box-shadow: 0 4px 8px rgba(0,0,0,0.1); background-color: white;">
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="informacion-producto">
+                        <h2>Devolver Producto</h2>
+                        <p><strong>Producto:</strong> {{ renta.producto.nombre }}</p>
+                        <p><strong>Usuario:</strong> {{ renta.usuario.numero_cuenta }}</p>
+                        <p><strong>Fecha de Renta:</strong> {{ renta.fecha_renta }}</p>
+                        <p><strong>Fecha de Devolución Estimada:</strong> {{ renta.fecha_devolucion_estimada }}</p>
+                        <p><strong>Estado:</strong> {{ renta.get_estado_display }}</p>
+                    </div>
+                    <div class="text-center mt-4">
+                        <form method="post">
+                            {% csrf_token %}
+                            <button type="submit" class="btn btn-primary btn-lg">Confirmar Devolución</button>
+                        </form>
+                        <button onclick="cancelarDevolucion()" class="btn btn-secondary btn-lg mt-2">Cancelar</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 </div>
+
+{% if messages %}
+<!-- Modal de Mensajes -->
+<div class="modal fade" id="mensajeModal" tabindex="-1" aria-labelledby="mensajeModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-body">
+                {% for message in messages %}
+                    <div class="alert alert-success">{{ message }}</div>
+                {% endfor %}
+            </div>
+            <div class="modal-footer justify-content-center">
+                <button type="button" class="btn btn-primary" data-bs-dismiss="modal" onclick="redirectToInicio()">Aceptar</button>
+            </div>
+        </div>
+    </div>
+</div>
+{% endif %}
+
+<script>
+    function cancelarDevolucion() {
+        window.location.href = "{% url 'inicio' %}";
+    }
+
+    function redirectToInicio() {
+        window.location.href = "{% url 'inicio' %}";
+    }
+
+    // Script para mostrar el modal automáticamente cuando hay mensajes
+    document.addEventListener('DOMContentLoaded', function() {
+        {% if messages %}
+        var mensajeModal = new bootstrap.Modal(document.getElementById('mensajeModal'));
+        mensajeModal.show();
+        {% endif %}
+    });
+</script>
 {% endblock %}

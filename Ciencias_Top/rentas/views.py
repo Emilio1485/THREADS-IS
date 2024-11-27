@@ -123,7 +123,7 @@ def devolver_producto(request, renta_id):
         renta.producto.save()
 
         messages.success(request, 'Producto devuelto exitosamente.')
-        return redirect('rentas:lista_rentas')
+    
 
     context = {
         'renta': renta,
