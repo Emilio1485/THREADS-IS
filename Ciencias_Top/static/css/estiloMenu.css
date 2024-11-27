@@ -403,7 +403,7 @@ body {
 
 .custom-modal .modal-body {
     padding: 1rem;
-    font-size: 16px;
+    font-size: 20px;
     margin: 0;
     color: #333;
     padding-bottom: 10px;
@@ -427,14 +427,18 @@ body {
     border: none;
     border-radius: 15px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    padding: 20px; /* Añadir padding al contenido del modal */
+    padding: 15px; /* Añadir padding al contenido del modal */
     margin: 10px; /* Añadir margen alrededor del modal */
 }
 
+
+
+
 #mensajeModal .modal-body {
-    padding: 20px;
+    padding: 5px;
     font-size: 16px;
     color: #333;
+    
 }
 
 #mensajeModal .modal-footer {
@@ -446,5 +450,5 @@ body {
 }
 
 #mensajeModal .btn-close {
-    margin: 8px;
+    margin: 1px;
 }

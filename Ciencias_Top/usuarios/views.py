@@ -71,7 +71,7 @@ def usuarios_vista(request):
     
     #  Obtener la consulta de búsqueda
     query = request.GET.get('q', '') # Obtener el valor de la consulta de búsqueda
-    mensaje = None
+    
     if query:
         usuarios = SuperUsuario.objects.filter(
             Q(numero_cuenta__icontains=query) |
@@ -84,12 +84,12 @@ def usuarios_vista(request):
             Q(correo__icontains=query)
     )
         if not usuarios:
-            mensaje = 'No se encontraron usuarios con los criterios de búsqueda proporcionados.'
+            messages.warning(request, 'No se encontraron usuarios que coincidan con tu búsqueda.')
     else:
         usuarios = SuperUsuario.objects.all()
         
         
-    return render(request, 'usuario/ver_usuarios.html', {'usuarios': usuarios, 'query': query, 'mensaje': mensaje, 'search_type': 'usuarios'})
+    return render(request, 'usuario/ver_usuarios.html', {'usuarios': usuarios, 'query': query,  'search_type': 'usuarios'})
 
 
 
