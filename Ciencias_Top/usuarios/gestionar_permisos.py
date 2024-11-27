@@ -14,6 +14,7 @@ def crear_grupos_y_permisos():
         'eliminar_usuario', 
         'ver_usuarios',
         'sumar_pumapuntos', 
+        
     ]
     for perm in permisos_admin:
         permission = Permission.objects.get(codename=perm)

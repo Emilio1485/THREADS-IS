@@ -9,4 +9,5 @@ urlpatterns = [
     path('lista/', views.lista_rentas, name='lista_rentas'),
     path('devolver/<str:renta_id>/', views.devolver_producto, name='devolver_producto'),
     path('historial/<int:usuario_id>/', views.historial_rentas_usuario, name='historial_rentas_usuario'),
+    path('ver_reportes/', views.ver_reportes, name='ver_reportes'),
 ]

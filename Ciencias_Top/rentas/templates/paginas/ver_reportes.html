@@ -1,0 +1,76 @@
+{% extends "ver_sin_buscar_plantilla.html" %}
+{% load static %}
+
+{% block titulo %}Reportes{% endblock %}
+{% block nombre %}Reportes del Sistema{% endblock %}
+
+{% block contenido %}
+<div class="reportes" style="background-color: #f0f8ff; padding: 20px; border-radius: 10px; max-width: 800px; margin: auto;">
+    <h2 class="text-center" style="color: #003366;">Reportes</h2>
+
+    <div class="mb-4">
+        <h3 class="h5" style="color: #003366;">Cantidad de personas por carrera con cuenta activa</h3>
+        <ul class="list-group">
+            {% for carrera in personas_por_carrera %}
+                <li class="list-group-item d-flex justify-content-between align-items-center">
+                    {{ carrera.carrera }}
+                    <span class="badge bg-primary rounded-pill">{{ carrera.total }}</span>
+                </li>
+            {% endfor %}
+        </ul>
+    </div>
+
+    <div class="mb-4">
+        <h3 class="h5" style="color: #003366;">Los 5 productos más rentados del mes de {{ nombre_mes }}</h3>
+        <ul class="list-group">
+            {% for producto in productos_mas_rentados %}
+                <li class="list-group-item d-flex justify-content-between align-items-center">
+                    {{ producto.nombre }}
+                    <span class="badge bg-primary rounded-pill">{{ producto.total }} rentas</span>
+                </li>
+            {% endfor %}
+        </ul>
+    </div>
+
+    <div class="mb-4">
+        <h3 class="h5" style="color: #003366;">Cantidad de cuentas inactivas</h3>
+        <p class="list-group-item">{{ cuentas_inactivas }}</p>
+    </div>
+
+    <div class="mb-4">
+        <h3 class="h5" style="color: #003366;">Productos que requieren menor cantidad de puma puntos para ser canjeados</h3>
+        <ul class="list-group">
+            {% for producto in productos_menor_puma_puntos %}
+                <li class="list-group-item d-flex justify-content-between align-items-center">
+                    {{ producto.nombre }}
+                    <span class="badge bg-primary rounded-pill">{{ producto.pumapuntos }} puma puntos</span>
+                </li>
+            {% endfor %}
+        </ul>
+    </div>
+
+    <div class="mb-4">
+        <h3 class="h5" style="color: #003366;">Los 10 usuarios que más veces han devuelto un producto rentado tarde</h3>
+        <ul class="list-group">
+            {% for usuario in usuarios_mas_tardes %}
+                <li class="list-group-item d-flex justify-content-between align-items-center">
+                    {{ usuario.numero_cuenta }} - {{ usuario.get_full_name }}
+                    <span class="badge bg-primary rounded-pill">{{ usuario.total_tardes }} devoluciones tarde</span>
+                </li>
+            {% endfor %}
+        </ul>
+    </div>
+
+    <div class="mb-4">
+        <h3 class="h5" style="color: #003366;">Los 5 usuarios con mayor cantidad de productos rentados en la semana</h3>
+        <ul class="list-group">
+            {% for usuario in usuarios_mas_rentas_semana %}
+                <li class="list-group-item d-flex justify-content-between align-items-center">
+                    {{ usuario.numero_cuenta }} - {{ usuario.get_full_name }}
+                    <span class="badge bg-primary rounded-pill">{{ usuario.total }} rentas</span>
+                </li>
+            {% endfor %}
+        </ul>
+    </div>
+</div>
+{% endblock %}
