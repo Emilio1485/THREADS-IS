@@ -155,6 +155,10 @@ body {
      flex-direction: column; /* Colocar las barras en columna */
      align-items: center; /* Centrar las barras horizontalmente */
  }
+
+ .menu-toggle:focus {
+     outline: none; /* Eliminar el contorno al hacer clic */
+ }
  
  
  .iconoMenu {
@@ -176,18 +180,17 @@ body {
  
  .search-container form {
     display: flex; /* Asegura que el input y el botón estén en línea */
-    align-items: strech; /* Centra verticalmente los elementos */
+    align-items: stretch ; /* Centra verticalmente los elementos */
     justify-content: center; /* Centra horizontalmente el formulario */
     width: 100%; /* El formulario ocupa todo el ancho disponible */
     margin: 0 auto; /* Elimina márgenes predeterminados */
     padding: 0; /* Elimina relleno predeterminado */
-    
     margin-top: 30px; /* Ajusta la posición del formulario */
 }
 
  
 .search-container input {
-    width: 75%; /* Ajusta el ancho del campo de búsqueda */
+    width: 70%; /* Ajusta el ancho del campo de búsqueda */
     padding: 12px; /* Espacio interno */
     border: none; /* Borde gris claro */
     border-radius: 7px 0 0 7px; /* Bordes redondeados a la izquierda */
@@ -197,29 +200,56 @@ body {
 }
 
 
-.search-container button {
-    background-color: none ; /* Color de fondo del botón */
+.clear-button {
+    background-color: white;
+    border: none; /* Sin borde */
+    padding: 10px; /* Espaciado interno */
+    font-size: 0.5rem; /* Tamaño del texto */
+    cursor: pointer; /* Cambia el cursor al pasar sobre el botón */
+    margin: 0; /* Sin margen */
+    outline: none; /* Elimina bordes al hacer clic */
+    display: flex;
+    align-items: center; /* Asegura el centrado vertical */
+    justify-content: center; /* Centra el contenido */
+}
+
+.clear-button i {
+    font-size: 1.4rem; /* Tamaño del ícono */
+    color: rgb(192, 192, 192);
+}
+
+.clear-button i:hover {
+    color: #9b9b9b; /* Cambia el color*/
+}
+.search-container .clear-button:hover {
+    background-color: white; /* Cambia el color de fondo al pasar el mouse */
+}
+
+.search-container .clear-button{
+    border-radius: 0;
+}
+.search-container .search-button {
+    background-color: #eaedfd ; /* Color de fondo del botón */
     border: none; /* Sin borde */
     border-radius: 0 7px 7px 0; /* Bordes redondeados a la derecha */
-    color: white; /* Color del ícono */
+  
     padding: 12px 18px; /* Espaciado interno */
     cursor: pointer; /* Cambia el cursor al pasar sobre el botón */
     font-size: 1.5rem; /* Tamaño del ícono */
     display: flex; /* Centra el ícono */
-    color: rgb(163, 163, 163); /* Color del icono */
+    color:rgb(8, 4, 46); /* Color del icono */
     align-items: center; /* Asegura el centrado vertical del ícono */
 }
 
-.search-container button i {
-    font-size: 1.4rem; /* Ajusta el tamaño del ícono de la lupa */
+.search-container .search-button i {
+    font-size: 1.5rem; /* Ajusta el tamaño del ícono de la lupa */
 }
 
-.search-container input:focus {
-    border-color: pink; /* Cambia el borde al hacer clic */
-}
 
-.search-container button:hover {
+
+.search-container .search-button:hover {
     background-color:  black; /* Cambia el color de fondo al pasar el mouse */
+    color: white; /* Cambia el color del texto al pasar el mouse */
 }
 
 
@@ -232,10 +262,7 @@ body {
  }
  
  
- /* Establece un ancho personalizado para la ventana del modal */
- .custom-modal-size {
-     max-width: 400px; /* Ajusta el valor para el tamaño deseado */
- }
+
  
  #logoutModal .modal-header {
      padding: 0.5rem 1rem;
@@ -243,6 +270,7 @@ body {
      border-bottom: none; /* Quitar el borde inferior si no lo deseas */
      background-color: rgb(255, 255, 255) ; /* Cambia el color de fondo del encabezado */
  }
+
  
  #logoutModal .modal-body {
      background-color: white;
@@ -253,8 +281,7 @@ body {
  }
  
  #logoutModal .modal-footer {
-     border-top: none; /* Quitar el borde superior si no lo deseas */
-     border-top: none;    
+     border-top: none; /* Quitar el borde superior si no lo deseas */ 
      background-color: rgb(255, 255, 255); /* Cambia el color de fondo del pie de página */
  }
  
@@ -273,6 +300,7 @@ body {
  
  .custom-modal-size {
      max-width: 400px; /* Puedes cambiar el ancho del modal si lo necesitas */
+     width: 100%; /* Asegura que el modal ocupe todo el ancho disponible */
  }
  
  .btn-secondary {
@@ -292,10 +320,6 @@ body {
  .modal-footer .btn-danger:hover {
      background-color: #000000; /* Color de fondo al pasar el cursor */
  }
-
- .modal-content {
-    border: none; /* Elimina el borde */
-}
  
  
  #logout-footer {
@@ -308,7 +332,7 @@ body {
      width: 100%;
      display: flex;
      justify-content: center;
-     align-items: center;
+     align-items: space-between;
      background-color:whitesmoke;
      
  } 
@@ -335,9 +359,9 @@ body {
 
 /* Estilo general para el mensaje */
 .custom-message {
-    background-color: #ffcdcd; /* Fondo amarillo claro */
-    color: #85040a; /* Color de texto marrón oscuro */
-    border: 1px solid #ffbaba; /* Borde amarillo claro */
+    background-color: #cdceff; /* Fondo amarillo claro */
+    color: #080f3f; /* Color de texto marrón oscuro */
+    border: none;
     padding: 15px;
     border-radius: 5px; /* Bordes redondeados */
     display: flex;
@@ -352,4 +376,75 @@ body {
 .custom-message i {
     margin-right: 10px; /* Espacio entre el icono y el texto */
     font-size: 20px; /* Tamaño del icono */
+}
+
+
+
+/* Estilo para el modal de mensajes */
+.custom-modal .modal-content {
+    border: none;
+    border-radius: 15px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.custom-modal .modal-body {
+    padding: 10px;
+    font-size: 16px;
+    color: #333;
+}
+
+/* Estilo para el modal de mensajes */
+.custom-modal .modal-content {
+    border: 8px;
+    border-radius: 15px;
+    background-color: whitesmoke;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.custom-modal .modal-body {
+    padding: 1rem;
+    font-size: 16px;
+    margin: 0;
+    color: #333;
+    padding-bottom: 10px;
+}
+
+/* Asegurarse de que las esquinas inferiores también se redondeen */
+.custom-modal .modal-footer {
+    border-top: none;
+    display: flex; /* Alinea los elementos en la misma línea */
+    border-radius: 0 0 15px 15px;
+}
+/* Asegurarse de que el botón de cerrar esté correctamente alineado */
+.custom-modal .btn-close {
+    margin: 10px;
+}
+
+
+
+/* Estilo para el modal de mensajes */
+#mensajeModal .modal-content {
+    border: none;
+    border-radius: 15px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    padding: 20px; /* Añadir padding al contenido del modal */
+    margin: 10px; /* Añadir margen alrededor del modal */
+}
+
+#mensajeModal .modal-body {
+    padding: 20px;
+    font-size: 16px;
+    color: #333;
+}
+
+#mensajeModal .modal-footer {
+    border-top: none;
+    border-radius: 0 0 15px 15px;
+    padding: 10px; /* Añadir padding al footer del modal */
+    display: flex; /* Alinea los elementos en la misma línea */
+    justify-content: flex-end; /* Alinea los elementos al final del footer */
+}
+
+#mensajeModal .btn-close {
+    margin: 8px;
 }

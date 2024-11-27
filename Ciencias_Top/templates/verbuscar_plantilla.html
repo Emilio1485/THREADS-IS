@@ -5,21 +5,17 @@
 
 
 {% block contenido %}
-<!-- Aquí agregas la barra de búsqueda -->
+<!-- barra de búsqueda -->
 <div class="search-container">
     <!-- Campo de búsqueda -->
     <form method="GET" action="">
-        <input type="text" class ="search-input" name = "q" placeholder="{% block buscar %}{% endblock %}" value = "{{query}}"
-        {% if es_busqueda_usuario %} pattern="\d*" title="Solo se permiten números" {% endif %} />
-        <input type="hidden" name="tipo" value="usuario" />
-        <button type="submit"><i class="fa fa-search"></i></button>
+        <input type="text" class ="search-input" name = "q" placeholder="{% block buscar %}{% endblock %}" value = "{{query}}" />
+        <button type="button" class="clear-button" onclick="clearSearch()"><i class="fa fa-times"></i></button>
+        <script src=" {% static 'js/barraBusqueda.js' %} "></script>
+        <button type="submit" class = "search-button"><i class="fa fa-search"></i></button>
     </form>
 </div>
 
 <!-- Aquí se puede agregar más contenido específico de la vista -->
-{% block lista_items %}{% endblock %}
+{% block lista_items %}{% endblock %}{% endblock %}
 
-
-
-
-{% endblock %}

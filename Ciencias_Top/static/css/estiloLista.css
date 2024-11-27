@@ -8,7 +8,7 @@
     padding: 0 25px;          /* Añade algo de padding para que no esté tan cerca de los bordes */
 }
 
-.card {
+.producto-card {
     /* Estilos generales de la tarjeta */
     background-color: #f5f5f5;
     border-radius: 10px;
@@ -24,11 +24,11 @@
 
 
 }
-.card-header, .card-content, .card-actions {
+.producto-card .card-header, .card-content, .card-actions {
     padding: 15px; /* Espaciado interno */
 }
 
-.card-header {
+.producto-card .card-header {
     display: flex; /* Usa flexbox para alinear elementos en fila */
     justify-content: space-between; /* Espacio entre los elementos */
     align-items:center ; /* Alinea los elementos verticalmente */
@@ -38,7 +38,7 @@
     
 }
 
-.card-header h4 {
+.producto-card .card-header h4 {
     margin: 0; /* Elimina el margen por defecto */
     font-size: 20px;
     font-weight: bold;
@@ -46,18 +46,18 @@
     line-height: 1.2; /* Altura de línea */
 }
 
-.card-header p {
+.producto-card .card-header p {
     margin: 0; /* Elimina el margen por defecto */
     line-height: 1.2; /* Altura de línea */
     font-size: 14px;
 }
 
 
-.card-content p {
+.producto-card .card-content p {
     margin:5px 0; /* Elimina el margen por defecto */
     line-height: 1.2; /* Altura de línea */
 }
-.icono_producto {
+.producto-card .icono_producto {
     background-color: #d1c4e9;
     border-radius: 50%; /* Hace que el borde sea redondo */
     width: 50px; /* Ajusta el ancho del icono */
@@ -69,22 +69,22 @@
     font-size: 20px; /* Tamaño de fuente */ 
 }
 
-.icono-item{
+.producto-card .icono-item{
     margin-right: 10px; /* Espacio entre el icono y el texto */
 }
 
-.info-header {
+.producto-card .info-header {
     display: flex; /* Usa flexbox para alinear elementos en fila */
     flex-direction: column; /* Coloca los elementos en columna */
     align-items: flex-start;
     flex-grow: 1; /* Permite que el texto tome todo el espacio disponible */
 }
 
-.menu-dots {
+.producto-card .menu-dots {
     cursor: pointer; /* Cambia el cursor al pasar sobre los puntos */
     margin-left: auto; /* Mueve los puntos al extremo derecho */
 }
-.card-image {
+.producto-card .card-image {
     /* Estilos de la imagen */
     height: 200px; /* Ajusta la altura de la imagen */
     width: 100%; /* Ajusta el ancho de la imagen */
@@ -95,13 +95,13 @@
    
 }
 
-.card-image img {
+.producto-card .card-image img {
     max-width: 100%; /* Ajusta el ancho máximo de la imagen */
     max-height: 100%; /* Ajusta la altura máxima de la imagen */
     object-fit: cover; /* Ajusta la imagen para que cubra el contenedor */
 }
 
-.card-content {
+.producto-card .card-content {
     padding: 15px; /* Espaciado interno */
     color: #333;
     font-size: 14px; /* Tamaño de fuente */
@@ -109,7 +109,7 @@
     overflow: auto; /* Añade desplazamiento si el contenido es demasiado grande */
 }
 
-.card-actions {
+.producto-card .card-actions {
     display: flex; /* Usa flexbox para alinear elementos en fila */
     justify-content: space-between; /* Espacio entre los elementos */
 
@@ -118,7 +118,7 @@
     
 }
 
-.card-actions .btn {
+.producto-card .card-actions .btn {
     width: 120px; 
     background-color: #0a0a4df7; /* Color de fondo del botón */
     color: #fff; /* Color del texto */
@@ -134,11 +134,11 @@
     transition: box-shadow 0.3s ease; /* Efecto de transición para la sombra */
 }
 
-.card-actions .btn:hover {
+.producto-card .card-actions .btn:hover {
     background-color: #000000; /* Cambia el color de fondo al pasar sobre el botón */
 }
 
-.card-actions .btn:not(:last-child) {
+.producto-card .card-actions .btn:not(:last-child) {
     margin-right: 0; /* Añade espacio entre los botones, excepto el último */
 }
 
@@ -167,52 +167,103 @@
     margin-bottom: 20px;
     display: flex;
     flex-direction: row; /* Información en una sola línea */
-    align-items: center;
+    align-items: stretch;
     padding: 10px;
-    height: auto;
-    color: white;
-    
-    margin: 20 auto;
+    color: black;
+    margin: 20px auto;
 }
-.usuario-card .card-header, .usuario-card .card-content, .usuario-card .card-actions {
-    padding: 10px;
-    flex: 1;
+
+.usuario-card:hover {
+    background-color: rgb(203, 206, 225);
+    transform: scale(1.01); /* Agranda la tarjeta al pasar el cursor */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Sombra más pronunciada al pasar el cursor */
+    color: rgb(23, 23, 94);
 }
+
 
 .usuario-card .card-header {
     display: flex;
-    justify-content: space-between;
+    flex-direction: column;
+    justify-content: center;
     align-items: center;
-    width: 100%;
-    
+    width: 200px;
+    height: 100%;
+    padding: 16px;
+    background-color: #c9ccde;
+    color: #000000;
 }
 
+.usuario-card .card-header .icono-item{
+    margin-bottom: 10px;
+    color: rgb(8, 4,46);
+}
+
+.usuario-card .card-header .info-header{
+    text-align: center;
+}
 .usuario-card .card-content {
     display: flex;
+    flex: 1;
+    padding: 16px;
     flex-direction: column;
-    flex-wrap: wrap;
-    gap : 10px;
-    line-height: 1.2;
+    justify-content: center;
+   
     
+    color: #000000;
 }
 
 
 
 .usuario-card .card-content p {
     margin: 0;
+    display: flex;
+    align-items: center;
     flex: 1 1 auto; /* Ajustar el ancho de los elementos */
     white-space: nowrap; /* Evitar que el texto se divida en varias líneas */
     
 }
 
 
-.usuario-card .card-actions {
-    display: flex;
-    justify-content: flex-end;
-    align-items: center;
-    width: 100%;
+/* Estilos para el número de cuenta */
+.numero-cuenta-label {
+    font-size: 14px; /* Tamaño de letra para la etiqueta */
+    color : #454545;
+    margin: 0; /* Elimina el margen */
+    line-height: 1.2; /* Altura de línea */
 }
 
-.usuario-card .card-actions button {
-    margin-left: 30px;
+.numero-cuenta {
+    font-size: 18px; /* Tamaño de letra para el número de cuenta */
+    font-weight: bold;
+    margin: 0; /* Elimina el margen */
+    line-height: 1.2; /* Altura de línea */
+    color: #454545;
 }
+
+
+/* Estilos para el botón de eliminar */
+.usuario-card .estado-icon {
+    display: inline-block;
+    width: 20px;
+    height: 20px;
+    border-radius: 50%; /* Hace que el borde sea redondeado */
+    margin-left: 10px;
+    vertical-align: middle;
+    box-shadow: 0 0 3px rgba(0, 0, 0, 0.5); /* Añade una sombra */
+}
+
+.estado-icon.activo {
+    background-color: green; /* Color del icono cuando está activo */
+}
+
+.estado-icon.inactivo {
+    background-color: red; /* Color del icono cuando está inactivo */
+}
+
+
+
+.usuario-card .material-icons {
+    font-size: 68px; /* Solo afecta los íconos dentro de .usuario-card */
+}
+
+

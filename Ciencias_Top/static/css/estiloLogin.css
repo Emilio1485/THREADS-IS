@@ -49,3 +49,60 @@ body {
     background-color: #B00020; /* Fondo de la alerta de error */
     color: #FFFFFF; /* Texto de la alerta de error */
 }
+
+
+/* Estilo para el modal de recuperar contraseña */
+#forgotPasswordModal .modal-content {
+    background-color: whitesmoke; /* Fondo oscuro */
+    color: #6a6a6a; /* Texto blanco */
+    border-radius: 1rem; /* Bordes redondeados */
+    border: none; /* Sin borde */
+}
+
+#forgotPasswordModal .modal-header {
+    border-bottom: none; /* Sin borde inferior */
+    
+}
+
+#forgotPasswordModal .modal-title {
+    font-size: 1.5rem; /* Tamaño de fuente */
+    letter-spacing: 1px; /* Espaciado entre letras */
+}
+
+#forgotPasswordModal .btn-close {
+    
+    right: 10px;
+    top: 10px;
+    background-color: #fff; /* Fondo blanco */
+    border-radius: 15px; /* Bordes redondeados */
+    padding: 5px; /* Padding */
+}
+
+#forgotPasswordModal .modal-body {
+    padding: 20px; /* Padding */
+    font-size: 1rem; /* Tamaño de fuente */
+}
+
+#forgotPasswordModal .modal-footer {
+    border-top: none; /* Sin borde superior */
+    display: flex;
+    justify-content: center;
+    padding: 10px; /* Padding */
+}
+
+#forgotPasswordModal .btn-secondary {
+    background-color: #0e183c; /* Color de fondo */
+    color: #fff; /* Color del texto */
+    border: none; /* Sin borde */
+    font-weight: bold; /* Negrita */
+    letter-spacing: 1px; /* Espaciado entre letras */
+    padding: 10px 20px; /* Padding */
+    width: 30%; /* Ancho automático */
+    border-radius: 15px; /* Bordes redondeados */
+    transition: background-color 0.3s, color 0.3s; /* Transición suave */
+}
+
+#forgotPasswordModal .btn-secondary:hover {
+    background-color: #0056b3; /* Color de fondo al pasar el ratón */
+    color: #fff; /* Color del texto al pasar el ratón */
+}

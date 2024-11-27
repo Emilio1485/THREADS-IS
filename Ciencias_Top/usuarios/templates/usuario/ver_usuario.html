@@ -1,31 +1,29 @@
 {% load static %}
-<div class="card usuario-card">
+
+<div class="card usuario-card" onclick= "location.href='{% url 'vista_detallada_usuario' usuario.numero_cuenta %}'">
     <div class="card-header">
         <div class="icono-item">
             <span class="material-icons">person</span>
         </div>
         <div class="info-header">
-            <h4> {{ usuario.apellido_paterno }} {{ usuario.apellido_materno }} {{ usuario.nombre }}</h4>
-            <p>Número de cuenta: {{ usuario.numero_cuenta }}</p>
+            <p class="numero-cuenta-label">Número de cuenta:</p>
+            <p class="numero-cuenta">{{ usuario.numero_cuenta }}</p>
         </div>
         
     </div>
     <div class="card-content">
-        {% if perms.usuarios.rentar_producto %}
-            <p><strong>{{ usuario.pumapuntos }} PUMA PUNTOS</strong></p>
-        {% endif %}
-        <p>Correo: {{ usuario.correo }}</p>
-        <p>Celular: {{ usuario.celular }}</p>
+
+        <h4> {{ usuario.apellido_paterno }} {{ usuario.apellido_materno }} {{ usuario.nombre }}</h4>
         <p>Carrera: {{ usuario.get_carrera_display }}</p>
         <p>Rol: {{ usuario.get_rol_display }}</p>
-        <p>Tipo de usuario: {{ usuario.get_tipo_usuario_display }}</p>
+        
+        <p>Estado:
+            <span class="estado-icon {% if usuario.is_active %}activo{% else %}inactivo{% endif %}" title="{% if usuario.is_active %}Activo{% else %}Inactivo{% endif %}"></span>
+        </p>
     </div>
-    <div class="card-actions">
-        {% if perms.usuarios.editar_usuario %}
-            <button class="btn btn-primary">Editar</button>
-        {% endif %}
-        {% if perms.usuarios.eliminar_usuario %}
-            <button class="btn btn-danger">Eliminar</button>
-        {% endif %}
-    </div>
+    
 </div>
+
+
+
+

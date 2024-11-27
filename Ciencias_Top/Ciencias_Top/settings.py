@@ -27,10 +27,6 @@ SECRET_KEY = 'django-insecure-m5x5b8_+n0_at+8@h#$)k@xku98(z2&3h#v12-&rphr1d=x)k%
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-
-
-
-
 ALLOWED_HOSTS = []
 
 
@@ -83,6 +79,7 @@ WSGI_APPLICATION = 'Ciencias_Top.wsgi.application'
 # https://docs.djangoproject.com/en/5.1/ref/settings/#databases
 
 DATABASES = {
+    
     
     'default': {
         'ENGINE': 'django.db.backends.postgresql_psycopg2',
@@ -153,3 +150,23 @@ LOGIN_REDIRECT_URL = 'inicio'  # URL a la que se redirigirá después del inicio
 
 
 
+LOGGING = {
+    'version': 1,
+    'disable_existing_loggers': False,
+    'handlers': {
+        'console': {
+            'level': 'DEBUG',
+            'class': 'logging.StreamHandler',
+        },
+    },
+    'loggers': {
+        'django': {
+            'handlers': ['console'],
+            'level': 'DEBUG',
+        },
+        '': {
+            'handlers': ['console'],
+            'level': 'DEBUG',
+        },
+    },
+}

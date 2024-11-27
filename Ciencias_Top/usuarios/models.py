@@ -6,6 +6,7 @@ from django.conf import settings
 from django.utils.crypto import get_random_string
 import string
 import re
+from django.utils.timezone import now
 
 
 
@@ -22,6 +23,8 @@ class SuperUsuarioManager(BaseUserManager):
         superuser.is_superuser = True
         superuser.save(using=self._db)
         return superuser
+    
+    
 class SuperUsuario(AbstractUser):
     """
     Modelo de usuario personalizado extendiendo el usuario estándar de Django.
@@ -139,8 +142,15 @@ class Usuario(models.Model):
     """
     user = models.OneToOneField(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
     pumapuntos = models.IntegerField(default=0)
+    fecha_ultimo_reinicio = models.DateField(default=now)
+    
+    def reiniciar_pumapuntos(self):
+        self.pumapuntos = 0
+        self.fecha_ultimo_reinicio = now()
+        self.save()
 
     def __str__(self):
 
         return f'Perfil de {self.user.username} - Puma Puntos: {self.pumapuntos}'
+
 

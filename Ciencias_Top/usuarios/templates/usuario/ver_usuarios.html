@@ -4,17 +4,33 @@
 {% block nombre %} Usuarios {% endblock %}
 
 
-{% block buscar %}Buscar un usuario (numero de cuenta){% endblock %}
+{% block buscar %}Buscar usuario (número de cuenta/nombre/correo/carrera/tipo de usuario/rol){% endblock %}
+
+
+
 
 {% block lista_items%}
+
+
+<!-- Mostrar el mensaje si no hay resultados de búsqueda o si no hay usuarios registrados -->
+{% if mensaje %}
+    <div class="alert alert-warning custom-message {{ mensaje_clase }}">
+        <i class="fa fa-exclamation-triangle"></i> <!-- Icono de advertencia -->
+        {{ mensaje }}
+    </div>
+{% endif %}
 
 <div class="usuarios-lista">
 
     {% for usuario in usuarios %}
 
         {% include 'usuario/ver_usuario.html' %}
-
     {% endfor %}
 </div>
 
+
+
 {% endblock%}
+
+
+

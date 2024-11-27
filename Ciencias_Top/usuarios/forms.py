@@ -112,3 +112,22 @@ class UsuarioForm(forms.ModelForm):
     
 
 
+
+class UsuarioEditForm(forms.ModelForm):
+    class Meta:
+        model = SuperUsuario
+        fields = ['nombre', 'apellido_paterno', 'apellido_materno', 'celular', 'correo', 'rol']
+
+    def clean_correo(self):
+        correo = self.cleaned_data.get('correo')
+        dominio = '@unam.mx'
+        dominio_1 = '@ciencias.unam.mx'
+        if not (correo.endswith(dominio) or correo.endswith(dominio_1)):
+            raise forms.ValidationError('El correo debe terminar en ' + dominio + ' o ' + dominio_1)
+        return correo
+
+    def clean_celular(self):
+        celular = self.cleaned_data.get('celular')
+        if len(celular) != 10 or not celular.isdigit():
+            raise forms.ValidationError('El número de celular debe tener exactamente 10 dígitos numéricos.')
+        return celular
