@@ -125,12 +125,13 @@ def eliminar_usuario_vista(request, numero_cuenta):
 def vista_detallada_usuario(request, numero_cuenta):
     # Obtener usuario con el número de cuenta proporcionado
     usuario = get_object_or_404(SuperUsuario, numero_cuenta=numero_cuenta)
+    rentas = Renta.objects.filter(usuario=usuario).order_by('-fecha_renta')
     # Obtener los roles disponibles
     roles = SuperUsuario.ROLES
     permisos = usuario.user_permissions.all()
     # Convertir los mensajes a una lista
     messages_list = [message.message for message in messages.get_messages(request)]
-    return render(request, 'usuario/vista_detallada_usuario.html', {'usuario': usuario, 'roles': roles, 'permisos': permisos,'messages': messages_list})
+    return render(request, 'usuario/vista_detallada_usuario.html', {'usuario': usuario, 'roles': roles, 'permisos': permisos,'messages': messages_list, 'rentas': rentas})
 
 
 

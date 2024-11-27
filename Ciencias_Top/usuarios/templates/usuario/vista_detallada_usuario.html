@@ -212,10 +212,48 @@
         </div>
     </div>
 </div>
-<!-- Enlace para ver el historial de rentas del usuario -->
-<a href="{% url 'rentas:historial_rentas_usuario' usuario.numero_cuenta %}" class="btn btn-info">Ver Historial de Rentas</a>
 
 <!-- Enlace para devolver un producto específico -->
+ 
+{% if usuario.get_rol_display == 'Usuario' %}
+<div class="historial-rentas">
+        <h3>Historial de Rentas</h3>
+        {% if rentas %}
+        <table class="table table-striped table-bordered">
+            <thead class="thead-dark">
+                <tr>
+                    <th>ID Renta</th>
+                    <th>Producto</th>
+                    <th>Fecha de Renta</th>
+                    <th>Fecha de Devolución Estimada</th>
+                    <th>Estado</th>
+                    <th>Acciones</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for renta in rentas %}
+                <tr>
+                    <td>{{ renta.id_renta }}</td>
+                    <td>{{ renta.producto.nombre }}</td>
+                    <td>{{ renta.fecha_renta }}</td>
+                    <td>{{ renta.fecha_devolucion_estimada }}</td>
+                    <td>{{ renta.get_estado_display }}</td>
+                    <td>
+                        {% if renta.estado == 'R' %}
+                            <a href="{% url 'rentas:devolver_producto' renta.id_renta %}" class="btn btn-primary">Devolver</a>
+                        {% endif %}
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+        {% else %}
+        <div class="alert alert-info" role="alert">
+            No hay historial de rentas disponible.
+        </div>
+        {% endif %}
+    </div>
+{% endif %}
 
 {% endblock %}
 
