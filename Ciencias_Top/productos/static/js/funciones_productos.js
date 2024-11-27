@@ -55,4 +55,3 @@ document.getElementById('actual-input').addEventListener('change', function() {
         imagePreviewContainer.style.display = 'none';
     }
 }); 
-
