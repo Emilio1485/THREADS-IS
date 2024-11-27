@@ -1,4 +1,3 @@
-
 .productos-lista {
     width: 100%;
     display: flex;           /* Usa flexbox para alinear elementos en fila */
@@ -265,5 +264,3 @@
 .usuario-card .material-icons {
     font-size: 68px; /* Solo afecta los íconos dentro de .usuario-card */
 }
-
-

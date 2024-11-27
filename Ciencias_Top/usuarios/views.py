@@ -5,6 +5,7 @@ from django.contrib.auth import authenticate, login
 from django.contrib.auth import logout
 from django.shortcuts import render, redirect, get_object_or_404
 from datetime import datetime
+from django.urls import reverse
 from rentas.models import Renta
 
 from productos.models import Producto  
@@ -42,26 +43,19 @@ def inicar_sesion_vista(request):
 
         if user is not None:
             login(request, user)
-            return redirect('inicio')  # Redirigir a la página de inicio
+            return redirect(reverse('inicio'))   # Redirigir a la página de inicio
         else:
             error_message = "Número de cuenta o contraseña incorrectos."
             return render(request, 'login.html', {'error_message': error_message})
         
     if request.user.is_authenticated:
-        return redirect('inicio')
+        return redirect(reverse('inicio'))
 
     return render(request, 'login.html')
 
 
 
-@login_required  # Esto requiere que el usuario esté autenticado para acceder a esta vista
-def inicio_vista(request):
-    productos = Producto.objects.all()
-    return render(request, 'inicioV/inicio.html', {
-    'titulo': 'Inicio',
-    'user': request.user,
-    'productos': productos
-})
+
     
 @login_required    
 def cerrar_sesion_vista(request):
@@ -72,7 +66,7 @@ def cerrar_sesion_vista(request):
 
 
 @login_required
-@permission_required('usuarios.ver_usuarios', raise_exception=True)
+@user_passes_test(is_admin,login_url='iniciar_sesion')
 def usuarios_vista(request):
     
     #  Obtener la consulta de búsqueda
@@ -95,7 +89,7 @@ def usuarios_vista(request):
         usuarios = SuperUsuario.objects.all()
         
         
-    return render(request, 'usuario/ver_usuarios.html', {'usuarios': usuarios, 'query': query, 'mensaje': mensaje})
+    return render(request, 'usuario/ver_usuarios.html', {'usuarios': usuarios, 'query': query, 'mensaje': mensaje, 'search_type': 'usuarios'})
 
 
 
@@ -329,17 +323,14 @@ def actualizar_permisos_y_pumapuntos(usuario, nuevo_rol):
         
         
 
-
+"""
 @login_required
 @user_passes_test(is_admin,login_url='iniciar_sesion')
 def usuarios_vista(request):
     usuarios = SuperUsuario.objects.all()
     return render(request, 'usuario/ver_usuarios.html', {'usuarios': usuarios})
+"""
 
-def cerrar_sesion_vista(request):
-    logout(request)  # Cerrar sesión del usuario
-    #messages.success(request, "Has cerrado sesión correctamente.")  # Mensaje de confirmación
-    return redirect('iniciar_sesion')  # Redirigir a la página de inicio de sesión 
 
 
 @login_required

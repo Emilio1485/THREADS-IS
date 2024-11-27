@@ -67,7 +67,8 @@ def inicio_vista(request):
         'titulo': 'Inicio',
         'user': user,
         'productos': productos,
-        'query': query
+        'query': query,
+        'search_type': 'productos'
     })
 
 @login_required

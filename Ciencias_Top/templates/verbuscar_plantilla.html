@@ -10,7 +10,7 @@
     <!-- Campo de búsqueda -->
     <form method="GET" action="">
         <input type="text" class ="search-input" name = "q" placeholder="{% block buscar %}{% endblock %}" value = "{{query}}" />
-        <button type="button" class="clear-button" onclick="clearSearch()"><i class="fa fa-times"></i></button>
+        <button type="button" class="clear-button" data-search-type="{{ search_type }}" onclick="clearSearch()"><i class="fa fa-times"></i></button>
         <script src=" {% static 'js/barraBusqueda.js' %} "></script>
         <button type="submit" class = "search-button"><i class="fa fa-search"></i></button>
     </form>
