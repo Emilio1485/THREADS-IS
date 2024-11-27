@@ -23,6 +23,9 @@ def is_admin(user):
 def is_prov(user):
     return user.groups.filter(name='Proveedores').exists()
 
+def is_us(user):
+    return user.groups.filter(name='Usuarios').exists()
+
 def is_admin_or_prov(user):
     return is_admin(user) or is_prov(user)
 
@@ -99,6 +102,7 @@ def renta_producto(request, producto_codigo):
     return render(request, 'paginas/renta_producto.html', context)
 
 @login_required
+@user_passes_test(is_us,login_url='iniciar_sesion')
 def lista_rentas(request):
     user = request.user
     rentas = Renta.objects.filter(usuario=user)
@@ -109,7 +113,7 @@ def lista_rentas(request):
     return render(request, 'paginas/lista_rentas.html', context)
 
 @login_required
-@user_passes_test(is_admin)
+@user_passes_test(is_admin,login_url='iniciar_sesion')
 def devolver_producto(request, renta_id):
     renta = get_object_or_404(Renta, id_renta=renta_id)
     user = request.user
@@ -131,7 +135,7 @@ def devolver_producto(request, renta_id):
     return render(request, 'paginas/devolver_producto.html', context)
 
 @login_required
-@user_passes_test(is_admin)
+@user_passes_test(is_admin,login_url='iniciar_sesion')
 def historial_rentas_usuario(request, usuario_id):
     usuario = get_object_or_404(SuperUsuario, numero_cuenta=usuario_id)  # Usa el campo numero_cuenta
     rentas = Renta.objects.filter(usuario=usuario).order_by('-fecha_renta')
@@ -157,7 +161,7 @@ from rentas.models import Renta
 
 
 @login_required
-@user_passes_test(lambda u: u.groups.filter(name='Administradores').exists())
+@user_passes_test(is_admin,login_url='iniciar_sesion')
 def ver_reportes(request):
     # Cantidad de personas por carrera que tienen una cuenta activa en el sistema
     personas_por_carrera = SuperUsuario.objects.filter(is_active=True).values('carrera').annotate(total=Count('carrera'))
