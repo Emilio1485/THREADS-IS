@@ -41,9 +41,39 @@
     </div>
 </div>
 
+{% if messages %}
+<!-- Modal de Mensajes -->
+<div class="modal fade" id="mensajeModal" tabindex="-1" aria-labelledby="mensajeModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-body">
+                {% for message in messages %}
+                    <div class="alert alert-{{ message.tags }}">{{ message }}</div>
+                {% endfor %}
+            </div>
+            <div class="modal-footer justify-content-center">
+                <button type="button" class="btn btn-primary" data-bs-dismiss="modal" onclick="redirectToInicio()">Aceptar</button>
+            </div>
+        </div>
+    </div>
+</div>
+{% endif %}
+
 <script>
     function cancelarRenta() {
         window.location.href = "{% url 'inicio' %}";
     }
+
+    function redirectToInicio() {
+        window.location.href = "{% url 'inicio' %}";
+    }
+
+    // Script para mostrar el modal automáticamente cuando hay mensajes
+    document.addEventListener('DOMContentLoaded', function() {
+        {% if messages %}
+        var mensajeModal = new bootstrap.Modal(document.getElementById('mensajeModal'));
+        mensajeModal.show();
+        {% endif %}
+    });
 </script>
 {% endblock %}

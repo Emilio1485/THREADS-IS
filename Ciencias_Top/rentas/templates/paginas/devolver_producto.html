@@ -5,7 +5,7 @@
 <div class="producto-detalle">
     <h2>Devolver Producto</h2>
     <p>Producto: {{ renta.producto.nombre }}</p>
-    <p>Usuario: {{ renta.usuario.username }}</p>
+    <p>Usuario: {{ renta.usuario.numero_cuenta }}</p>
     <p>Fecha de Renta: {{ renta.fecha_renta }}</p>
     <p>Fecha de Devolución Estimada: {{ renta.fecha_devolucion_estimada }}</p>
     <p>Estado: {{ renta.get_estado_display }}</p>

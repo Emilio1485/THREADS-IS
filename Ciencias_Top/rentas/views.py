@@ -60,13 +60,13 @@ def renta_producto(request, producto_codigo):
         hoy = datetime.now().date()
         rentas_hoy = Renta.objects.filter(usuario=user, fecha_renta__date=hoy).count()
         if rentas_hoy >= 3:
-            messages.error(request, "Ya has rentado el máximo de productos permitido para hoy.")
-            return redirect('inicio')
+            messages.error(request, "Has alcanzado el límite de 3 rentas diarias.")
+          
 
         # Verificar la disponibilidad del producto
         if producto.existencia <= 0:
             messages.error(request, "El producto no está disponible.")
-            return redirect('inicio')
+            
 
         renta = Renta(usuario=user, producto=producto)
         puede_rentar, mensaje = renta.puede_rentar()
@@ -89,7 +89,7 @@ def renta_producto(request, producto_codigo):
             user.usuario.save()
 
             messages.success(request, 'Producto rentado exitosamente.')
-            return redirect('ver_perfil')
+           
         else:
             messages.error(request, mensaje)
 
