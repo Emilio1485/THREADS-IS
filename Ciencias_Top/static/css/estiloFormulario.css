@@ -32,8 +32,8 @@ textarea { /* Estilo para inputs y selects */
 input:focus,
 select:focus { /* Estilos al enfocar inputs y selects */
     outline: none; /* Sin contorno por defecto */
-    border-color: #673ab7; /* Color del borde al enfocar */
-    box-shadow: 0 0 3px rgba(103, 58, 183, 0.3); /* Sombra al enfocar */
+    border-color: #0a0a4df7;; /* Color del borde al enfocar */
+    box-shadow: 0 0 3px rgba(16, 5, 33, 0.3); /* Sombra al enfocar */
 }
 
 input:disabled {
@@ -43,35 +43,42 @@ input:disabled {
 
 .button-group {
     display: flex;
-    gap: 10px; /* Espacio entre botones */
+    align-items: center;
+    justify-content: center;
+    gap: 50px; /* Espacio entre botones */
     margin-top: 20px; /* Margen superior para separación */
 }
 
 .btn {
     padding: 10px 20px; /* Padding para botones */
     border: none;
-    border-radius: 4px; /* Bordes redondeados */
+    border-radius: 10px; /* Bordes redondeados */
     color: white; /* Color de texto */
     cursor: pointer; /* Cursor de puntero */
     font-weight: bold; /* Negrita */
     transition: background-color 0.2s ease; /* Transición suave para cambios de color */
 }
-
 .btn:hover {
-    opacity: 0.9; /* Opacidad al pasar el mouse */
+    background-color: black;
+    color : white;
 }
+
 
 .btn-cancel {
-    background-color: #8b1f1f; /* Color de fondo para cancelar */
+    background-color: #007bff; /* Color de fondo para cancelar */
+    color: white; /* Color de texto */
 }
 
+.btn-cancel:hover {
+    background-color: #0056b3; /* Color de fondo al pasar sobre el botón */
+}
 .btn-upload {
-    background-color: #330e3e;
+    background-color: #0e173e;
     width:auto;
 }
 
 .btn-add {
-    background-color: #673ab7; /* Color de fondo para agregar */
+    background-color: #0a0a4df7;; /* Color de fondo para agregar */
 }
 
 /* Estilos para mensajes de error y éxito */
@@ -110,10 +117,10 @@ input:disabled {
 
 /* Estilo para el botón personalizado (ahora es un label) */
 .btn-upload {
-    background-color: #673ab7;
+    background-color: #0e3c80;
     color: white;
     padding: 10px 20px;
-    border-radius: 4px;
+    border-radius: 6px;
     cursor: pointer;
     font-weight: bold;
     border: none;
@@ -122,7 +129,8 @@ input:disabled {
 }
 
 .btn-upload:hover {
-    background-color: #563098;
+    background-color: #0c1735;
+    color: white;
 }
 
 #file-chosen {

@@ -1,0 +1,139 @@
+/* Estilos para la tarjeta de perfil de usuario */
+.perfil-usuario {
+    background-color: whitesmoke;
+    padding: 20px;
+    border-radius: 10px;
+    max-width: 800px;
+    margin: 50px  auto;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.perfil-usuario .foto-perfil {
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.perfil-usuario .foto-perfil .foto-perfil-icono {
+    width: 200px;
+    height: 200px;
+    border-radius: 50%;
+    background-color: none;
+    color: rgb(7, 7, 56);
+    display: inline-block;
+    position: relative;
+    font-size: 200px;
+    align-items: center;
+    justify-content: center;
+    
+}
+
+.perfil-usuario .foto-perfil .foto-perfil-icono span {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-size: 50px;
+    color: #fff;
+}
+
+.perfil-usuario .card-header {
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.perfil-usuario .card-header h2 {
+    
+    color: #003366;
+    margin-bottom: 10px;
+}
+
+.perfil-usuario .card-header p {
+    margin: 0;
+}
+
+.perfil-usuario .info-personal {
+    background-color: #e6f2ff;
+    width: 70%;
+    padding: 20px;
+    border-radius: 10px;
+    margin-bottom: 20px;
+    
+}
+
+.perfil-usuario .info-personal h3 {
+    color: #003366;
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.perfil-usuario .info-personal ul {
+    list-style: none;
+    padding: 0;
+    text-align: left;
+}
+
+.perfil-usuario .info-personal ul li {
+    margin: 5px 0;
+}
+
+
+
+/* Estilos para las secciones de productos rentados y devueltos */
+.productos-rentados, .productos-devueltos {
+    background-color: #e6f2ff;
+    padding: 20px;
+    display: flex;
+    flex-direction: column; 
+    align-items: center;
+    border-radius: 10px;
+    margin-bottom: 20px;
+    width: 60%;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    margin-left:auto;
+    margin-right: auto;
+    gap: 20px;
+    
+}
+
+.productos-rentados h3, .productos-devueltos h3 {
+    color: #003366;
+    text-align: center;
+    margin-bottom: 20px;
+    
+}
+
+.productos-rentados table, .productos-devueltos table {
+    background-color: #ffffff;
+    border-radius: 10px;
+    width: 100%;
+    margin-bottom: 20px;
+    border-collapse: collapse;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.productos-rentados table thead tr, .productos-devueltos table thead tr {
+    background-color: #003366;
+    color: white;
+}
+
+.productos-rentados table tbody tr, .productos-devueltos table tbody tr {
+    text-align: center;
+}
+
+.productos-rentados table th, .productos-devueltos table th,
+.productos-rentados table td, .productos-devueltos table td {
+    padding: 10px;
+    border: 1px solid #ddd;
+}
+
+.productos-rentados table tbody tr:nth-child(even), .productos-devueltos table tbody tr:nth-child(even) {
+    background-color: #f2f2f2;
+}
+
+.productos-rentados p, .productos-devueltos p {
+    color: #003366;
+    text-align: center;
+}
