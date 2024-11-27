@@ -54,7 +54,10 @@
                 {% if perms.usuarios.agregar_usuario %}
                     <li class="nav-item">
                         <a class="nav-link active" href="{% url 'agregar_usuario' %}"><i class="bi bi-chevron-right"></i> Agregar Usuario</a>
-
+                    </li>
+                    <!-- Opciones para el administrador para ver reportes -->
+                    <li class="nav-item">
+                        <a class="nav-link active" href="{% url 'rentas:ver_reportes' %}"><i class="bi bi-chevron-right"></i> Ver Reportes</a>
                     </li>
                 {% endif %}
             
@@ -62,12 +65,7 @@
                 <li class="nav-item">
                     <a class="nav-link active" href="{% url 'ver_perfil' %}"><i class="bi bi-chevron-right"></i> Ver Perfil</a>
                 </li>
-
-             
-                    <li class="nav-item">
-                        <a class="nav-link active" href="{% url 'rentas:ver_reportes' %}"><i class="bi bi-chevron-right"></i> Ver Reportes</a>
-                    </li>
-                
+7 
 
             </ul>
             <div id="logout-footer" class="mt-3" style="display: none;">
