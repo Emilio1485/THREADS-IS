@@ -92,7 +92,32 @@ def usuarios_vista(request):
     return render(request, 'usuario/ver_usuarios.html', {'usuarios': usuarios, 'query': query,  'search_type': 'usuarios'})
 
 
+@login_required
+@permission_required('usuarios.cambiar_usuario', raise_exception=True)
+def habilitar_usuario(request, numero_cuenta):
+    if request.method == 'POST':
+        try:
+            usuario = get_object_or_404(SuperUsuario, numero_cuenta=numero_cuenta)
+            
+            # No permitir habilitar tu propia cuenta
+            if usuario == request.user:
+                messages.error(request, "No puedes habilitar tu propia cuenta.")
+                return redirect('vista_detallada_usuario', numero_cuenta=numero_cuenta)
 
+            # Habilitar usuario si está inactivo
+            if not usuario.is_active:
+                usuario.is_active = True
+                usuario.save()
+                messages.success(request, f'Usuario {numero_cuenta} habilitado exitosamente.')
+                return redirect('vista_detallada_usuario', numero_cuenta=numero_cuenta)
+        
+            # Ya está habilitado
+            messages.error(request, "Este usuario ya está habilitado.")
+            return redirect('vista_detallada_usuario', numero_cuenta=numero_cuenta)
+        except Exception as e:
+            messages.error(request, f'Error al habilitar el usuario: {str(e)}')
+    # Si no es POST
+    return JsonResponse({'success': False, 'message': 'Método no permitido.'}, status=405)
 @login_required
 @permission_required('usuarios.eliminar_usuario', raise_exception=True)
 def eliminar_usuario_vista(request, numero_cuenta):

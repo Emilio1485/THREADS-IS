@@ -80,6 +80,26 @@
     </div>
 </div>
 
+<!-- Modal de confirmación para habilitar -->
+<div class="modal fade" id="modalHabilitarConfirmacion" tabindex="-1" aria-labelledby="modalHabilitarConfirmacionLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Cerrar"></button>
+            </div>
+            <div class="modal-body">
+                ¿Estás seguro de que deseas habilitar a {{ usuario.numero_cuenta }}?
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+                <form id="habilitar-form" method="post" action="{% url 'habilitar_usuario' usuario.numero_cuenta %}">
+                    {% csrf_token %}
+                    <button type="button" class="btn btn-success" id="confirmarHabilitar">Habilitar</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
 <!-- Formulario oculto para deshabilitar al usuario -->
 <form id="deshabilitar-form" action="{% url 'eliminar_usuario' usuario.numero_cuenta %}" method="POST" style="display: none;">
     {% csrf_token %}

@@ -77,7 +77,7 @@
 <script>
     // Evitar que el usuario regrese a la página anterior
     window.history.pushState(null, '', window.location.href);
-    window.onpopstate = function(event) {
-        window.location.href = "{% url 'iniciar_sesion' %}";
+    window.onpopstate = function() {
+        window.history.pushState(null, '', window.location.href);
     };
 </script>
